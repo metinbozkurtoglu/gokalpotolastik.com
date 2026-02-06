@@ -31,16 +31,16 @@ export const POST: APIRoute = async ({ request }) => {
       port: parseInt(process.env.SMTP_PORT || '465'),
       secure: true, // SSL
       auth: {
-        user: process.env.SMTP_USER || 'info@gokalpotolastik.com',
+        user: process.env.SMTP_USER || 'info@gokalplastikcilik.com',
         pass: process.env.SMTP_PASS
       }
     });
 
     // Email content
     const mailOptions = {
-      from: `"Gökalp Lastikçilik Web" <${process.env.SMTP_USER || 'info@gokalpotolastik.com'}>`,
-      to: process.env.SMTP_TO || 'info@gokalpotolastik.com',
-      replyTo: `"${name}" <noreply@gokalpotolastik.com>`,
+      from: `"Gökalp Lastikçilik Web" <${process.env.SMTP_USER || 'info@gokalplastikcilik.com'}>`,
+      to: process.env.SMTP_TO || 'info@gokalplastikcilik.com',
+      replyTo: `"${name}" <noreply@gokalplastikcilik.com>`,
       subject: `🚗 Yeni İletişim Formu: ${name}`,
       html: `
         <!DOCTYPE html>
@@ -86,7 +86,7 @@ export const POST: APIRoute = async ({ request }) => {
               </div>
             </div>
             <div class="footer">
-              <p>Bu mesaj gokalpotolastik.com iletişim formundan gönderildi.</p>
+              <p>Bu mesaj gokalplastikcilik.com iletişim formundan gönderildi.</p>
               <p>Tarih: ${new Date().toLocaleString('tr-TR', { timeZone: 'Europe/Istanbul' })}</p>
             </div>
           </div>
