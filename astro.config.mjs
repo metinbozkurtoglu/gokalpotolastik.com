@@ -7,6 +7,7 @@ import node from '@astrojs/node';
 
 export default defineConfig({
   site: 'https://gokalplastikcilik.com',
+  output: 'server',
   trailingSlash: 'never',
   compressHTML: true,
   adapter: node({
