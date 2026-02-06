@@ -27,19 +27,19 @@ export const POST: APIRoute = async ({ request }) => {
 
     // Create SMTP transporter
     const transporter = nodemailer.createTransport({
-      host: import.meta.env.SMTP_HOST || 'smtp.hostinger.com',
-      port: parseInt(import.meta.env.SMTP_PORT || '465'),
+      host: process.env.SMTP_HOST || 'smtp.hostinger.com',
+      port: parseInt(process.env.SMTP_PORT || '465'),
       secure: true, // SSL
       auth: {
-        user: import.meta.env.SMTP_USER || 'info@gokalpotolastik.com',
-        pass: import.meta.env.SMTP_PASS
+        user: process.env.SMTP_USER || 'info@gokalpotolastik.com',
+        pass: process.env.SMTP_PASS
       }
     });
 
     // Email content
     const mailOptions = {
-      from: `"Gökalp Lastikçilik Web" <${import.meta.env.SMTP_USER || 'info@gokalpotolastik.com'}>`,
-      to: import.meta.env.SMTP_TO || 'info@gokalpotolastik.com',
+      from: `"Gökalp Lastikçilik Web" <${process.env.SMTP_USER || 'info@gokalpotolastik.com'}>`,
+      to: process.env.SMTP_TO || 'info@gokalpotolastik.com',
       replyTo: `"${name}" <noreply@gokalpotolastik.com>`,
       subject: `🚗 Yeni İletişim Formu: ${name}`,
       html: `
