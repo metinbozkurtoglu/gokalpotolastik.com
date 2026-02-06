@@ -1,0 +1,402 @@
+---
+import ServiceLayout from '../../layouts/ServiceLayout.astro';
+import GallerySection from '../../components/GallerySection.astro';
+import { services } from '../../data/siteConfig';
+
+const service = services.find(s => s.slug === 'lastik-tamiri')!;
+
+const benefits = [
+  {
+    icon: 'price',
+    title: 'Yeni Lastik Maliyetinin Yarısı',
+    desc: 'Profesyonel tamir ile yeni lastik almanın yaklaşık %50 maliyetinden tasarruf edin. Bütçenizi korurken güvenliğinizden ödün vermeyin.'
+  },
+  {
+    icon: 'tools',
+    title: 'Profesyonel Mantar Yama',
+    desc: 'Fitil yöntemi yerine sertifikalı mantar yama (plug-patch) tekniğiyle kalıcı ve dayanıklı onarım sağlıyoruz. İç ve dış yüzey birlikte kapatılır.'
+  },
+  {
+    icon: 'shield',
+    title: 'Güvenlik Garantisi',
+    desc: 'Tamir sonrası basınç testi, balans kontrolü ve görsel inceleme yapıyoruz. Güvenli olmayan lastiği kesinlikle tamir etmiyoruz.'
+  },
+  {
+    icon: 'truck',
+    title: '7/24 Mobil Tamir Servisi',
+    desc: 'Yolda kaldıysanız bizi arayın. Mersin genelinde mobil servis aracımızla konumunuza gelerek yerinde lastik tamiri yapıyoruz.'
+  }
+];
+
+const process = [
+  {
+    step: '1',
+    title: 'Lastik Sökme ve İnceleme',
+    desc: 'Lastik janttan profesyonel sökme makinesiyle çıkarılır. İç ve dış yüzey detaylı şekilde incelenerek hasar noktası ve türü belirlenir.'
+  },
+  {
+    step: '2',
+    title: 'Hasar Değerlendirmesi',
+    desc: 'Hasarın boyutu, konumu ve lastiğin genel durumu değerlendirilir. Sırt bölgesindeki 6 mm\'ye kadar delikler tamir edilebilir; yan duvar hasarları tamir edilemez.'
+  },
+  {
+    step: '3',
+    title: 'Uygun Tamir Yöntemi Seçimi',
+    desc: 'Hasarın tipine göre mantar yama, iç yama veya kombine yöntem belirlenir. Her durum için en dayanıklı ve güvenli teknik uygulanır.'
+  },
+  {
+    step: '4',
+    title: 'Profesyonel Onarım',
+    desc: 'Hasar bölgesi özel aletlerle temizlenir ve pürüzlendirilir. Vulkanize yapıştırıcı ve yama malzemesi uygulanarak kalıcı onarım gerçekleştirilir.'
+  },
+  {
+    step: '5',
+    title: 'Basınç Testi ve Kalite Kontrol',
+    desc: 'Tamir edilen lastik janta monte edilir, doğru hava basıncı verilir ve sızıntı testi yapılır. Balans ayarı kontrol edilerek araç teslim edilir.'
+  }
+];
+
+const stats = [
+  { value: '5.000+', label: 'Yıllık Lastik Tamiri' },
+  { value: '%95', label: 'Başarılı Tamir Oranı' },
+  { value: '15 dk', label: 'Ortalama Tamir Süresi' },
+  { value: '%50', label: 'Yeni Lastiğe Göre Tasarruf' }
+];
+
+const faq = [
+  {
+    question: 'Hangi lastik hasarları tamir edilebilir?',
+    answer: 'Lastik sırt bölgesindeki (yol ile temas eden yüzey) 6 mm\'ye kadar olan çivi, vida ve benzeri delinme hasarları güvenle tamir edilebilir. Hasarın yalnızca sırt bölgesinde olması, lastiğin iç yapısının (kord bezinin) sağlam kalması ve diş derinliğinin 3 mm\'nin üzerinde bulunması temel koşullardır. Yan duvar hasarları, uzun kesikler, 6 mm\'den büyük delikler ve daha önce aynı bölgede tamir görmüş lastikler onarıma uygun değildir.'
+  },
+  {
+    question: 'Mantar yama ile fitil tamir arasındaki fark nedir?',
+    answer: 'Fitil (ip) tamir yöntemi, lastik janttan sökülmeden dışarıdan bir kauçuk ip takılmasıdır; hızlıdır ancak iç yüzey kontrol edilmediği için gizli hasarlar gözden kaçabilir ve uzun vadede sızıntı riski yüksektir. Mantar yama (plug-patch) yönteminde ise lastik janttan sökülerek iç yüzey detaylı incelenir, hasar bölgesi hem delik içinden hem iç yüzeyden kapatılır. Bu sayede çok daha dayanıklı, güvenli ve kalıcı bir onarım elde edilir. Profesyonel lastikçiler dünya genelinde mantar yama yöntemini standart olarak tercih eder.'
+  },
+  {
+    question: 'Tamir edilen lastik güvenli midir? Yüksek hızda kullanılabilir mi?',
+    answer: 'Profesyonel mantar yama yöntemiyle doğru şekilde tamir edilen bir lastik, orijinal performansına çok yakın dayanıklılık sağlar. Normal sürüş koşullarında ve hız sınırlarına uyarak güvenle kullanılabilir. Ancak aynı lastik üzerinde birden fazla tamir noktası varsa, tamir bölgeleri birbirine çok yakınsa veya lastiğin genel yaşı ve diş derinliği sınır değerlerdeyse yeni lastik almanız daha güvenli bir tercih olacaktır. Tamir sonrası uzmanlarımız size lastiğin durumu hakkında dürüst bir değerlendirme sunar.'
+  },
+  {
+    question: 'Lastik tamiri ne kadara mal olur?',
+    answer: 'Lastik tamir ücreti hasarın türüne ve uygulanan yönteme göre değişmekle birlikte, yeni bir lastik almanın yaklaşık %50\'si kadar bir maliyete sahiptir. Standart bir mantar yama tamiri oldukça ekonomik bir işlemdir. Tam fiyat bilgisi için bizi arayabilir veya WhatsApp üzerinden lastiğinizin fotoğrafını göndererek ön değerlendirme alabilirsiniz. Tamir mümkün değilse Hankook ve Laufenn lastiklerimizle uygun fiyatlı yeni lastik seçenekleri sunuyoruz.'
+  },
+  {
+    question: 'Yan duvar (yanak) hasarı tamir edilebilir mi?',
+    answer: 'Yan duvar hasarları genellikle tamir edilemez ve edilmemelidir. Lastiğin yan duvarı, sürüş sırasında en fazla esneyen ve yük taşıyan bölgedir; bu bölgedeki kesik, yırtık veya şişme lastiğin yapısal bütünlüğünün bozulduğunu gösterir. Tamir edilse bile yüksek hız veya ağır yük altında patlama riski devam eder. Bu nedenle yan duvar hasarı tespit ettiğimizde güvenliğiniz için yeni lastik değişimini öneriyoruz. Yetkili bayi olarak uygun fiyatlı lastik seçenekleri sunabiliyoruz.'
+  },
+  {
+    question: 'Tamir edilen lastik ne kadar süre dayanır?',
+    answer: 'Profesyonel mantar yama yöntemiyle yapılan bir tamir, lastiğin kalan ömrü boyunca dayanacak şekilde tasarlanmıştır. Yani lastiğinizin diş derinliği yeterli olduğu sürece tamir noktası sorun çıkarmaz. Kaliteli malzeme ve doğru uygulama ile tamir edilen lastikler binlerce kilometre daha güvenle kullanılabilir. Ancak tamir sonrası ilk 100 km içinde bir kez daha hava basıncı kontrolü yaptırmanızı ve herhangi bir sızıntı belirtisi görürseniz hemen servisimize gelmenizi öneririz.'
+  }
+];
+
+const relatedSlugs = ['lastik-satisi', 'lastik-degisimi', 'yol-yardim-servisi'];
+---
+
+<ServiceLayout
+  title="Lastik Tamiri Mersin | Lastik Yaması & Onarımı | Gökalp"
+  description="Mersin'de lastik tamiri, lastik yaması ve onarım hizmeti. Yandan yırtık, patlak tamir, mantar tamir. 7/24 mobil servis. 0534 030 77 59"
+  h1="Lastik Tamiri ve Yaması — Profesyonel Onarım Hizmeti"
+  heroSubtitle="Yolda çivi veya vida battığında yeni lastik almak zorunda değilsiniz. Profesyonel mantar yama ve onarım teknikleriyle lastiğinizi kurtarıyor, yeni lastik maliyetinin yarısından azıyla güvenli bir şekilde yola devam etmenizi sağlıyoruz. Güvenliğiniz her zaman önceliğimizdir; tamir edilemeyecek hasarlarda sizi dürüstçe bilgilendiriyoruz."
+  slug="lastik-tamiri"
+  heroFeatures={["7/24 Mobil Servis", "Mantar & Yama Tamir", "Uygun Fiyat", "Güvenlik Garantisi"]}
+  benefits={benefits}
+  process={process}
+  stats={stats}
+  faq={faq}
+  relatedSlugs={relatedSlugs}
+>
+
+  <!-- ═══════════════════════════════════════════════════ -->
+  <!-- TAMIR TURLERI — Repair Types Grid                  -->
+  <!-- ═══════════════════════════════════════════════════ -->
+  <section class="py-20 lg:py-28 bg-gray-50 relative">
+    <div class="container-custom">
+      <div class="text-center mb-14">
+        <div class="flex items-center justify-center gap-3 mb-4 reveal">
+          <span class="w-8 h-px bg-primary/50"></span>
+          <span class="text-primary font-semibold text-sm uppercase tracking-[0.15em]">Tamir Yöntemlerimiz</span>
+          <span class="w-8 h-px bg-primary/50"></span>
+        </div>
+        <h2 class="text-h2-mobile lg:text-h2-desktop text-gray-900 reveal reveal-delay-1">
+          Uygulanan Lastik Tamir Teknikleri
+        </h2>
+        <p class="text-gray-500 mt-4 max-w-2xl mx-auto reveal reveal-delay-2">
+          Hasarın türüne ve konumuna göre en uygun tamir yöntemini belirliyor, kalıcı ve güvenli onarım sağlıyoruz.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+        <!-- Mantar Yama -->
+        <div class="glass-card p-6 lg:p-7 text-center group reveal reveal-delay-1">
+          <div class="w-14 h-14 rounded-2xl bg-primary/10 border border-primary/20 flex items-center justify-center mx-auto mb-5 group-hover:bg-primary/20 group-hover:scale-110 transition-all duration-300">
+            <svg class="w-7 h-7 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+            </svg>
+          </div>
+          <h3 class="text-gray-900 font-bold text-base mb-3">Mantar Yama (Plug-Patch)</h3>
+          <p class="text-gray-500 text-sm leading-relaxed">
+            En güvenilir yöntem. Hem delik icinden hem ic yuzeyden kapatma sağlar. Sırt bölgesindeki deliklerde standart uygulama.
+          </p>
+          <div class="mt-4 inline-block bg-green-50 border border-green-500/20 text-green-600 text-xs font-semibold px-3 py-1.5 rounded-full">
+            En Cok Tercih Edilen
+          </div>
+        </div>
+
+        <!-- Ic Yama -->
+        <div class="glass-card p-6 lg:p-7 text-center group reveal reveal-delay-2">
+          <div class="w-14 h-14 rounded-2xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center mx-auto mb-5 group-hover:bg-blue-500/20 group-hover:scale-110 transition-all duration-300">
+            <svg class="w-7 h-7 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z" />
+            </svg>
+          </div>
+          <h3 class="text-gray-900 font-bold text-base mb-3">Ic Yama Tamiri</h3>
+          <p class="text-gray-500 text-sm leading-relaxed">
+            Lastiğin ic yuzeyine vulkanize yama yapıştırılır. Geniş yuzey kapsaması ile etkili sızdırmazlık sağlar.
+          </p>
+          <div class="mt-4 inline-block bg-blue-500/10 border border-blue-500/20 text-blue-600 text-xs font-semibold px-3 py-1.5 rounded-full">
+            Klasik Yontem
+          </div>
+        </div>
+
+        <!-- Yan Duvar Degerlendirmesi -->
+        <div class="glass-card p-6 lg:p-7 text-center group reveal reveal-delay-3">
+          <div class="w-14 h-14 rounded-2xl bg-yellow-500/10 border border-yellow-500/20 flex items-center justify-center mx-auto mb-5 group-hover:bg-yellow-500/20 group-hover:scale-110 transition-all duration-300">
+            <svg class="w-7 h-7 text-yellow-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L4.082 16.5c-.77.833.192 2.5 1.732 2.5z" />
+            </svg>
+          </div>
+          <h3 class="text-gray-900 font-bold text-base mb-3">Yan Duvar Degerlendirmesi</h3>
+          <p class="text-gray-500 text-sm leading-relaxed">
+            Yan duvar hasarlarını detaylı inceliyoruz. Kucuk yuzey ciziği ile yapısal hasar arasındaki farkı belirliyoruz.
+          </p>
+          <div class="mt-4 inline-block bg-yellow-500/10 border border-yellow-500/20 text-yellow-600 text-xs font-semibold px-3 py-1.5 rounded-full">
+            Uzman Degerlendirme
+          </div>
+        </div>
+
+        <!-- Boncuk Tamiri -->
+        <div class="glass-card p-6 lg:p-7 text-center group reveal reveal-delay-4">
+          <div class="w-14 h-14 rounded-2xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center mx-auto mb-5 group-hover:bg-purple-500/20 group-hover:scale-110 transition-all duration-300">
+            <svg class="w-7 h-7 text-purple-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+            </svg>
+          </div>
+          <h3 class="text-gray-900 font-bold text-base mb-3">Boncuk (Bead) Tamiri</h3>
+          <p class="text-gray-500 text-sm leading-relaxed">
+            Lastik boncuk bolgesindeki hasarlar ozel yontemlerle onarılır. Jant ile lastik arasındaki sızdırmazlık yeniden sağlanır.
+          </p>
+          <div class="mt-4 inline-block bg-purple-500/10 border border-purple-500/20 text-purple-600 text-xs font-semibold px-3 py-1.5 rounded-full">
+            Ozel Uygulama
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════════════ -->
+  <!-- TAMİR EDİLEBİLİR vs EDİLEMEZ HASARLAR             -->
+  <!-- ═══════════════════════════════════════════════════ -->
+  <section class="py-20 lg:py-28 bg-white relative">
+    <div class="container-custom">
+      <div class="text-center mb-14">
+        <div class="flex items-center justify-center gap-3 mb-4 reveal">
+          <span class="w-8 h-px bg-primary/50"></span>
+          <span class="text-primary font-semibold text-sm uppercase tracking-[0.15em]">Hasar Rehberi</span>
+          <span class="w-8 h-px bg-primary/50"></span>
+        </div>
+        <h2 class="text-h2-mobile lg:text-h2-desktop text-gray-900 reveal reveal-delay-1">
+          Tamir Edilebilir mi, Edilemez mi?
+        </h2>
+        <p class="text-gray-500 mt-4 max-w-2xl mx-auto reveal reveal-delay-2">
+          Lastiğinizdeki hasarın tamir edilip edilemeyeceğini anlamanız icin hazırladığımız karşılaştırma rehberi.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 max-w-5xl mx-auto">
+        <!-- Tamir Edilebilir -->
+        <div class="glass-card p-6 lg:p-8 border-green-500/20 reveal reveal-delay-1">
+          <div class="flex items-center gap-3 mb-6">
+            <div class="w-10 h-10 rounded-xl bg-green-50 border border-green-500/30 flex items-center justify-center">
+              <svg class="w-6 h-6 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+              </svg>
+            </div>
+            <h3 class="text-green-600 font-bold text-lg">Tamir Edilebilir Hasarlar</h3>
+          </div>
+          <ul class="space-y-4">
+            <li class="flex items-start gap-3">
+              <svg class="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+              </svg>
+              <span class="text-gray-600 text-sm">Sırt bolgesinde <strong class="text-gray-900">6 mm'ye kadar</strong> civi/vida delikleri</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg class="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+              </svg>
+              <span class="text-gray-600 text-sm"><strong class="text-gray-900">Tek noktalı</strong> delinmeler (birbirine uzak tamir noktaları)</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg class="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+              </svg>
+              <span class="text-gray-600 text-sm">Dis derinliği <strong class="text-gray-900">3 mm uzerinde</strong> olan lastikler</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg class="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+              </svg>
+              <span class="text-gray-600 text-sm">Ic yapısı (kord bezi) <strong class="text-gray-900">sağlam kalmış</strong> lastikler</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg class="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+              </svg>
+              <span class="text-gray-600 text-sm">Boncuk bolgesindeki <strong class="text-gray-900">kucuk sızdırmazlık</strong> sorunları</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Tamir Edilemez -->
+        <div class="glass-card p-6 lg:p-8 border-red-500/20 reveal reveal-delay-2">
+          <div class="flex items-center gap-3 mb-6">
+            <div class="w-10 h-10 rounded-xl bg-red-50 border border-red-500/30 flex items-center justify-center">
+              <svg class="w-6 h-6 text-red-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </div>
+            <h3 class="text-red-600 font-bold text-lg">Tamir Edilemez Hasarlar</h3>
+          </div>
+          <ul class="space-y-4">
+            <li class="flex items-start gap-3">
+              <svg class="w-5 h-5 text-red-600 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+              <span class="text-gray-600 text-sm"><strong class="text-gray-900">Yan duvar</strong> (yanak) kesik, yırtık ve şişmeleri</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg class="w-5 h-5 text-red-600 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+              <span class="text-gray-600 text-sm"><strong class="text-gray-900">6 mm'den buyuk</strong> delik ve kesikler</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg class="w-5 h-5 text-red-600 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+              <span class="text-gray-600 text-sm">Dis derinliği <strong class="text-gray-900">3 mm altına inmiş</strong> lastikler</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg class="w-5 h-5 text-red-600 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+              <span class="text-gray-600 text-sm"><strong class="text-gray-900">Kord bezi hasar gormüş</strong> veya ayrılmış yapılar</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg class="w-5 h-5 text-red-600 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+              <span class="text-gray-600 text-sm">Aynı bolgede <strong class="text-gray-900">birden fazla tamir</strong> gormüş lastikler</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Alt Bilgi Kutusu -->
+      <div class="max-w-5xl mx-auto mt-8 reveal reveal-delay-3">
+        <div class="glass-card p-5 lg:p-6 border-primary/20 flex flex-col sm:flex-row items-start sm:items-center gap-4">
+          <div class="w-10 h-10 rounded-xl bg-primary/10 border border-primary/30 flex items-center justify-center flex-shrink-0">
+            <svg class="w-5 h-5 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+          </div>
+          <div>
+            <p class="text-gray-600 text-sm leading-relaxed">
+              <strong class="text-gray-900">Emin değil misiniz?</strong> Lastiğinizin fotoğrafını
+              <a href="https://wa.me/905340307759?text=Merhaba,%20lastik%20tamiri%20hakkında%20bilgi%20almak%20istiyorum" target="_blank" rel="noopener noreferrer" class="text-primary hover:text-primary/80 underline">WhatsApp'tan gonderin</a>,
+              uzmanlarımız on degerlendirme yapsın. Tamir mumkun değilse
+              <a href="/hizmetler/lastik-satisi" class="text-primary hover:text-primary/80 underline">uygun fiyatlı lastik seceneklerimizi</a> inceleyin.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <GallerySection />
+
+  <!-- ═══════════════════════════════════════════════════ -->
+  <!-- YOLDA KALDIYSAN — Yol Yardım Bağlantısı            -->
+  <!-- ═══════════════════════════════════════════════════ -->
+  <section class="py-16 lg:py-20 section-dark relative overflow-hidden">
+    <div class="container-custom relative">
+      <div class="max-w-4xl mx-auto">
+        <div class="glass-card p-8 lg:p-10 reveal">
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+            <div>
+              <div class="flex items-center gap-2 mb-4">
+                <div class="w-8 h-8 rounded-lg bg-red-50 border border-red-500/30 flex items-center justify-center">
+                  <svg class="w-4 h-4 text-red-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L4.082 16.5c-.77.833.192 2.5 1.732 2.5z" />
+                  </svg>
+                </div>
+                <span class="text-red-600 font-semibold text-sm uppercase tracking-wider">Acil Durum</span>
+              </div>
+              <h3 class="text-gray-900 font-bold text-xl lg:text-2xl mb-4">Yolda mı Kaldınız?</h3>
+              <p class="text-gray-500 text-sm leading-relaxed mb-6">
+                Lastik patlaması veya delinmesi nedeniyle yolda kaldıysanız panik yapmayın. 7/24 mobil servis aracımızla
+                Mersin genelinde konumunuza gelerek yerinde lastik tamiri veya değişimi yapıyoruz. Ortalama 15-20 dakikada yanınızdayız.
+              </p>
+              <a href="/hizmetler/yol-yardim-servisi" class="inline-flex items-center gap-2 text-primary font-semibold text-sm hover:text-primary/80 transition-colors">
+                Yol Yardım Servisi Hakkında Bilgi Alın
+                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+              </a>
+            </div>
+            <div class="flex flex-col gap-3">
+              <div class="glass-card p-4 flex items-center gap-3 border-gray-200">
+                <div class="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
+                  <svg class="w-4 h-4 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                </div>
+                <div>
+                  <p class="text-gray-900 text-sm font-semibold">7/24 Hizmet</p>
+                  <p class="text-gray-500 text-xs">Gece gunduz arayabilirsiniz</p>
+                </div>
+              </div>
+              <div class="glass-card p-4 flex items-center gap-3 border-gray-200">
+                <div class="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
+                  <svg class="w-4 h-4 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                  </svg>
+                </div>
+                <div>
+                  <p class="text-gray-900 text-sm font-semibold">Mersin Geneli</p>
+                  <p class="text-gray-500 text-xs">Tum ilcelere hizmet veriyoruz</p>
+                </div>
+              </div>
+              <div class="glass-card p-4 flex items-center gap-3 border-gray-200">
+                <div class="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
+                  <svg class="w-4 h-4 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z" />
+                  </svg>
+                </div>
+                <div>
+                  <p class="text-gray-900 text-sm font-semibold">Yerinde Tamir</p>
+                  <p class="text-gray-500 text-xs">Mobil servis aracıyla geliyoruz</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</ServiceLayout>

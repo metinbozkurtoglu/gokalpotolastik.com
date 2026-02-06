@@ -1,0 +1,77 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import Breadcrumb from '../components/Breadcrumb.astro';
+interface Props {
+  title: string;
+  description: string;
+  date: string;
+  image?: string;
+}
+
+const { title, description, date, image } = Astro.props;
+
+const breadcrumbs = [
+  { name: 'Anasayfa', url: '/' },
+  { name: 'Blog', url: '/blog' },
+  { name: title.split('|')[0].trim(), url: Astro.url.pathname },
+];
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  schemaType="blog"
+  breadcrumbs={breadcrumbs}
+  article={{
+    headline: title,
+    datePublished: date,
+    description: description,
+    image: image,
+  }}
+>
+  <Breadcrumb items={breadcrumbs} />
+
+  <article class="container-custom py-8 lg:py-16">
+    <div class="max-w-3xl mx-auto">
+      <header class="mb-10">
+        <time datetime={date} class="text-primary text-sm font-medium">
+          {new Date(date).toLocaleDateString('tr-TR', { year: 'numeric', month: 'long', day: 'numeric' })}
+        </time>
+        <h1 class="text-h1-mobile lg:text-h1-desktop text-gray-900 mt-3">
+          <slot name="title" />
+        </h1>
+      </header>
+
+      {image && (
+        <div class="mb-10 rounded-2xl overflow-hidden shadow-lg">
+          <picture>
+            <source srcset={image.replace('.jpg', '.webp')} type="image/webp" />
+            <img
+              src={image}
+              alt={title.split('|')[0].trim()}
+              width="800"
+              height="450"
+              class="w-full h-auto object-cover aspect-video"
+              loading="eager"
+              decoding="async"
+            />
+          </picture>
+        </div>
+      )}
+
+      <div class="prose prose-lg max-w-none
+        prose-headings:font-montserrat prose-headings:font-bold
+        prose-h2:text-gray-900 prose-h2:mt-10 prose-h2:mb-4
+        prose-h3:text-gray-900
+        prose-p:text-gray-600 prose-p:leading-relaxed
+        prose-li:text-gray-600
+        prose-strong:text-gray-900
+        prose-a:text-primary prose-a:no-underline hover:prose-a:underline
+        prose-img:rounded-xl
+      ">
+        <slot />
+      </div>
+    </div>
+  </article>
+
+</BaseLayout>

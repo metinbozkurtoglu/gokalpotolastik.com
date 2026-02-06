@@ -1,0 +1,40 @@
+---
+const brands = [
+  { name: "Hankook", logo: "/images/brands/hankook.svg", primary: true },
+  { name: "Bosch", logo: "/images/brands/bosch.png", primary: true },
+  { name: "Laufenn", logo: "/images/brands/laufenn.png" },
+  { name: "Michelin", logo: "/images/brands/michelin.jpg" },
+  { name: "Continental", logo: "/images/brands/continental.png" },
+  { name: "Bridgestone", logo: "/images/brands/bridgestone.jpg" },
+  { name: "Pirelli", logo: "/images/brands/pirelli.png" },
+  { name: "Goodyear", logo: "/images/brands/goodyear.png" },
+];
+---
+
+<section class="py-6 lg:py-8 bg-white border-b border-gray-100">
+  <div class="container-custom">
+    <div class="flex flex-col items-center">
+      <p class="text-gray-400 text-xs uppercase tracking-widest mb-4">Çalıştığımız Markalar</p>
+      <div class="flex flex-wrap items-center justify-center gap-6 lg:gap-10">
+        {brands.map(brand => (
+          <div class={`flex items-center justify-center ${brand.primary ? 'opacity-100' : 'opacity-60 hover:opacity-100'} transition-opacity`}>
+            <picture>
+              {brand.logo.endsWith('.svg') ? null : (
+                <source srcset={brand.logo.replace(/\.(jpg|png)$/, '.webp')} type="image/webp" />
+              )}
+              <img
+                src={brand.logo}
+                alt={brand.name}
+                width="120"
+                height="40"
+                class="h-6 lg:h-8 w-auto object-contain grayscale hover:grayscale-0 transition-all duration-300"
+                loading="lazy"
+                decoding="async"
+              />
+            </picture>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>

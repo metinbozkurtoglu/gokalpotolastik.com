@@ -1,0 +1,455 @@
+---
+import { siteConfig, services } from '../data/siteConfig';
+
+interface Props {
+  transparent?: boolean;
+}
+
+const { transparent = false } = Astro.props;
+---
+
+<header
+  id="site-header"
+  class="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
+  data-transparent={transparent ? "true" : "false"}
+>
+  <div class="header-bg absolute inset-0 transition-all duration-300"></div>
+
+  <div class="container-custom relative">
+    <div class="flex items-center justify-between h-24 lg:h-[100px]">
+      
+      <!-- Logo -->
+      <a href="/" class="flex items-center group" aria-label="Gökalp Lastikçilik Ana Sayfa">
+        <picture>
+          <source srcset="/images/logo-renkli.webp" type="image/webp" />
+          <img
+            src="/images/logo-renkli.png"
+            alt="Gökalp Lastikçilik - Mersin 7/24 Lastik ve Akü Servisi"
+            width="150"
+            height="75"
+            class="header-logo logo-renkli h-[68px] sm:h-20 lg:h-[88px] w-auto transition-all duration-300 group-hover:scale-105"
+            loading="eager"
+            decoding="async"
+            fetchpriority="high"
+          />
+        </picture>
+        <picture>
+          <source srcset="/images/logo-beyaz.webp" type="image/webp" />
+          <img
+            src="/images/logo-beyaz.png"
+            alt="Gökalp Lastikçilik - Mersin 7/24 Lastik ve Akü Servisi"
+            width="150"
+            height="75"
+            class="header-logo logo-beyaz h-[68px] sm:h-20 lg:h-[88px] w-auto transition-all duration-300 group-hover:scale-105"
+            loading="eager"
+            decoding="async"
+            fetchpriority="high"
+          />
+        </picture>
+      </a>
+
+      <!-- Desktop Nav -->
+      <nav class="hidden lg:flex items-center gap-1" aria-label="Ana menü">
+        <a href="/" class="header-nav">Anasayfa</a>
+
+        <!-- Hizmetler Dropdown -->
+        <div class="relative group">
+          <button
+            class="header-nav flex items-center gap-1.5"
+            aria-expanded="false"
+            aria-haspopup="true"
+          >
+            Hizmetler
+            <svg class="w-4 h-4 transition-transform duration-200 group-hover:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+
+          <div class="absolute top-full left-0 pt-3 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform translate-y-2 group-hover:translate-y-0">
+            <div class="bg-white border border-gray-200 rounded-2xl p-3 min-w-[260px] shadow-2xl">
+              <a href="/hizmetler" class="dropdown-item font-semibold text-gray-900 border-b border-gray-100 mb-2 pb-2">
+                <span class="flex items-center gap-2">
+                  <svg class="w-4 h-4 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+                  </svg>
+                  Tüm Hizmetler
+                </span>
+              </a>
+              {services.map((service) => (
+                <a href={`/hizmetler/${service.slug}`} class="dropdown-item">
+                  {service.title}
+                </a>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        <a href="/hakkimizda" class="header-nav">Hakkımızda</a>
+        <a href="/blog" class="header-nav">Blog</a>
+        <a href="/iletisim" class="header-nav">İletişim</a>
+      </nav>
+
+      <!-- Desktop CTA -->
+      <div class="hidden lg:flex items-center gap-4">
+        <a
+          href={`tel:${siteConfig.phone}`}
+          class="header-phone flex items-center gap-2 text-sm font-semibold transition-all duration-300 group"
+          aria-label={`Bizi arayın: ${siteConfig.phoneFormatted}`}
+        >
+          <svg class="w-4 h-4 group-hover:animate-pulse" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+          </svg>
+          {siteConfig.phoneFormatted}
+        </a>
+        <a
+          href={siteConfig.whatsappLink}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="header-cta flex items-center gap-2"
+        >
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+          </svg>
+          WhatsApp
+        </a>
+      </div>
+
+      <!-- Mobile: Actions -->
+      <div class="lg:hidden flex items-center gap-3">
+        <!-- WhatsApp Button -->
+        <a
+          href={siteConfig.whatsappLink}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="flex items-center justify-center w-10 h-10 rounded-xl bg-whatsapp text-white transition-transform active:scale-95"
+          aria-label="WhatsApp ile yaz"
+        >
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+          </svg>
+        </a>
+        
+        <!-- Hamburger Menu Button -->
+        <button
+          id="mobile-menu-toggle"
+          class="mobile-menu-btn"
+          aria-label="Menüyü aç"
+          aria-expanded="false"
+        >
+          <div class="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+          <span class="menu-text">Menü</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile Menu -->
+  <div
+    id="mobile-menu"
+    class="mobile-menu-panel fixed inset-0 z-[60] lg:hidden"
+  >
+    <div class="mobile-menu-overlay absolute inset-0 bg-black/50 backdrop-blur-sm"></div>
+    
+    <div class="mobile-menu-content absolute top-0 right-0 h-full w-[85%] max-w-[320px] bg-white shadow-2xl flex flex-col">
+      <!-- Header -->
+      <div class="flex items-center justify-between p-4 border-b border-gray-100">
+        <span class="text-gray-900 font-bold text-lg">Menü</span>
+        <button
+          id="mobile-menu-close"
+          class="w-10 h-10 rounded-xl bg-gray-100 flex items-center justify-center hover:bg-gray-200 transition-colors"
+          aria-label="Menüyü kapat"
+        >
+          <svg class="w-5 h-5 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+
+      <!-- Nav Links -->
+      <nav class="flex-1 overflow-y-auto p-4" aria-label="Mobil menü">
+        <div class="space-y-1">
+          <a href="/" class="mobile-link">Anasayfa</a>
+          
+          <div class="py-2">
+            <span class="mobile-link-label">Hizmetler</span>
+            <div class="mt-2 ml-3 space-y-1 border-l-2 border-primary/20 pl-3">
+              {services.map((service) => (
+                <a href={`/hizmetler/${service.slug}`} class="mobile-link-sub">
+                  {service.title}
+                </a>
+              ))}
+            </div>
+          </div>
+          
+          <a href="/hakkimizda" class="mobile-link">Hakkımızda</a>
+          <a href="/blog" class="mobile-link">Blog</a>
+          <a href="/iletisim" class="mobile-link">İletişim</a>
+        </div>
+      </nav>
+
+      <!-- Footer CTA - Dual Buttons -->
+      <div class="p-4 border-t border-gray-100 space-y-3">
+        <!-- Urgent Message -->
+        <div class="text-center py-2">
+          <span class="text-sm text-gray-500">Yolda mı kaldınız?</span>
+        </div>
+        
+        <!-- Phone Button -->
+        <a 
+          href={`tel:${siteConfig.phone}`} 
+          class="flex items-center justify-center gap-3 w-full py-3.5 px-4 bg-primary text-white font-bold rounded-xl transition-all hover:bg-primary-hover"
+        >
+          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+          </svg>
+          <span>Hemen Ara</span>
+          <span class="text-white/70 text-sm">{siteConfig.phoneFormatted}</span>
+        </a>
+        
+        <!-- WhatsApp Button -->
+        <a 
+          href={siteConfig.whatsappLink}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="flex items-center justify-center gap-3 w-full py-3 px-4 bg-[#25D366] text-white font-bold rounded-xl transition-all hover:bg-[#128C7E]"
+        >
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+          </svg>
+          <span>WhatsApp ile Yaz</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</header>
+
+{!transparent && <div class="h-24 lg:h-[100px]"></div>}
+
+<style>
+  /* ══════════════════════════════════════════ */
+  /* Header Background                          */
+  /* ══════════════════════════════════════════ */
+  .header-bg {
+    background: rgba(255, 255, 255, 0.98);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  }
+
+  /* ══════════════════════════════════════════ */
+  /* Logo                                       */
+  /* ══════════════════════════════════════════ */
+  .header-logo {
+    filter: none;
+    transition: filter 0.3s ease, transform 0.3s ease;
+  }
+
+  /* Default: show colored logo, hide white logo */
+  .logo-renkli { display: block; }
+  .logo-beyaz { display: none; }
+
+  /* Transparent mode (not scrolled): show white logo, hide colored */
+  #site-header[data-transparent="true"]:not(.scrolled) .logo-renkli { display: none; }
+  #site-header[data-transparent="true"]:not(.scrolled) .logo-beyaz { display: block; }
+  
+  .header-nav {
+    @apply font-medium text-base px-4 py-2.5 rounded-lg transition-all duration-200;
+    color: #374151;
+  }
+  .header-nav:hover {
+    color: #111827;
+    background: rgb(243, 244, 246);
+  }
+  
+  .header-phone { 
+    color: #4B5563; 
+    font-size: 15px;
+  }
+  .header-phone:hover { color: #DB5200; }
+
+  /* ══════════════════════════════════════════ */
+  /* Header CTA Button                          */
+  /* ══════════════════════════════════════════ */
+  .header-cta {
+    @apply bg-whatsapp hover:brightness-110 text-white font-bold text-base px-5 py-2.5 rounded-xl transition-all duration-200;
+  }
+
+  /* ══════════════════════════════════════════ */
+  /* Transparent Mode (Hero)                    */
+  /* ══════════════════════════════════════════ */
+  #site-header[data-transparent="true"]:not(.scrolled) .header-bg {
+    background: transparent;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    border-color: transparent;
+  }
+  #site-header[data-transparent="true"]:not(.scrolled) .header-nav { color: rgba(255,255,255,0.85); }
+  #site-header[data-transparent="true"]:not(.scrolled) .header-nav:hover {
+    color: white;
+    background: rgba(255,255,255,0.1);
+  }
+  #site-header[data-transparent="true"]:not(.scrolled) .header-phone { color: rgba(255,255,255,0.85); }
+  #site-header[data-transparent="true"]:not(.scrolled) .header-phone:hover { color: white; }
+  #site-header[data-transparent="true"]:not(.scrolled) .hamburger span { background: white; }
+  #site-header[data-transparent="true"]:not(.scrolled) .menu-text { color: white; }
+
+  /* Default menu text */
+  .menu-text { color: #374151; }
+
+  /* ══════════════════════════════════════════ */
+  /* Scrolled State                             */
+  /* ══════════════════════════════════════════ */
+  #site-header.scrolled .header-bg {
+    background: rgba(255, 255, 255, 1);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+  }
+
+  /* ══════════════════════════════════════════ */
+  /* Dropdown                                   */
+  /* ══════════════════════════════════════════ */
+  .dropdown-item {
+    @apply block px-4 py-2.5 text-gray-600 hover:text-primary hover:bg-primary/5 rounded-lg text-sm transition-all duration-200;
+  }
+
+  /* ══════════════════════════════════════════ */
+  /* Mobile Menu Button                         */
+  /* ══════════════════════════════════════════ */
+  .mobile-menu-btn {
+    @apply h-11 px-4 rounded-xl bg-gray-100 flex items-center gap-2 transition-all hover:bg-gray-200;
+  }
+  .menu-text {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #374151;
+  }
+  #site-header[data-transparent="true"]:not(.scrolled) .mobile-menu-btn {
+    background: rgba(255,255,255,0.15);
+  }
+  #site-header[data-transparent="true"]:not(.scrolled) .mobile-menu-btn:hover {
+    background: rgba(255,255,255,0.25);
+  }
+
+  /* ══════════════════════════════════════════ */
+  /* Hamburger Icon                             */
+  /* ══════════════════════════════════════════ */
+  .hamburger {
+    width: 18px;
+    height: 14px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .hamburger span {
+    display: block;
+    width: 100%;
+    height: 2px;
+    background: #111827;
+    border-radius: 2px;
+    transition: all 0.3s ease;
+  }
+  .hamburger span:nth-child(2) { width: 75%; }
+  
+  .menu-open .hamburger span:nth-child(1) {
+    transform: rotate(45deg) translate(4px, 4px);
+  }
+  .menu-open .hamburger span:nth-child(2) {
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+  .menu-open .hamburger span:nth-child(3) {
+    transform: rotate(-45deg) translate(4px, -4px);
+    width: 100%;
+  }
+
+  /* ══════════════════════════════════════════ */
+  /* Mobile Menu Panel                          */
+  /* ══════════════════════════════════════════ */
+  .mobile-menu-panel {
+    pointer-events: none;
+  }
+  .mobile-menu-panel.active {
+    pointer-events: auto;
+  }
+  
+  .mobile-menu-overlay {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  .mobile-menu-panel.active .mobile-menu-overlay {
+    opacity: 1;
+  }
+  
+  .mobile-menu-content {
+    transform: translateX(100%);
+    transition: transform 0.3s ease;
+  }
+  .mobile-menu-panel.active .mobile-menu-content {
+    transform: translateX(0);
+  }
+
+  /* ══════════════════════════════════════════ */
+  /* Mobile Links                               */
+  /* ══════════════════════════════════════════ */
+  .mobile-link {
+    @apply block px-4 py-3 text-gray-700 hover:text-gray-900 hover:bg-gray-50 rounded-xl text-base font-medium transition-all;
+  }
+  .mobile-link-label {
+    @apply block px-4 py-2 text-primary font-semibold text-sm uppercase tracking-wider;
+  }
+  .mobile-link-sub {
+    @apply block px-3 py-2.5 text-gray-600 hover:text-gray-900 hover:bg-gray-50 rounded-lg text-sm transition-all;
+  }
+</style>
+
+<script>
+  const header = document.getElementById('site-header');
+  const menuToggle = document.getElementById('mobile-menu-toggle');
+  const menuClose = document.getElementById('mobile-menu-close');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const overlay = mobileMenu?.querySelector('.mobile-menu-overlay');
+
+  // Scroll state
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 50) {
+      header?.classList.add('scrolled');
+    } else {
+      header?.classList.remove('scrolled');
+    }
+  }, { passive: true });
+
+  // Mobile menu
+  function openMenu() {
+    mobileMenu?.classList.add('active');
+    menuToggle?.classList.add('menu-open');
+    menuToggle?.setAttribute('aria-expanded', 'true');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeMenu() {
+    mobileMenu?.classList.remove('active');
+    menuToggle?.classList.remove('menu-open');
+    menuToggle?.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+  }
+
+  menuToggle?.addEventListener('click', () => {
+    const isOpen = mobileMenu?.classList.contains('active');
+    isOpen ? closeMenu() : openMenu();
+  });
+
+  menuClose?.addEventListener('click', closeMenu);
+  overlay?.addEventListener('click', closeMenu);
+
+  mobileMenu?.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', closeMenu);
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeMenu();
+  });
+</script>

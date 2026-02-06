@@ -1,0 +1,77 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { siteConfig } from '../data/siteConfig';
+
+const title = "Sayfa Bulunamadı | Gökalp Lastikçilik";
+const description = "Aradığınız sayfa bulunamadı. Gökalp Lastikçilik ana sayfasına dönerek hizmetlerimize göz atabilirsiniz.";
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  noindex={true}
+>
+
+  <section class="relative min-h-[70vh] flex items-center overflow-hidden">
+    <!-- Background pattern -->
+    <div class="absolute inset-0 opacity-[0.03]" style="background-image: radial-gradient(circle at 1px 1px, white 1px, transparent 0); background-size: 40px 40px;"></div>
+
+    <!-- Orange accent glow -->
+    <div class="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] bg-primary/[0.05] rounded-full blur-[100px]"></div>
+
+    <div class="container-custom relative text-center py-20">
+      <!-- 404 Number -->
+      <div class="mb-8 reveal">
+        <span class="text-[clamp(8rem,20vw,14rem)] font-bold leading-none text-transparent bg-clip-text bg-gradient-to-b from-primary/40 to-primary/5 select-none">
+          404
+        </span>
+      </div>
+
+      <!-- Message -->
+      <div class="max-w-lg mx-auto">
+        <h1 class="text-h1-mobile lg:text-h1-desktop text-gray-900 mb-4 reveal reveal-delay-1">
+          Aradığınız Sayfa Bulunamadı
+        </h1>
+
+        <p class="text-gray-500 text-lg leading-relaxed mb-10 reveal reveal-delay-2">
+          Bu sayfa kaldırılmış, taşınmış ya da hiç var olmamış olabilir. Ana sayfamıza dönerek aradığınızı bulabilirsiniz.
+        </p>
+
+        <!-- CTA Buttons -->
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-4 reveal reveal-delay-3">
+          <a href="/" class="btn-primary w-full sm:w-auto">
+            <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+            </svg>
+            Ana Sayfaya Dön
+          </a>
+          <a href={`tel:${siteConfig.phone}`} class="btn-primary w-full sm:w-auto">
+            <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+            </svg>
+            {siteConfig.phoneFormatted}
+          </a>
+        </div>
+
+      </div>
+
+      <!-- Helpful Links -->
+      <div class="mt-16 max-w-2xl mx-auto reveal reveal-delay-5">
+        <p class="text-gray-500 text-sm mb-6">Bunlara göz atmak ister misiniz?</p>
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+          {[
+            { label: "Hizmetler", href: "/hizmetler" },
+            { label: "Hakkımızda", href: "/hakkimizda" },
+            { label: "Blog", href: "/blog" },
+            { label: "İletişim", href: "/iletisim" },
+          ].map((link) => (
+            <a href={link.href} class="glass-card px-4 py-3 text-center text-sm text-gray-500 font-medium hover:text-primary transition-colors">
+              {link.label}
+            </a>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+</BaseLayout>

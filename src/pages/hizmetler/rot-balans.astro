@@ -1,0 +1,469 @@
+---
+import ServiceLayout from '../../layouts/ServiceLayout.astro';
+import GallerySection from '../../components/GallerySection.astro';
+import { services } from '../../data/siteConfig';
+
+const service = services.find(s => s.slug === 'rot-balans')!;
+
+const benefits = [
+  {
+    icon: 'target',
+    title: 'Bilgisayarlı Hassas Ayar',
+    desc: '3D rot ayar cihazımız tekerleklerin konumunu milimetrik hassasiyetle olcer. Uretici spesifikasyonlarına gore ayar yapılır, tahmine yer kalmaz.'
+  },
+  {
+    icon: 'price',
+    title: 'Yakıt Tasarrufu',
+    desc: 'Doğru rot ayarı ile lastiklerin yol yuzeyiyle temas acısı optimize edilir. Bu sayede yuvarlanma direnci azalır ve yakıt tuketiminde %5\'e varan tasarruf sağlanır.'
+  },
+  {
+    icon: 'refresh',
+    title: 'Lastik Omru %40 Uzar',
+    desc: 'Bozuk rot ayarı lastiklerin duzensiz aşınmasına neden olur. Doğru ayar ile lastikleriniz eşit aşınır ve omru %40\'a kadar uzar.'
+  },
+  {
+    icon: 'shield',
+    title: 'Guvenli Yol Tutuşu',
+    desc: 'Doğru hizalanmış tekerlekler aracınızın virajlarda ve ani frenlerde daha iyi yol tutmasını sağlar. Direksiyon tepkisi hassaslaşır, suruş guvenligi artar.'
+  }
+];
+
+const process = [
+  {
+    step: '1',
+    title: 'Arac ve Lastik On İnceleme',
+    desc: 'Susansiyon parcaları, rotiller, rotbaşları ve lastik durumu gorsel olarak kontrol edilir. Aşınmış parcalar tespit edilirse oncelikle bunların degişimi onerilir.'
+  },
+  {
+    step: '2',
+    title: 'Sensorlerin Montajı',
+    desc: 'Her dort tekerleğe hassas olcum sensorleri yerleştirilir. Sensorler tekerlek acılarını 0.01 derece hassasiyetle olcer.'
+  },
+  {
+    step: '3',
+    title: 'Acı Olcumu ve Analiz',
+    desc: 'Camber, caster ve toe acıları bilgisayar ortamında olculur. Mevcut değerler aracınızın uretici standart değerleriyle karşılaştırılır ve sapma miktarı belirlenir.'
+  },
+  {
+    step: '4',
+    title: 'Bilgisayarlı Ayar',
+    desc: 'Sapma gosteren acılar, ozel aletlerle uretici spesifikasyonlarına getirilir. Balans ayarı icin lastik-jant kombinasyonu makinede dondurulurek ağırlık dengesizlikleri giderilir.'
+  },
+  {
+    step: '5',
+    title: 'Test Suruşu ve Rapor',
+    desc: 'Ayar sonrası kısa bir test suruşu yapılır. Direksiyon tepkisi ve arac stabilitesi doğrulanır. Oncesi-sonrası olcum raporu sizinle paylaşılır.'
+  }
+];
+
+const stats = [
+  { value: '10.000+', label: 'Yapılan Rot Balans Ayarı' },
+  { value: '%40', label: 'Daha Uzun Lastik Omru' },
+  { value: '%5', label: 'Yakıt Tasarrufu' },
+  { value: '30 dk', label: 'Ortalama İşlem Suresi' }
+];
+
+const faq = [
+  {
+    question: 'Rot ayarı ile balans ayarı arasındaki fark nedir?',
+    answer: 'Rot ayarı (tekerlek duzen ayarı), tekerleklerinizin birbirine ve yol yuzeyine gore acısını duzenler; camber, caster ve toe değerlerini uretici standartlarına getirir. Balans ayarı ise lastik-jant butununun donuş sırasında oluşturduğu ağırlık dengesizliğini giderir; janta kucuk ağırlıklar eklenerek denge sağlanır. Rot ayarı aracın duzgun gitmesini ve lastiğin eşit aşınmasını sağlarken, balans ayarı yuksek hızlarda direksiyon titremesini onler. İkisi farklı işlemlerdir ancak genellikle birlikte yapılması onerilir.'
+  },
+  {
+    question: 'Rot balans bozukluğunun belirtileri nelerdir?',
+    answer: 'Rot bozukluğunun en belirgin işaretleri aracın sağa veya sola cekmesi, direksiyonun duz yolda eğri durması ve lastiklerin tek taraftan duzensiz aşınmasıdır. Balans bozukluğu ise ozellikle 80-100 km/h hızlarda hissedilen direksiyon titremesi, direksiyondaki vuruntu hissi ve lastiklerin belirli noktalarda daha fazla aşınmasıyla kendini gosterir. Bunlardan herhangi birini fark ederseniz kilometre fark etmeksizin kontrol yaptırmanız gerekir. Erken tespit hem guvenliğinizi artırır hem de lastik degişim maliyetinden tasarruf etmenizi sağlar.'
+  },
+  {
+    question: 'Rot balans ne sıklıkla yaptırılmalı?',
+    answer: 'Genel oneri her 10.000-15.000 km\'de veya her lastik degişiminde rot balans kontrolu yaptırılmasıdır. Bunun dışında kaldırım carpması, derin cukura duşme, susansiyon parcası degişimi, kaza sonrası veya lastik degişimi gibi durumlarda mutlaka kontrol edilmelidir. Mersin\'de yol koşulları goz onune alındığında ozellikle kotu yol yuzeylerinde sık seyahat eden suruculerin yılda en az iki kez kontrol yaptırması onerilir. Rot balansı duzenli yaptırmak lastik omrunu belirgin şekilde uzatır ve uzun vadede size tasarruf sağlar.'
+  },
+  {
+    question: 'Rot balans ayarı ne kadar surer ve ucreti nedir?',
+    answer: 'Standart bir rot balans ayarı ortalama 30-45 dakika icerisinde tamamlanır. On rot ayarı daha kısa sururken, dort tekerlek rot ayarı biraz daha fazla zaman alabilir. Ucret aracın tipine (binek, SUV, ticari), rot ayarı turkne (2 veya 4 tekerlek) ve ek parca ihtiyacına gore değişir. Guncel fiyat bilgisi icin bizi arayabilir veya WhatsApp uzerinden arac bilginizi gondererek hızlı teklif alabilirsiniz. Rotbaşı veya rotil degişimi gibi ek parca gerektiren durumlarda onceden bilgilendirilirsiniz.'
+  },
+  {
+    question: 'Rot ayarı yakıt tuketimini etkiler mi?',
+    answer: 'Evet, bozuk rot ayarı doğrudan yakıt tuketimini artırır. Tekerlekler yanlış acıda konumlandığında lastikler yol yuzeyine idealden fazla temas eder veya acılı surtunerek ekstra direnç oluşturur. Bu durum motorun daha fazla guc uretmesini gerektirir ve yakıt tuketimi %3-5 oranında artar. Doğru rot ayarı ile yuvarlanma direnci minimuma indirilir, lastikler yol yuzeyiyle optimal acıda temas eder ve araç daha az enerji harcayarak ilerler. Ozellikle şehir ici suruşlerde bu tasarruf belirgin şekilde hissedilir.'
+  },
+  {
+    question: '2 tekerlek rot ayarı ile 4 tekerlek rot ayarı arasındaki fark nedir?',
+    answer: 'On (2 tekerlek) rot ayarı yalnızca on tekerleklerin camber, caster ve toe acılarını duzenler; arka tekerlekler sabit aks yapısına sahip araclarda tercih edilir. Dort tekerlek rot ayarı ise hem on hem arka tekerleklerin tum acılarını birlikte optimize eder; bağımsız arka susansiyona sahip modern araclarda mutlaka dort tekerlek ayarı yapılmalıdır. Dort tekerlek rot ayarı daha kapsamlı bir hizalama sağladığı icin lastik aşınması ve suruş stabilitesi acısından ustun sonuclar verir. Servisimizde aracınızın susansiyon tipine gore hangi ayarın uygun olduğunu belirleyerek size doğru hizmeti sunuyoruz.'
+  }
+];
+
+const relatedSlugs = ['lastik-degisimi', 'lastik-satisi', 'lastik-tamiri'];
+---
+
+<ServiceLayout
+  title="Rot Balans Ayarı Mersin | Bilgisayarlı Rot | Gökalp Lastikçilik"
+  description="Mersin'de bilgisayarlı rot ayarı ve balans hizmeti. Lastik ömrünü uzatın, yakıt tasarrufu sağlayın. 4 tekerlek rot ayarı. 0534 030 77 59"
+  h1="Bilgisayarlı Rot Balans Ayarı Mersin"
+  heroSubtitle="Son teknoloji bilgisayarlı rot ayar cihazımızla tekerleklerinizi milimetrik hassasiyetle hizalıyoruz. Doğru rot balans ayarı lastik omrunuzu %40'a kadar uzatır, yakıt tuketimini duşurur ve aracınızın yol tutuşunu belirgin şekilde iyileştirir. Guvenli ve konforlu bir suruş icin duzenli rot balans kontrolu şart."
+  slug="rot-balans"
+  heroFeatures={["Bilgisayarlı Cihaz", "4 Tekerlek Rot", "Lastik Ömrü +%40", "Yakıt Tasarrufu"]}
+  benefits={benefits}
+  process={process}
+  stats={stats}
+  faq={faq}
+  relatedSlugs={relatedSlugs}
+>
+
+  <!-- ═══════════════════════════════════════════════════ -->
+  <!-- ROT AYARI vs BALANS AYARI — Karşılaştırma           -->
+  <!-- ═══════════════════════════════════════════════════ -->
+  <section class="py-20 lg:py-28 bg-gray-50 relative">
+    <div class="container-custom">
+      <div class="text-center mb-14">
+        <div class="flex items-center justify-center gap-3 mb-4 reveal">
+          <span class="w-8 h-px bg-primary/50"></span>
+          <span class="text-primary font-semibold text-sm uppercase tracking-[0.15em]">Karşılaştırma</span>
+          <span class="w-8 h-px bg-primary/50"></span>
+        </div>
+        <h2 class="text-h2-mobile lg:text-h2-desktop text-gray-900 reveal reveal-delay-1">
+          Rot Ayarı ve Balans Ayarı Farkı
+        </h2>
+        <p class="text-gray-500 mt-4 max-w-2xl mx-auto reveal reveal-delay-2">
+          İkisi de suruş guvenligi icin kritik oneme sahip, ancak tamamen farklı işlemlerdir. İşte detayları:
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 max-w-5xl mx-auto">
+        <!-- Rot Ayarı -->
+        <div class="glass-card p-6 lg:p-8 reveal reveal-delay-1">
+          <div class="flex items-center gap-3 mb-6">
+            <div class="w-12 h-12 rounded-2xl bg-primary/10 border border-primary/20 flex items-center justify-center">
+              <svg class="w-6 h-6 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 16c-3.31 0-6-2.69-6-6s2.69-6 6-6 6 2.69 6 6-2.69 6-6 6zm0-8c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z" />
+              </svg>
+            </div>
+            <div>
+              <h3 class="text-gray-900 font-bold text-lg">Rot Ayarı</h3>
+              <span class="text-primary text-xs font-semibold uppercase tracking-wider">Tekerlek Duzen Ayarı</span>
+            </div>
+          </div>
+          <ul class="space-y-4">
+            <li class="flex items-start gap-3">
+              <div class="w-6 h-6 rounded-md bg-primary/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                <span class="text-primary text-xs font-bold">1</span>
+              </div>
+              <div>
+                <p class="text-gray-900 text-sm font-semibold">Ne Yapar?</p>
+                <p class="text-gray-500 text-sm">Tekerleklerin birbirine ve yol yuzeyine gore acısını duzenler</p>
+              </div>
+            </li>
+            <li class="flex items-start gap-3">
+              <div class="w-6 h-6 rounded-md bg-primary/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                <span class="text-primary text-xs font-bold">2</span>
+              </div>
+              <div>
+                <p class="text-gray-900 text-sm font-semibold">Hangi Acılar?</p>
+                <p class="text-gray-500 text-sm">Camber, Caster ve Toe değerleri ayarlanır</p>
+              </div>
+            </li>
+            <li class="flex items-start gap-3">
+              <div class="w-6 h-6 rounded-md bg-primary/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                <span class="text-primary text-xs font-bold">3</span>
+              </div>
+              <div>
+                <p class="text-gray-900 text-sm font-semibold">Bozulursa?</p>
+                <p class="text-gray-500 text-sm">Arac sağa/sola ceker, lastik tek taraftan aşınır</p>
+              </div>
+            </li>
+            <li class="flex items-start gap-3">
+              <div class="w-6 h-6 rounded-md bg-primary/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                <span class="text-primary text-xs font-bold">4</span>
+              </div>
+              <div>
+                <p class="text-gray-900 text-sm font-semibold">Sonuc</p>
+                <p class="text-gray-500 text-sm">Eşit lastik aşınması, duz gidiş, yakıt tasarrufu</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Balans Ayarı -->
+        <div class="glass-card p-6 lg:p-8 reveal reveal-delay-2">
+          <div class="flex items-center gap-3 mb-6">
+            <div class="w-12 h-12 rounded-2xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center">
+              <svg class="w-6 h-6 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3" />
+              </svg>
+            </div>
+            <div>
+              <h3 class="text-gray-900 font-bold text-lg">Balans Ayarı</h3>
+              <span class="text-blue-600 text-xs font-semibold uppercase tracking-wider">Ağırlık Dengeleme</span>
+            </div>
+          </div>
+          <ul class="space-y-4">
+            <li class="flex items-start gap-3">
+              <div class="w-6 h-6 rounded-md bg-blue-500/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                <span class="text-blue-600 text-xs font-bold">1</span>
+              </div>
+              <div>
+                <p class="text-gray-900 text-sm font-semibold">Ne Yapar?</p>
+                <p class="text-gray-500 text-sm">Lastik-jant kombinasyonundaki ağırlık dengesizliğini giderir</p>
+              </div>
+            </li>
+            <li class="flex items-start gap-3">
+              <div class="w-6 h-6 rounded-md bg-blue-500/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                <span class="text-blue-600 text-xs font-bold">2</span>
+              </div>
+              <div>
+                <p class="text-gray-900 text-sm font-semibold">Nasıl Yapılır?</p>
+                <p class="text-gray-500 text-sm">Janta gram cinsinden kucuk ağırlıklar eklenerek denge sağlanır</p>
+              </div>
+            </li>
+            <li class="flex items-start gap-3">
+              <div class="w-6 h-6 rounded-md bg-blue-500/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                <span class="text-blue-600 text-xs font-bold">3</span>
+              </div>
+              <div>
+                <p class="text-gray-900 text-sm font-semibold">Bozulursa?</p>
+                <p class="text-gray-500 text-sm">Yuksek hızda direksiyon titrer, rulmanlar erken aşınır</p>
+              </div>
+            </li>
+            <li class="flex items-start gap-3">
+              <div class="w-6 h-6 rounded-md bg-blue-500/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                <span class="text-blue-600 text-xs font-bold">4</span>
+              </div>
+              <div>
+                <p class="text-gray-900 text-sm font-semibold">Sonuc</p>
+                <p class="text-gray-500 text-sm">Titreşimsiz suruş, uzun lastik omru, konfor</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Birlikte Yapılmalı Notu -->
+      <div class="max-w-5xl mx-auto mt-8 reveal reveal-delay-3">
+        <div class="glass-card p-5 lg:p-6 border-primary/20 flex flex-col sm:flex-row items-start sm:items-center gap-4">
+          <div class="w-10 h-10 rounded-xl bg-primary/10 border border-primary/30 flex items-center justify-center flex-shrink-0">
+            <svg class="w-5 h-5 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
+            </svg>
+          </div>
+          <div>
+            <p class="text-gray-600 text-sm leading-relaxed">
+              <strong class="text-gray-900">Oneri:</strong> Rot ayarı ve balans ayarı birlikte yapıldığında en iyi sonucu verir.
+              Ozellikle <a href="/hizmetler/lastik-degisimi" class="text-primary hover:text-primary/80 underline">lastik degişimi</a> sonrasında
+              her iki işlemi birlikte yaptırmak lastik omrunu maksimuma cıkarır ve suruş konforunu artırır.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════════════ -->
+  <!-- BELİRTİLER — Symptoms Section                      -->
+  <!-- ═══════════════════════════════════════════════════ -->
+  <section class="py-20 lg:py-28 bg-white relative">
+    <div class="container-custom">
+      <div class="text-center mb-14">
+        <div class="flex items-center justify-center gap-3 mb-4 reveal">
+          <span class="w-8 h-px bg-primary/50"></span>
+          <span class="text-primary font-semibold text-sm uppercase tracking-[0.15em]">Belirtiler</span>
+          <span class="w-8 h-px bg-primary/50"></span>
+        </div>
+        <h2 class="text-h2-mobile lg:text-h2-desktop text-gray-900 reveal reveal-delay-1">
+          Rot Balans Bozukluğu Nasıl Anlaşılır?
+        </h2>
+        <p class="text-gray-500 mt-4 max-w-2xl mx-auto reveal reveal-delay-2">
+          Aşağıdaki belirtilerden herhangi birini fark ediyorsanız rot balans kontrolu yaptırmanız gerekiyor.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 max-w-5xl mx-auto">
+        <!-- Direksiyon Titremesi -->
+        <div class="glass-card p-6 text-center group reveal reveal-delay-1">
+          <div class="w-14 h-14 rounded-2xl bg-red-500/10 border border-red-500/20 flex items-center justify-center mx-auto mb-5 group-hover:bg-red-500/20 group-hover:scale-110 transition-all duration-300">
+            <svg class="w-7 h-7 text-red-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
+            </svg>
+          </div>
+          <h3 class="text-gray-900 font-bold text-sm mb-2">Direksiyon Titremesi</h3>
+          <p class="text-gray-500 text-xs leading-relaxed">
+            Ozellikle 80-100 km/h hızlarda direksiyonda titreşim veya vuruntu hissedilir.
+          </p>
+          <div class="mt-3 inline-block bg-red-500/10 border border-red-500/20 text-red-600 text-[10px] font-bold px-2.5 py-1 rounded-full uppercase tracking-wider">
+            Balans Sorunu
+          </div>
+        </div>
+
+        <!-- Aracın Cekmesi -->
+        <div class="glass-card p-6 text-center group reveal reveal-delay-2">
+          <div class="w-14 h-14 rounded-2xl bg-yellow-500/10 border border-yellow-500/20 flex items-center justify-center mx-auto mb-5 group-hover:bg-yellow-500/20 group-hover:scale-110 transition-all duration-300">
+            <svg class="w-7 h-7 text-yellow-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+            </svg>
+          </div>
+          <h3 class="text-gray-900 font-bold text-sm mb-2">Sağa/Sola Cekme</h3>
+          <p class="text-gray-500 text-xs leading-relaxed">
+            Duz yolda direksiyonu bıraktığınızda arac bir tarafa doğru kayar.
+          </p>
+          <div class="mt-3 inline-block bg-yellow-500/10 border border-yellow-500/20 text-yellow-600 text-[10px] font-bold px-2.5 py-1 rounded-full uppercase tracking-wider">
+            Rot Sorunu
+          </div>
+        </div>
+
+        <!-- Duzensiz Aşınma -->
+        <div class="glass-card p-6 text-center group reveal reveal-delay-3">
+          <div class="w-14 h-14 rounded-2xl bg-orange-500/10 border border-orange-500/20 flex items-center justify-center mx-auto mb-5 group-hover:bg-orange-500/20 group-hover:scale-110 transition-all duration-300">
+            <svg class="w-7 h-7 text-orange-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+              <circle cx="12" cy="12" r="10" />
+              <circle cx="12" cy="12" r="6" />
+              <circle cx="12" cy="12" r="2" />
+            </svg>
+          </div>
+          <h3 class="text-gray-900 font-bold text-sm mb-2">Duzensiz Aşınma</h3>
+          <p class="text-gray-500 text-xs leading-relaxed">
+            Lastik sırtının bir kenarı diğerinden fazla aşınır veya dalgalı aşınma oluşur.
+          </p>
+          <div class="mt-3 inline-block bg-orange-500/10 border border-orange-500/20 text-orange-400 text-[10px] font-bold px-2.5 py-1 rounded-full uppercase tracking-wider">
+            Rot + Balans
+          </div>
+        </div>
+
+        <!-- Direksiyon Eğri Durması -->
+        <div class="glass-card p-6 text-center group reveal reveal-delay-4">
+          <div class="w-14 h-14 rounded-2xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center mx-auto mb-5 group-hover:bg-purple-500/20 group-hover:scale-110 transition-all duration-300">
+            <svg class="w-7 h-7 text-purple-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+            </svg>
+          </div>
+          <h3 class="text-gray-900 font-bold text-sm mb-2">Eğri Direksiyon</h3>
+          <p class="text-gray-500 text-xs leading-relaxed">
+            Arac duz giderken direksiyon simidi ortalanmaz, eğri bir pozisyonda kalır.
+          </p>
+          <div class="mt-3 inline-block bg-purple-500/10 border border-purple-500/20 text-purple-600 text-[10px] font-bold px-2.5 py-1 rounded-full uppercase tracking-wider">
+            Rot Sorunu
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════════════ -->
+  <!-- NE ZAMAN YAPILMALI — Timeline/Checklist             -->
+  <!-- ═══════════════════════════════════════════════════ -->
+  <section class="py-20 lg:py-28 bg-gray-50 relative overflow-hidden">
+    <div class="container-custom relative">
+      <div class="text-center mb-14">
+        <div class="flex items-center justify-center gap-3 mb-4 reveal">
+          <span class="w-8 h-px bg-primary/50"></span>
+          <span class="text-primary font-semibold text-sm uppercase tracking-[0.15em]">Zamanlama</span>
+          <span class="w-8 h-px bg-primary/50"></span>
+        </div>
+        <h2 class="text-h2-mobile lg:text-h2-desktop text-gray-900 reveal reveal-delay-1">
+          Rot Balans Ne Zaman Yapılmalı?
+        </h2>
+        <p class="text-gray-500 mt-4 max-w-2xl mx-auto reveal reveal-delay-2">
+          Aşağıdaki durumlardan herhangi biriyle karşılaştığınızda rot balans kontrolu yaptırmanız onerilir.
+        </p>
+      </div>
+
+      <div class="max-w-4xl mx-auto">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+          <!-- Periyodik -->
+          <div class="glass-card p-6 flex items-start gap-4 reveal reveal-delay-1">
+            <div class="w-10 h-10 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center flex-shrink-0">
+              <svg class="w-5 h-5 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            </div>
+            <div>
+              <h3 class="text-gray-900 font-bold text-sm mb-1">Her 10.000 - 15.000 km'de</h3>
+              <p class="text-gray-500 text-xs leading-relaxed">Duzenli periyodik kontrol ile lastik aşınmasını minimize edin.</p>
+            </div>
+          </div>
+
+          <!-- Lastik Degişimi Sonrası -->
+          <div class="glass-card p-6 flex items-start gap-4 reveal reveal-delay-2">
+            <div class="w-10 h-10 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center flex-shrink-0">
+              <svg class="w-5 h-5 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+              </svg>
+            </div>
+            <div>
+              <h3 class="text-gray-900 font-bold text-sm mb-1">Lastik Degişimi Sonrası</h3>
+              <p class="text-gray-500 text-xs leading-relaxed">Yeni lastik veya mevsimlik degişim sonrası mutlaka kontrol yaptırın.</p>
+            </div>
+          </div>
+
+          <!-- Cukur/Kaldırım Carpması -->
+          <div class="glass-card p-6 flex items-start gap-4 reveal reveal-delay-3">
+            <div class="w-10 h-10 rounded-xl bg-yellow-500/10 border border-yellow-500/20 flex items-center justify-center flex-shrink-0">
+              <svg class="w-5 h-5 text-yellow-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L4.082 16.5c-.77.833.192 2.5 1.732 2.5z" />
+              </svg>
+            </div>
+            <div>
+              <h3 class="text-gray-900 font-bold text-sm mb-1">Cukur veya Kaldırım Carpması</h3>
+              <p class="text-gray-500 text-xs leading-relaxed">Sert darbe sonrası rot acıları kayabilir, kontrol şarttır.</p>
+            </div>
+          </div>
+
+          <!-- Susansiyon Parcası Degişimi -->
+          <div class="glass-card p-6 flex items-start gap-4 reveal reveal-delay-4">
+            <div class="w-10 h-10 rounded-xl bg-yellow-500/10 border border-yellow-500/20 flex items-center justify-center flex-shrink-0">
+              <svg class="w-5 h-5 text-yellow-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z" />
+              </svg>
+            </div>
+            <div>
+              <h3 class="text-gray-900 font-bold text-sm mb-1">Susansiyon Parcası Degişimi</h3>
+              <p class="text-gray-500 text-xs leading-relaxed">Rotil, rotbaşı, salıncak veya amortisor degişimi sonrası rot ayarı gerekir.</p>
+            </div>
+          </div>
+
+          <!-- Kaza Sonrası -->
+          <div class="glass-card p-6 flex items-start gap-4 reveal reveal-delay-5">
+            <div class="w-10 h-10 rounded-xl bg-red-500/10 border border-red-500/20 flex items-center justify-center flex-shrink-0">
+              <svg class="w-5 h-5 text-red-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L4.082 16.5c-.77.833.192 2.5 1.732 2.5z" />
+              </svg>
+            </div>
+            <div>
+              <h3 class="text-gray-900 font-bold text-sm mb-1">Kaza veya Darbe Sonrası</h3>
+              <p class="text-gray-500 text-xs leading-relaxed">Kucuk bir temas bile rot acılarını bozabilir, mutlaka olcturen.</p>
+            </div>
+          </div>
+
+          <!-- Belirtiler Gorulunce -->
+          <div class="glass-card p-6 flex items-start gap-4 reveal reveal-delay-6">
+            <div class="w-10 h-10 rounded-xl bg-red-500/10 border border-red-500/20 flex items-center justify-center flex-shrink-0">
+              <svg class="w-5 h-5 text-red-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                <path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+              </svg>
+            </div>
+            <div>
+              <h3 class="text-gray-900 font-bold text-sm mb-1">Belirtileri Fark Ettiğinizde</h3>
+              <p class="text-gray-500 text-xs leading-relaxed">Titreşim, cekme veya duzensiz aşınma gorurseniz hemen gelin.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Alt Baglantı -->
+        <div class="mt-10 text-center reveal reveal-delay-3">
+          <div class="glass-card p-5 lg:p-6 border-primary/20 inline-flex flex-col sm:flex-row items-center gap-4">
+            <p class="text-gray-600 text-sm">
+              <strong class="text-gray-900">Lastik degişimi mi gerekiyor?</strong> Rot balans ayarı oncesinde lastik durumunuzu kontrol edelim.
+            </p>
+            <a href="/hizmetler/lastik-satisi" class="inline-flex items-center gap-2 text-primary font-semibold text-sm hover:text-primary/80 transition-colors whitespace-nowrap">
+              Lastik Secenekleri
+              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <GallerySection />
+
+</ServiceLayout>

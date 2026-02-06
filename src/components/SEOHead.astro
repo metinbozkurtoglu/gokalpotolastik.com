@@ -1,0 +1,165 @@
+---
+import { siteConfig } from '../data/siteConfig';
+
+interface Props {
+  title: string;
+  description: string;
+  canonical?: string;
+  ogImage?: string;
+  ogType?: string;
+  noindex?: boolean;
+}
+
+const {
+  title,
+  description,
+  canonical = Astro.url.pathname,
+  ogImage = '/images/og-default.jpg',
+  ogType = 'website',
+  noindex = false,
+} = Astro.props;
+
+const canonicalURL = new URL(canonical, siteConfig.url).href;
+const ogImageURL = new URL(ogImage, siteConfig.url).href;
+---
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+  <!-- Primary Meta -->
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  <link rel="canonical" href={canonicalURL} />
+  {noindex && <meta name="robots" content="noindex, nofollow" />}
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicon.png" />
+
+  <!-- DNS Prefetch & Preconnect for performance -->
+  <link rel="dns-prefetch" href="//www.googletagmanager.com" />
+  <link rel="dns-prefetch" href="//www.google-analytics.com" />
+  <link rel="dns-prefetch" href="//lh3.googleusercontent.com" />
+  <link rel="preconnect" href="https://lh3.googleusercontent.com" crossorigin />
+  <link rel="preconnect" href="https://www.googleadservices.com" />
+  <link rel="preconnect" href="https://googleads.g.doubleclick.net" />
+
+  <!-- Preload Critical Resources -->
+  <link rel="preload" href="/fonts/montserrat-v31-latin-ext/montserrat-v31-latin-ext-700.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/fonts/montserrat-v31-latin-ext/montserrat-v31-latin-ext-600.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/fonts/montserrat-v31-latin-ext/montserrat-v31-latin-ext-regular.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/images/hero-poster.webp" as="image" type="image/webp" fetchpriority="high" />
+
+  <!-- Mobile App Meta -->
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content={siteConfig.shortName} />
+  <meta name="application-name" content={siteConfig.shortName} />
+  <meta name="theme-color" content="#DB5200" />
+  <meta name="msapplication-TileColor" content="#DB5200" />
+
+  <!-- Format Detection -->
+  <meta name="format-detection" content="telephone=yes" />
+  <meta name="format-detection" content="address=yes" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:image" content={ogImageURL} />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content={title} />
+  <meta property="og:url" content={canonicalURL} />
+  <meta property="og:type" content={ogType} />
+  <meta property="og:locale" content="tr_TR" />
+  <meta property="og:site_name" content={siteConfig.name} />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={title} />
+  <meta name="twitter:description" content={description} />
+  <meta name="twitter:image" content={ogImageURL} />
+
+  <!-- Geo & Local SEO -->
+  <meta name="geo.region" content="TR-33" />
+  <meta name="geo.placename" content="Mersin, Türkiye" />
+  <meta name="geo.position" content={`${siteConfig.geo.lat};${siteConfig.geo.lng}`} />
+  <meta name="ICBM" content={`${siteConfig.geo.lat}, ${siteConfig.geo.lng}`} />
+
+  <!-- Language -->
+  <meta name="language" content="Turkish" />
+  <meta http-equiv="content-language" content="tr" />
+
+  <!-- Business Info for Google -->
+  <meta name="author" content={siteConfig.name} />
+  <meta name="publisher" content={siteConfig.name} />
+  <meta name="copyright" content={`© ${new Date().getFullYear()} ${siteConfig.name}`} />
+
+  <!-- Keywords (still used by some search engines) -->
+  <meta name="keywords" content="lastikçi mersin, mersin lastikçi, mersin lastik satışı, lastik fiyatları mersin, mersin lastik değişimi, rot balans mersin, akü değişimi mersin, mersin yol yardım, 7/24 lastikçi mersin, hankook bayi mersin, bosch akü bayii mersin, jant düzeltme mersin, lastik tamiri mersin, mobil lastik servisi mersin, mersin akü fiyatları, mersin oto lastik, lastik montaj mersin, yol yardım servisi mersin, acil lastikçi mersin, gece açık lastikçi mersin" />
+
+  <!-- Rating & Reviews indicator -->
+  <meta name="rating" content="4.9" />
+  <meta name="review_count" content="42" />
+
+  <!-- Verification (add your codes) -->
+  <!-- <meta name="google-site-verification" content="YOUR_CODE" /> -->
+  <!-- <meta name="facebook-domain-verification" content="YOUR_CODE" /> -->
+
+  <!-- Critical CSS for above-the-fold content -->
+  <style is:inline>
+    /* Critical font-display for LCP */
+    @font-face {
+      font-family: 'Montserrat';
+      font-display: swap;
+      font-weight: 400;
+      src: url('/fonts/montserrat-v31-latin-ext/montserrat-v31-latin-ext-regular.woff2') format('woff2');
+    }
+    @font-face {
+      font-family: 'Montserrat';
+      font-display: swap;
+      font-weight: 700;
+      src: url('/fonts/montserrat-v31-latin-ext/montserrat-v31-latin-ext-700.woff2') format('woff2');
+    }
+
+    /* Critical above-the-fold styles */
+    :root {
+      --primary: #DB5200;
+      --primary-hover: #FF6B1A;
+    }
+    body {
+      font-family: 'Montserrat', system-ui, -apple-system, sans-serif;
+      margin: 0;
+      -webkit-font-smoothing: antialiased;
+    }
+    .container-custom {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+    /* Skip nav for accessibility */
+    .skip-nav {
+      position: absolute;
+      transform: translateY(-100%);
+      z-index: 9999;
+    }
+    .skip-nav:focus {
+      transform: translateY(0);
+    }
+    /* Reveal animation initial state */
+    .reveal {
+      opacity: 0;
+      transform: translateY(12px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+
+  <slot />
+</head>

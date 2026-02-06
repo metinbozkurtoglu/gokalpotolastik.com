@@ -1,0 +1,356 @@
+---
+import { siteConfig } from '../data/siteConfig';
+
+interface Props {
+  type: 'home' | 'service' | 'blog' | 'contact' | 'about' | 'page';
+  serviceName?: string;
+  serviceDescription?: string;
+  breadcrumbs?: { name: string; url: string }[];
+  faq?: { question: string; answer: string }[];
+  article?: {
+    headline: string;
+    datePublished: string;
+    dateModified?: string;
+    description: string;
+    image?: string;
+  };
+}
+
+const { type, serviceName, serviceDescription, breadcrumbs, faq, article } = Astro.props;
+
+// Google Reviews data for AggregateRating
+const googleRating = {
+  ratingValue: 4.9,
+  reviewCount: 42,
+  bestRating: 5,
+  worstRating: 1
+};
+
+// Sample reviews for rich snippets
+const sampleReviews = [
+  {
+    author: "Rıdvan Eryılmaz",
+    datePublished: "2024-12-15",
+    reviewBody: "Mükemmel hizmet verip beklerken hiç canım sıkılmadı hoş sohpetlerinden dolayı. Teşekkürler İlyas bey, tam bir esnaf.",
+    ratingValue: 5
+  },
+  {
+    author: "Musa Bilgi",
+    datePublished: "2024-11-20",
+    reviewBody: "Gece saat 04'te aracımın lastiği patladı, aradım çok yardımcı oldu. 20 dakikada gelip işimizi halletti. Mahmut usta işinin ehli.",
+    ratingValue: 5
+  },
+  {
+    author: "Fatma Yıldız",
+    datePublished: "2024-10-10",
+    reviewBody: "Kadın olarak lastikçiye gitmek hep tedirgin ederdi. Burada ilk kez rahat hissettim. Fiyatı önceden söylediler, güvendim.",
+    ratingValue: 5
+  }
+];
+
+const localBusiness = {
+  "@context": "https://schema.org",
+  "@type": ["AutoRepair", "TireShop", "LocalBusiness"],
+  "@id": `${siteConfig.url}/#organization`,
+  "name": siteConfig.name,
+  "alternateName": siteConfig.shortName,
+  "description": siteConfig.description,
+  "url": siteConfig.url,
+  "telephone": siteConfig.phone,
+  "email": siteConfig.email,
+  "logo": `${siteConfig.url}/images/logo.png`,
+  "image": [
+    `${siteConfig.url}/images/og-default.jpg`,
+    `${siteConfig.url}/images/dukkan.jpg`
+  ],
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": siteConfig.address.street,
+    "addressLocality": siteConfig.address.district,
+    "addressRegion": siteConfig.address.city,
+    "postalCode": siteConfig.address.postalCode,
+    "addressCountry": siteConfig.address.country
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": siteConfig.geo.lat,
+    "longitude": siteConfig.geo.lng
+  },
+  "openingHoursSpecification": {
+    "@type": "OpeningHoursSpecification",
+    "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
+    "opens": "00:00",
+    "closes": "23:59"
+  },
+  "priceRange": "₺₺",
+  "currenciesAccepted": "TRY",
+  "paymentAccepted": "Cash, Credit Card, Debit Card",
+  "areaServed": [
+    { "@type": "City", "name": "Mersin" },
+    { "@type": "State", "name": "Mersin İli" },
+    { "@type": "AdministrativeArea", "name": "Toroslar, Mersin" },
+    { "@type": "AdministrativeArea", "name": "Akdeniz, Mersin" },
+    { "@type": "AdministrativeArea", "name": "Mezitli, Mersin" },
+    { "@type": "AdministrativeArea", "name": "Yenişehir, Mersin" },
+    { "@type": "AdministrativeArea", "name": "Tarsus, Mersin" },
+    { "@type": "AdministrativeArea", "name": "Erdemli, Mersin" },
+    { "@type": "AdministrativeArea", "name": "Silifke, Mersin" }
+  ],
+  "serviceArea": {
+    "@type": "GeoCircle",
+    "geoMidpoint": {
+      "@type": "GeoCoordinates",
+      "latitude": siteConfig.geo.lat,
+      "longitude": siteConfig.geo.lng
+    },
+    "geoRadius": "50000"
+  },
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": googleRating.ratingValue,
+    "reviewCount": googleRating.reviewCount,
+    "bestRating": googleRating.bestRating,
+    "worstRating": googleRating.worstRating
+  },
+  "review": sampleReviews.map(review => ({
+    "@type": "Review",
+    "author": {
+      "@type": "Person",
+      "name": review.author
+    },
+    "datePublished": review.datePublished,
+    "reviewBody": review.reviewBody,
+    "reviewRating": {
+      "@type": "Rating",
+      "ratingValue": review.ratingValue,
+      "bestRating": 5,
+      "worstRating": 1
+    }
+  })),
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Lastik ve Akü Hizmetleri",
+    "itemListElement": [
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Lastik Satışı",
+          "description": "Hankook yetkili bayi - Tüm araç markaları için lastik satışı"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Lastik Değişimi",
+          "description": "Profesyonel lastik sökme takma hizmeti"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Rot Balans",
+          "description": "Hassas rot balans ayarı"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "7/24 Yol Yardım",
+          "description": "Mersin genelinde 7/24 mobil lastik servisi"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Akü Satışı ve Değişimi",
+          "description": "Bosch yetkili bayi - Akü satış ve montaj"
+        }
+      }
+    ]
+  },
+  "potentialAction": [
+    {
+      "@type": "ReserveAction",
+      "target": {
+        "@type": "EntryPoint",
+        "urlTemplate": `${siteConfig.url}/iletisim`,
+        "actionPlatform": [
+          "http://schema.org/DesktopWebPlatform",
+          "http://schema.org/MobileWebPlatform"
+        ]
+      },
+      "result": {
+        "@type": "Reservation",
+        "name": "Randevu"
+      }
+    },
+    {
+      "@type": "CommunicateAction",
+      "target": {
+        "@type": "EntryPoint",
+        "urlTemplate": `tel:${siteConfig.phone}`,
+        "actionPlatform": "http://schema.org/MobileWebPlatform"
+      }
+    }
+  ],
+  "sameAs": [],
+  "knowsAbout": [
+    "Lastik satışı",
+    "Lastik değişimi",
+    "Rot balans ayarı",
+    "Akü satışı",
+    "Akü değişimi",
+    "Jant düzeltme",
+    "Lastik tamiri",
+    "Yol yardım servisi",
+    "7/24 lastikçi",
+    "Mobil lastik servisi"
+  ],
+  "slogan": "7/24 Profesyonel Lastik ve Akü Hizmetleri"
+};
+
+const serviceSchema = serviceName ? {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "@id": `${siteConfig.url}/hizmetler/#${serviceName.toLowerCase().replace(/\s+/g, '-')}`,
+  "name": serviceName,
+  "description": serviceDescription,
+  "provider": {
+    "@type": "AutoRepair",
+    "@id": `${siteConfig.url}/#organization`,
+    "name": siteConfig.name,
+    "telephone": siteConfig.phone,
+    "url": siteConfig.url
+  },
+  "areaServed": [
+    { "@type": "City", "name": "Mersin" },
+    { "@type": "AdministrativeArea", "name": "Mersin İli" }
+  ],
+  "availableChannel": {
+    "@type": "ServiceChannel",
+    "servicePhone": siteConfig.phone,
+    "serviceUrl": siteConfig.url,
+    "availableLanguage": {
+      "@type": "Language",
+      "name": "Turkish"
+    }
+  },
+  "termsOfService": `${siteConfig.url}/hizmetler`,
+  "serviceOutput": {
+    "@type": "Thing",
+    "name": "Profesyonel araç bakım hizmeti"
+  },
+  "hoursAvailable": {
+    "@type": "OpeningHoursSpecification",
+    "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
+    "opens": "00:00",
+    "closes": "23:59"
+  },
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": googleRating.ratingValue,
+    "reviewCount": googleRating.reviewCount,
+    "bestRating": googleRating.bestRating,
+    "worstRating": googleRating.worstRating
+  }
+} : null;
+
+const breadcrumbSchema = breadcrumbs && breadcrumbs.length > 0 ? {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": breadcrumbs.map((item, index) => ({
+    "@type": "ListItem",
+    "position": index + 1,
+    "name": item.name,
+    "item": `${siteConfig.url}${item.url}`
+  }))
+} : null;
+
+const faqSchema = faq && faq.length > 0 ? {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": faq.map(item => ({
+    "@type": "Question",
+    "name": item.question,
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": item.answer
+    }
+  }))
+} : null;
+
+const articleSchema = article ? {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": article.headline,
+  "datePublished": article.datePublished,
+  "dateModified": article.dateModified || article.datePublished,
+  "description": article.description,
+  "image": article.image ? `${siteConfig.url}${article.image}` : undefined,
+  "author": {
+    "@type": "Organization",
+    "name": siteConfig.name
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": siteConfig.name,
+    "url": siteConfig.url,
+    "logo": {
+      "@type": "ImageObject",
+      "url": `${siteConfig.url}/images/logo.png`
+    }
+  }
+} : null;
+
+const contactSchema = type === 'contact' ? {
+  "@context": "https://schema.org",
+  "@type": "ContactPage",
+  "name": "İletişim - Gökalp Lastikçilik",
+  "url": `${siteConfig.url}/iletisim`,
+  "description": "Gökalp Lastikçilik iletişim bilgileri, adres ve çalışma saatleri",
+  "mainEntity": {
+    "@type": "AutoRepair",
+    "@id": `${siteConfig.url}/#organization`,
+    "name": siteConfig.name,
+    "telephone": siteConfig.phone,
+    "email": siteConfig.email,
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": siteConfig.address.street,
+      "addressLocality": siteConfig.address.district,
+      "addressRegion": siteConfig.address.city,
+      "postalCode": siteConfig.address.postalCode,
+      "addressCountry": siteConfig.address.country
+    }
+  }
+} : null;
+
+// WebSite schema for sitelinks search box
+const websiteSchema = type === 'home' ? {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": siteConfig.name,
+  "url": siteConfig.url,
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": {
+      "@type": "EntryPoint",
+      "urlTemplate": `${siteConfig.url}/hizmetler?q={search_term_string}`
+    },
+    "query-input": "required name=search_term_string"
+  }
+} : null;
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(localBusiness)} />
+{serviceSchema && <script type="application/ld+json" set:html={JSON.stringify(serviceSchema)} />}
+{breadcrumbSchema && <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />}
+{faqSchema && <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />}
+{articleSchema && <script type="application/ld+json" set:html={JSON.stringify(articleSchema)} />}
+{contactSchema && <script type="application/ld+json" set:html={JSON.stringify(contactSchema)} />}
+{websiteSchema && <script type="application/ld+json" set:html={JSON.stringify(websiteSchema)} />}

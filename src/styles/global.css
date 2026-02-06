@@ -1,0 +1,241 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ═══════════════════════════════════════════════════ */
+/* MONTSERRAT SELF-HOSTED FONTS (Latin-Ext)            */
+/* ═══════════════════════════════════════════════════ */
+@font-face {
+  font-family: 'Montserrat';
+  src: url('/fonts/montserrat-v31-latin-ext/montserrat-v31-latin-ext-regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Montserrat';
+  src: url('/fonts/montserrat-v31-latin-ext/montserrat-v31-latin-ext-500.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Montserrat';
+  src: url('/fonts/montserrat-v31-latin-ext/montserrat-v31-latin-ext-600.woff2') format('woff2');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Montserrat';
+  src: url('/fonts/montserrat-v31-latin-ext/montserrat-v31-latin-ext-700.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ═══════════════════════════════════════════════════ */
+/* CSS CUSTOM PROPERTIES                               */
+/* ═══════════════════════════════════════════════════ */
+:root {
+  --color-primary: #DB5200;
+  --color-primary-hover: #FF6B1A;
+  --color-primary-dark: #B84500;
+  --color-primary-glow: rgba(219, 82, 0, 0.3);
+
+  --color-black: #000000;
+  --color-dark-900: #0C1117;
+  --color-dark-800: #141C27;
+  --color-dark-700: #1E2836;
+  --color-dark-600: #283548;
+
+  --color-white: #FFFFFF;
+  --color-gray-100: #F5F5F5;
+  --color-gray-200: #E8E8E8;
+  --color-gray-300: #D1D1D1;
+  --color-gray-400: #9A9A9A;
+
+  --color-success: #22C55E;
+  --color-warning: #F59E0B;
+  --color-error: #EF4444;
+  --color-whatsapp: #25D366;
+}
+
+/* ═══════════════════════════════════════════════════ */
+/* BASE STYLES                                         */
+/* ═══════════════════════════════════════════════════ */
+@layer base {
+  html {
+    font-family: 'Montserrat', sans-serif;
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    @apply bg-white text-gray-900 leading-relaxed;
+    min-height: 100vh;
+  }
+
+  ::selection {
+    background: rgba(219, 82, 0, 0.2);
+    color: #1a1a1a;
+  }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #f5f5f5;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #d1d1d1;
+    border-radius: 4px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #DB5200;
+  }
+
+  /* Focus */
+  :focus-visible {
+    outline: 2px solid #DB5200;
+    outline-offset: 2px;
+  }
+
+  /* Skip nav */
+  .skip-nav {
+    @apply absolute -top-full left-4 z-[9999] bg-primary text-white px-4 py-2 rounded-b-lg font-bold;
+    transition: top 0.2s;
+  }
+
+  .skip-nav:focus {
+    top: 0;
+  }
+}
+
+/* ═══════════════════════════════════════════════════ */
+/* COMPONENT STYLES                                    */
+/* ═══════════════════════════════════════════════════ */
+@layer components {
+
+  /* CTA Buttons */
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 bg-primary text-white font-bold uppercase tracking-cta px-8 py-4 rounded-lg transition-all duration-300 ease-out hover:bg-primary-hover hover:shadow-lg hover:shadow-primary-glow active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-white;
+    min-height: 48px;
+  }
+
+  .btn-whatsapp {
+    @apply inline-flex items-center justify-center gap-2 bg-whatsapp text-white font-bold uppercase tracking-cta px-8 py-4 rounded-lg transition-all duration-300 ease-out hover:brightness-110 hover:shadow-lg hover:shadow-whatsapp/30 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-whatsapp focus-visible:ring-offset-2 focus-visible:ring-offset-white;
+    min-height: 48px;
+  }
+
+  .btn-outline {
+    @apply inline-flex items-center justify-center gap-2 border-2 border-primary text-primary font-bold uppercase tracking-cta px-8 py-4 rounded-lg transition-all duration-300 ease-out hover:bg-primary hover:text-white active:scale-[0.98];
+    min-height: 48px;
+  }
+
+  /* Card — solid white with shadow */
+  .glass-card {
+    @apply relative bg-white border border-gray-200 rounded-xl shadow-sm transition-all duration-300 ease-out;
+  }
+
+  .glass-card:hover {
+    @apply border-primary/30 shadow-md;
+    box-shadow: 0 4px 20px rgba(219, 82, 0, 0.08);
+  }
+
+  /* Section backgrounds */
+  .section-dark {
+    @apply bg-white;
+  }
+
+  .section-darker {
+    @apply bg-gray-50;
+  }
+
+  .section-light {
+    @apply bg-gray-100 text-gray-900;
+  }
+
+  /* Orange accent line */
+  .accent-line {
+    @apply w-16 h-1 bg-primary rounded-full;
+  }
+
+  .accent-line-center {
+    @apply w-16 h-1 bg-primary rounded-full mx-auto;
+  }
+
+  /* Container */
+  .container-custom {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+}
+
+/* ═══════════════════════════════════════════════════ */
+/* SCROLL ANIMATIONS (IntersectionObserver)            */
+/* ═══════════════════════════════════════════════════ */
+.reveal {
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translate(0, 0);
+}
+
+/* Directional variants */
+.reveal-left {
+  opacity: 0;
+  transform: translateX(-20px);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal-right {
+  opacity: 0;
+  transform: translateX(20px);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal-scale {
+  opacity: 0;
+  transform: scale(0.95);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal-left.visible,
+.reveal-right.visible,
+.reveal-scale.visible {
+  opacity: 1;
+  transform: translate(0, 0) scale(1);
+}
+
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+.reveal-delay-4 { transition-delay: 0.4s; }
+.reveal-delay-5 { transition-delay: 0.5s; }
+.reveal-delay-6 { transition-delay: 0.6s; }
+
+/* Counter animation target */
+[data-count] {
+  font-variant-numeric: tabular-nums;
+}
+
+/* ═══════════════════════════════════════════════════ */
+/* MOBILE CONTACT BAR SPACING                          */
+/* ═══════════════════════════════════════════════════ */
+@media (max-width: 1023px) {
+  body {
+    padding-bottom: 56px;
+  }
+}

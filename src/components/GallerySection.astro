@@ -1,0 +1,200 @@
+---
+const galleryImages = [
+  {
+    src: "/images/galeri/gokalp-lastikcilik-hankook-bayi-dis-cephe.jpg",
+    alt: "Gökalp Lastikçilik Hankook Yetkili Bayi Dükkan Dış Cephesi Mersin",
+    title: "Dükkanımız - Hankook Bayi"
+  },
+  {
+    src: "/images/galeri/gokalp-oto-lastik-dukkan-mersin.jpg",
+    alt: "Gökalp Oto Lastik Dükkan Görünümü Mersin",
+    title: "Servis Alanımız"
+  },
+  {
+    src: "/images/galeri/pirelli-p-zero-lastik-225-40r19-mersin.jpg",
+    alt: "Pirelli P-Zero 225/40R19 lastik montajı Gökalp Lastikçilik Mersin",
+    title: "Pirelli P-Zero Montajı"
+  },
+  {
+    src: "/images/galeri/laufenn-s-fit-lastik-195-55r16-mersin.jpg",
+    alt: "Laufenn S FIT EQ+ 195/55R16 lastik Gökalp Oto Lastik Mersin",
+    title: "Laufenn S FIT EQ+"
+  },
+  {
+    src: "/images/galeri/milestone-kis-lastigi-205-55r16-mersin.jpg",
+    alt: "Milestone kış lastiği 205/55R16 Gökalp Lastikçilik Mersin",
+    title: "Kış Lastiği Montajı"
+  },
+  {
+    src: "/images/galeri/lassa-competus-lastik-235-50r18-mersin.jpg",
+    alt: "Lassa Competus H/P3 235/50R18 lastik Mersin",
+    title: "Lassa Competus H/P3"
+  },
+  {
+    src: "/images/galeri/minerva-lastik-275-35r20-gokalp-mersin.jpg",
+    alt: "Minerva 275/35R20 lastik Gökalp Oto Lastik Mersin",
+    title: "Minerva Premium Lastik"
+  },
+  {
+    src: "/images/galeri/jant-lastik-degisimi-fiat-egea-mersin.jpg",
+    alt: "Fiat Egea jant lastik değişimi Gökalp Lastikçilik Mersin",
+    title: "Jant & Lastik Değişimi"
+  },
+];
+---
+
+<section class="py-20 lg:py-28 bg-white relative overflow-hidden">
+  <div class="container-custom">
+    <div class="mb-14 reveal">
+      <span class="inline-block w-12 h-1 bg-primary rounded-full mb-4"></span>
+      <h2 class="text-3xl lg:text-[2.75rem] font-bold text-gray-900 reveal reveal-delay-1">Çalışmalarımızdan Kareler</h2>
+      <p class="text-gray-500 mt-4 max-w-xl reveal reveal-delay-2">
+        Her gün onlarca aracın lastik ve jant işlemlerini profesyonelce gerçekleştiriyoruz.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-3 lg:gap-4">
+      {galleryImages.map((image, i) => (
+        <button
+          type="button"
+          class={`gallery-item group relative aspect-square rounded-xl overflow-hidden shadow-lg cursor-pointer reveal-scale reveal-delay-${Math.min(i + 1, 4)}`}
+          data-src={image.src}
+          data-alt={image.alt}
+          data-title={image.title}
+          aria-label={`${image.title} fotoğrafını büyüt`}
+        >
+          <picture>
+            <source srcset={image.src.replace('.jpg', '.webp')} type="image/webp" />
+            <img
+              src={image.src}
+              alt={image.alt}
+              width="600"
+              height="600"
+              class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+              loading="lazy"
+              decoding="async"
+            />
+          </picture>
+          <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+          <div class="absolute bottom-0 left-0 right-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+            <p class="text-white font-semibold text-sm text-left">{image.title}</p>
+          </div>
+          <!-- Zoom icon -->
+          <div class="absolute top-3 right-3 w-8 h-8 bg-white/90 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+            <svg class="w-4 h-4 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" />
+            </svg>
+          </div>
+        </button>
+      ))}
+    </div>
+  </div>
+</section>
+
+<!-- Lightbox Modal -->
+<div id="lightbox" class="fixed inset-0 z-50 hidden" role="dialog" aria-modal="true" aria-label="Fotoğraf görüntüleyici">
+  <!-- Backdrop -->
+  <div id="lightbox-backdrop" class="absolute inset-0 bg-black/95 backdrop-blur-sm"></div>
+
+  <!-- Content -->
+  <div class="relative h-full flex flex-col items-center justify-center p-4">
+    <!-- Close button -->
+    <button id="lightbox-close" aria-label="Kapat" class="absolute top-4 right-4 z-10 w-12 h-12 bg-white/10 hover:bg-white/20 rounded-full flex items-center justify-center transition-colors">
+      <svg class="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+      </svg>
+    </button>
+
+    <!-- Navigation arrows -->
+    <button id="lightbox-prev" aria-label="Önceki fotoğraf" class="absolute left-4 top-1/2 -translate-y-1/2 z-10 w-12 h-12 bg-white/10 hover:bg-white/20 rounded-full flex items-center justify-center transition-colors">
+      <svg class="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+      </svg>
+    </button>
+    <button id="lightbox-next" aria-label="Sonraki fotoğraf" class="absolute right-4 top-1/2 -translate-y-1/2 z-10 w-12 h-12 bg-white/10 hover:bg-white/20 rounded-full flex items-center justify-center transition-colors">
+      <svg class="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+      </svg>
+    </button>
+
+    <!-- Image container -->
+    <div class="max-w-5xl max-h-[80vh] flex items-center justify-center">
+      <img id="lightbox-image" src="" alt="" class="max-w-full max-h-[80vh] object-contain rounded-lg shadow-2xl" />
+    </div>
+
+    <!-- Caption -->
+    <div class="mt-4 text-center">
+      <p id="lightbox-title" class="text-white font-semibold text-lg"></p>
+    </div>
+  </div>
+</div>
+
+<script>
+  const galleryItems = document.querySelectorAll('.gallery-item');
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImage = document.getElementById('lightbox-image') as HTMLImageElement;
+  const lightboxTitle = document.getElementById('lightbox-title');
+  const lightboxClose = document.getElementById('lightbox-close');
+  const lightboxBackdrop = document.getElementById('lightbox-backdrop');
+  const lightboxPrev = document.getElementById('lightbox-prev');
+  const lightboxNext = document.getElementById('lightbox-next');
+
+  let currentIndex = 0;
+  const images = Array.from(galleryItems).map(item => ({
+    src: item.getAttribute('data-src') || '',
+    alt: item.getAttribute('data-alt') || '',
+    title: item.getAttribute('data-title') || ''
+  }));
+
+  function openLightbox(index: number) {
+    currentIndex = index;
+    updateLightboxImage();
+    lightbox?.classList.remove('hidden');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeLightbox() {
+    lightbox?.classList.add('hidden');
+    document.body.style.overflow = '';
+  }
+
+  function updateLightboxImage() {
+    const image = images[currentIndex];
+    if (lightboxImage) {
+      lightboxImage.src = image.src;
+      lightboxImage.alt = image.alt;
+    }
+    if (lightboxTitle) {
+      lightboxTitle.textContent = image.title;
+    }
+  }
+
+  function nextImage() {
+    currentIndex = (currentIndex + 1) % images.length;
+    updateLightboxImage();
+  }
+
+  function prevImage() {
+    currentIndex = (currentIndex - 1 + images.length) % images.length;
+    updateLightboxImage();
+  }
+
+  // Event listeners
+  galleryItems.forEach((item, index) => {
+    item.addEventListener('click', () => openLightbox(index));
+  });
+
+  lightboxClose?.addEventListener('click', closeLightbox);
+  lightboxBackdrop?.addEventListener('click', closeLightbox);
+  lightboxNext?.addEventListener('click', nextImage);
+  lightboxPrev?.addEventListener('click', prevImage);
+
+  // Keyboard navigation
+  document.addEventListener('keydown', (e) => {
+    if (lightbox?.classList.contains('hidden')) return;
+
+    if (e.key === 'Escape') closeLightbox();
+    if (e.key === 'ArrowRight') nextImage();
+    if (e.key === 'ArrowLeft') prevImage();
+  });
+</script>

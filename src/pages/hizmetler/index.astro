@@ -1,0 +1,304 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHeader from '../../components/PageHeader.astro';
+import BrandsStrip from '../../components/BrandsStrip.astro';
+import { siteConfig, services } from '../../data/siteConfig';
+
+const title = "Hizmetlerimiz | Gökalp Lastikçilik Mersin";
+const description = "Mersin'de lastik satışı, lastik değişimi, rot balans, jant düzeltme, akü satışı, akü takviyesi ve 7/24 yol yardım hizmeti. Hankook & Bosch yetkili bayi.";
+
+const breadcrumbs = [
+  { name: 'Anasayfa', url: '/' },
+  { name: 'Hizmetler', url: '/hizmetler' },
+];
+
+// Her hizmet için detaylı açıklama ve özellikler
+const serviceDetails: Record<string, { desc: string; features: string[] }> = {
+  'yol-yardim-servisi': {
+    desc: "Mersin'in her noktasına ortalama 15 dakikada ulaşıyoruz. Lastik patlaması, akü arızası, lastik değişimi gibi acil durumlarda 7/24 hizmetinizdeyiz.",
+    features: ["15 dk içerisinde", "Tüm ilçelere servis", "Gece-gündüz"]
+  },
+  'lastik-satisi': {
+    desc: "Hankook yetkili bayi olarak orijinal lastikleri fabrika fiyatıyla sunuyoruz. Laufenn, Michelin, Continental ve diğer tüm markalarda geniş stok.",
+    features: ["Ücretsiz montaj", "Tüm markalar stokta", "Taksit imkanı"]
+  },
+  'aku-satisi-degisimi': {
+    desc: "Bosch yetkili bayi güvencesiyle aracınıza uygun aküyü seçip yerinde montaj yapıyoruz. Ücretsiz akü testi ile akünüzün durumunu öğrenin.",
+    features: ["Ücretsiz akü testi", "Yerinde montaj", "2 yıl garanti"]
+  },
+  'lastik-degisimi': {
+    desc: "Profesyonel lastik sökme-takma ekipmanlarıyla yaz/kış lastik değişimi, mevsimlik lastik saklama ve rotasyon hizmeti.",
+    features: ["Hızlı servis", "Balans dahil", "4 tekerlek"]
+  },
+  'rot-balans': {
+    desc: "Bilgisayarlı rot ayar cihazı ile tekerlek geometrinizi fabrika değerlerine getiriyoruz. Düzensiz lastik aşınmasının önüne geçin.",
+    features: ["Bilgisayarlı ölçüm", "Ön ve arka aks", "Hassas ayar"]
+  },
+  'lastik-tamiri': {
+    desc: "Yolda kalan lastiklerinizi profesyonel yama ve onarım yöntemleriyle kurtarıyoruz. Değişim gerektirmeyen hasarlarda ekonomik çözüm.",
+    features: ["Mantar yama", "Ekonomik çözüm", "Yerinde tamir"]
+  },
+  'jant-duzeltme': {
+    desc: "Kaldırıma çarpma veya çukurdan dolayı hasarlanan jantlarınızı özel pres makinesiyle fabrika ayarlarına getiriyoruz.",
+    features: ["Çelik & hafif metal", "Fabrika ayarı", "Aynı gün teslim"]
+  },
+  'aku-takviyesi': {
+    desc: "Araç çalışmıyorsa bulunduğunuz yere gelip profesyonel takviye cihazlarıyla akünüzü şarj ediyoruz veya yerinde değişim yapıyoruz.",
+    features: ["15 dk'da geliyoruz", "Yerinde şarj", "7/24 açık"]
+  }
+};
+
+// İkon ve renk mapping
+const serviceStyles: Record<string, { gradient: string; iconPath: string }> = {
+  'yol-yardim-servisi': {
+    gradient: 'from-red-500 to-orange-500',
+    iconPath: '<path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" />'
+  },
+  'lastik-satisi': {
+    gradient: 'from-orange-500 to-amber-500',
+    iconPath: '<circle cx="12" cy="12" r="9" /><circle cx="12" cy="12" r="5" /><circle cx="12" cy="12" r="1.5" fill="currentColor" />'
+  },
+  'aku-satisi-degisimi': {
+    gradient: 'from-yellow-500 to-amber-500',
+    iconPath: '<path stroke-linecap="round" stroke-linejoin="round" d="M21 10.5h.375c.621 0 1.125.504 1.125 1.125v2.25c0 .621-.504 1.125-1.125 1.125H21M4.5 10.5H18V15H4.5v-4.5zM3.75 18h15A2.25 2.25 0 0021 15.75v-6a2.25 2.25 0 00-2.25-2.25h-15A2.25 2.25 0 001.5 9.75v6A2.25 2.25 0 003.75 18z" />'
+  },
+  'lastik-degisimi': {
+    gradient: 'from-blue-500 to-indigo-500',
+    iconPath: '<path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />'
+  },
+  'rot-balans': {
+    gradient: 'from-purple-500 to-pink-500',
+    iconPath: '<path stroke-linecap="round" stroke-linejoin="round" d="M12 3v17.25m0 0c-1.472 0-2.882.265-4.185.75M12 20.25c1.472 0 2.882.265 4.185.75M18.75 4.97A48.416 48.416 0 0012 4.5c-2.291 0-4.545.16-6.75.47m13.5 0c1.01.143 2.01.317 3 .52m-3-.52l2.62 10.726c.122.499-.106 1.028-.589 1.202a5.988 5.988 0 01-2.031.352 5.988 5.988 0 01-2.031-.352c-.483-.174-.711-.703-.59-1.202L18.75 4.97zm-16.5.52c.99-.203 1.99-.377 3-.52m0 0l2.62 10.726c.122.499-.106 1.028-.589 1.202a5.989 5.989 0 01-2.031.352 5.989 5.989 0 01-2.031-.352c-.483-.174-.711-.703-.59-1.202L5.25 4.97z" />'
+  },
+  'lastik-tamiri': {
+    gradient: 'from-emerald-500 to-teal-500',
+    iconPath: '<path stroke-linecap="round" stroke-linejoin="round" d="M11.42 15.17L17.25 21A2.652 2.652 0 0021 17.25l-5.877-5.877M11.42 15.17l2.496-3.03c.317-.384.74-.626 1.208-.766M11.42 15.17l-4.655 5.653a2.548 2.548 0 11-3.586-3.586l6.837-5.63m5.108-.233c.55-.164 1.163-.188 1.743-.14a4.5 4.5 0 004.486-6.336l-3.276 3.277a3.004 3.004 0 01-2.25-2.25l3.276-3.276a4.5 4.5 0 00-6.336 4.486c.091 1.076-.071 2.264-.904 2.95l-.102.085m-1.745 1.437L5.909 7.5H4.5L2.25 3.75l1.5-1.5L7.5 4.5v1.409l4.26 4.26m-1.745 1.437l1.745-1.437m6.615 8.206L15.75 15.75M4.867 19.125h.008v.008h-.008v-.008z" />'
+  },
+  'jant-duzeltme': {
+    gradient: 'from-pink-500 to-rose-500',
+    iconPath: '<path stroke-linecap="round" stroke-linejoin="round" d="M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127.324.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 011.37.49l1.296 2.247a1.125 1.125 0 01-.26 1.431l-1.003.827c-.293.24-.438.613-.431.992a6.759 6.759 0 010 .255c-.007.378.138.75.43.99l1.005.828c.424.35.534.954.26 1.43l-1.298 2.247a1.125 1.125 0 01-1.369.491l-1.217-.456c-.355-.133-.75-.072-1.076.124a6.57 6.57 0 01-.22.128c-.331.183-.581.495-.644.869l-.213 1.28c-.09.543-.56.941-1.11.941h-2.594c-.55 0-1.02-.398-1.11-.94l-.213-1.281c-.062-.374-.312-.686-.644-.87a6.52 6.52 0 01-.22-.127c-.325-.196-.72-.257-1.076-.124l-1.217.456a1.125 1.125 0 01-1.369-.49l-1.297-2.247a1.125 1.125 0 01.26-1.431l1.004-.827c.292-.24.437-.613.43-.992a6.932 6.932 0 010-.255c.007-.378-.138-.75-.43-.99l-1.004-.828a1.125 1.125 0 01-.26-1.43l1.297-2.247a1.125 1.125 0 011.37-.491l1.216.456c.356.133.751.072 1.076-.124.072-.044.146-.087.22-.128.332-.183.582-.495.644-.869l.214-1.281z" /><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />'
+  },
+  'aku-takviyesi': {
+    gradient: 'from-cyan-500 to-blue-500',
+    iconPath: '<path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" />'
+  }
+};
+
+const whatsappUrl = `https://wa.me/${siteConfig.whatsapp.replace(/\D/g, '')}`;
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  schemaType="page"
+  breadcrumbs={breadcrumbs}
+  headerTransparent={true}
+>
+
+  <!-- Hero -->
+  <PageHeader
+    title="Mersin'de Profesyonel Lastik & Akü Hizmetleri"
+    subtitle="20 yıllık tecrübeyle 8 farklı hizmeti tek çatı altında sunuyoruz. Hankook lastik ve Bosch akü yetkili bayii."
+    badge="8 Farklı Hizmet | 7/24 Açık"
+    breadcrumbs={breadcrumbs}
+    showCTA={true}
+    ctaText="Hemen Arayın"
+    size="large"
+  />
+
+
+  <!-- ═══════════════════════════════════════════════════ -->
+  <!-- TÜM HİZMETLER                                       -->
+  <!-- ═══════════════════════════════════════════════════ -->
+  <section class="py-16 lg:py-24 bg-gray-50">
+    <div class="container-custom">
+      <!-- Section Header -->
+      <div class="text-center max-w-2xl mx-auto mb-14 reveal">
+        <h2 class="text-3xl lg:text-4xl font-bold text-gray-900 mb-3">Sunduğumuz Hizmetler</h2>
+        <div class="w-16 h-1 bg-primary rounded-full mx-auto"></div>
+      </div>
+
+      <!-- Services — Alternating Cards -->
+      <div class="space-y-6 lg:space-y-8">
+        {services.map((service, index) => {
+          const style = serviceStyles[service.slug] || serviceStyles['lastik-satisi'];
+          const details = serviceDetails[service.slug];
+          const isOdd = index % 2 !== 0;
+          const num = String(index + 1).padStart(2, '0');
+          return (
+            <div class={`group relative bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 reveal`}>
+
+              <div class={`flex flex-col ${isOdd ? 'lg:flex-row-reverse' : 'lg:flex-row'}`}>
+
+                {/* Gradient Panel */}
+                <div class={`relative lg:w-[280px] xl:w-[320px] flex-shrink-0 bg-gradient-to-br ${style.gradient} p-8 lg:p-10 flex flex-col items-center justify-center text-center`}>
+                  {/* Decorative circles */}
+                  <div class="absolute top-4 right-4 w-20 h-20 bg-white/10 rounded-full blur-xl"></div>
+                  <div class="absolute bottom-4 left-4 w-16 h-16 bg-white/10 rounded-full blur-lg"></div>
+
+                  {/* Number */}
+                  <span class="text-white/20 text-6xl lg:text-7xl font-bold absolute top-3 left-5 lg:top-4 lg:left-6 select-none">{num}</span>
+
+                  {/* Icon */}
+                  <div class="relative w-16 h-16 lg:w-20 lg:h-20 rounded-2xl bg-white/20 backdrop-blur-sm flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-500">
+                    <svg class="w-8 h-8 lg:w-10 lg:h-10 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" set:html={style.iconPath} />
+                  </div>
+
+                  {/* Title on mobile */}
+                  <h3 class="lg:hidden text-white font-bold text-lg">{service.title}</h3>
+
+                  {service.slug === 'yol-yardim-servisi' && (
+                    <span class="mt-3 inline-flex items-center gap-1.5 px-3 py-1 bg-white/20 backdrop-blur-sm text-white text-xs font-semibold rounded-full">
+                      <span class="w-1.5 h-1.5 bg-white rounded-full animate-pulse"></span>
+                      7/24 Acil
+                    </span>
+                  )}
+                </div>
+
+                {/* Content Panel */}
+                <div class="flex-1 p-6 lg:p-10 flex flex-col justify-center">
+                  {/* Title — desktop */}
+                  <div class="hidden lg:flex items-center gap-3 mb-3">
+                    <h3 class="text-xl xl:text-2xl font-bold text-gray-900 group-hover:text-primary transition-colors duration-300">
+                      {service.title}
+                    </h3>
+                    {service.slug === 'yol-yardim-servisi' && (
+                      <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 bg-red-50 text-red-600 text-xs font-semibold rounded-full border border-red-100">
+                        <span class="w-1.5 h-1.5 bg-red-500 rounded-full animate-pulse"></span>
+                        7/24 Acil
+                      </span>
+                    )}
+                  </div>
+
+                  <p class="text-gray-500 text-sm lg:text-base leading-relaxed mb-5">
+                    {details?.desc || service.shortDesc}
+                  </p>
+
+                  {/* Feature tags */}
+                  {details?.features && (
+                    <div class="flex flex-wrap gap-2 mb-6">
+                      {details.features.map((feature) => (
+                        <span class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-gray-50 text-gray-600 text-xs font-medium rounded-lg border border-gray-100">
+                          <svg class="w-3.5 h-3.5 text-primary flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                          </svg>
+                          {feature}
+                        </span>
+                      ))}
+                    </div>
+                  )}
+
+                  {/* Buttons */}
+                  <div class="flex items-center gap-3">
+                    <a
+                      href={`/hizmetler/${service.slug}`}
+                      class="inline-flex items-center gap-2 px-6 py-3 bg-primary text-white text-sm font-semibold rounded-xl hover:bg-primary-hover transition-colors shadow-md shadow-primary/20"
+                    >
+                      İncele
+                      <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                      </svg>
+                    </a>
+                    <a
+                      href={`${whatsappUrl}&text=Merhaba, ${service.title} hakkında bilgi almak istiyorum.`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="inline-flex items-center gap-2 px-6 py-3 border border-gray-200 text-gray-700 text-sm font-semibold rounded-xl hover:border-primary/50 hover:text-primary transition-colors"
+                    >
+                      <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z" />
+                        <path d="M12 0C5.373 0 0 5.373 0 12c0 2.625.846 5.059 2.284 7.034L.789 23.492a.5.5 0 00.611.611l4.458-1.495A11.952 11.952 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-2.387 0-4.63-.826-6.4-2.21l-.147-.117-3.083 1.033 1.033-3.083-.117-.147A9.953 9.953 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z" />
+                      </svg>
+                      Bilgi Al
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════════════ -->
+  <!-- MARKALAR                                             -->
+  <!-- ═══════════════════════════════════════════════════ -->
+  <BrandsStrip />
+
+
+  <!-- ═══════════════════════════════════════════════════ -->
+  <!-- NEDEN BİZ — Stats + Avantajlar                       -->
+  <!-- ═══════════════════════════════════════════════════ -->
+  <section class="py-16 lg:py-24 bg-gray-900 relative overflow-hidden">
+    <div class="absolute inset-0">
+      <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/10 rounded-full blur-[120px]"></div>
+      <div class="absolute bottom-0 left-0 w-[400px] h-[400px] bg-blue-500/10 rounded-full blur-[100px]"></div>
+    </div>
+
+    <div class="container-custom relative">
+      <!-- Stats Row -->
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-6 mb-16 reveal">
+        {[
+          { value: '20+', label: 'Yıl Deneyim' },
+          { value: '8', label: 'Farklı Hizmet' },
+          { value: '4.9', label: 'Google Puanı' },
+          { value: '7/24', label: 'Kesintisiz' },
+        ].map((stat) => (
+          <div class="text-center py-6 px-4 rounded-2xl bg-white/5 border border-white/10">
+            <span class="block text-3xl lg:text-4xl font-bold text-white mb-1" data-count>{stat.value}</span>
+            <span class="text-gray-400 text-sm">{stat.label}</span>
+          </div>
+        ))}
+      </div>
+
+      <!-- Title -->
+      <div class="text-center mb-12 reveal">
+        <h2 class="text-3xl lg:text-4xl font-bold text-white mb-4">Bizi Tercih Etmeniz İçin 4 Neden</h2>
+      </div>
+
+      <!-- Advantages Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+        {[
+          {
+            icon: '<path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />',
+            title: "Yetkili Bayi Güvencesi",
+            desc: "Hankook lastik ve Bosch akü yetkili bayii olarak orijinal ürünleri üretici garantisiyle sunuyoruz.",
+            color: "text-primary"
+          },
+          {
+            icon: '<path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />',
+            title: "7/24 Kesintisiz Hizmet",
+            desc: "Gece yarısı lastik patlaması, sabah akü bitmesi... Ne zaman olursa olsun Mersin genelinde yanınızdayız.",
+            color: "text-emerald-400"
+          },
+          {
+            icon: '<path stroke-linecap="round" stroke-linejoin="round" d="M11.42 15.17L17.25 21A2.652 2.652 0 0021 17.25l-5.877-5.877M11.42 15.17l2.496-3.03c.317-.384.74-.626 1.208-.766M11.42 15.17l-4.655 5.653a2.548 2.548 0 11-3.586-3.586l6.837-5.63m5.108-.233c.55-.164 1.163-.188 1.743-.14a4.5 4.5 0 004.486-6.336l-3.276 3.277a3.004 3.004 0 01-2.25-2.25l3.276-3.276a4.5 4.5 0 00-6.336 4.486c.091 1.076-.071 2.264-.904 2.95l-.102.085" />',
+            title: "Modern Ekipman",
+            desc: "Son teknoloji cihazlarla hassas rot balans, profesyonel lastik sökme-takma ve jant düzeltme hizmeti.",
+            color: "text-blue-400"
+          },
+          {
+            icon: '<path stroke-linecap="round" stroke-linejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />',
+            title: "Net Fiyat, Sürpriz Yok",
+            desc: "İşlem öncesi fiyat bilgisi veririz, gereksiz satış yapmayız. Ne söylersek onu uygularız.",
+            color: "text-purple-400"
+          },
+        ].map((item, i) => (
+          <div class={`flex items-start gap-5 p-6 rounded-2xl bg-white/5 border border-white/10 hover:bg-white/[0.08] transition-all duration-300 reveal reveal-delay-${Math.min(i + 1, 4)}`}>
+            <div class="w-12 h-12 rounded-xl bg-white/10 flex items-center justify-center flex-shrink-0">
+              <svg class={`w-6 h-6 ${item.color}`} fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" set:html={item.icon} />
+            </div>
+            <div>
+              <h3 class="text-lg font-bold text-white mb-1">{item.title}</h3>
+              <p class="text-gray-400 text-sm leading-relaxed">{item.desc}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+
+</BaseLayout>

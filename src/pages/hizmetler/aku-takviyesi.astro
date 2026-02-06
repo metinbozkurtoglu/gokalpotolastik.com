@@ -1,0 +1,414 @@
+---
+import ServiceLayout from '../../layouts/ServiceLayout.astro';
+import GallerySection from '../../components/GallerySection.astro';
+import { services } from '../../data/siteConfig';
+
+const service = services.find(s => s.slug === 'aku-takviyesi')!;
+
+const benefits = [
+  {
+    icon: 'zap',
+    title: 'Hızlı Müdahale',
+    desc: 'Konumunuza ortalama 15 dakikada ulaşıyoruz. Mersin genelinde 7/24 aktif ekiplerimiz sürekli hazır bekliyor.'
+  },
+  {
+    icon: 'shield',
+    title: 'Elektroniklere Zarar Vermez',
+    desc: 'Profesyonel takviye cihazlarımız voltaj regülasyonu sağlar. Aracınızın elektronik sistemlerine hiçbir zarar gelmez.'
+  },
+  {
+    icon: 'tools',
+    title: 'Profesyonel Takviye Ekipmanı',
+    desc: 'Endüstriyel seviye akü takviye cihazları ve dijital voltmetre ile doğru teşhis ve güvenli takviye yapıyoruz.'
+  },
+  {
+    icon: 'target',
+    title: 'Yerinde Akü Teşhisi',
+    desc: 'Takviye sonrası aküyü ve şarj sistemini test ederek gerçek sorunu buluyoruz. Gereksiz akü değişimi yaptırmıyoruz.'
+  }
+];
+
+const processSteps = [
+  {
+    step: '1',
+    title: 'Bizi Arayın',
+    desc: '0534 030 77 59 numarasını arayın veya WhatsApp\'tan yazın. Aracınızın marka, model ve konumunu bildirin.'
+  },
+  {
+    step: '2',
+    title: 'Ekip Konumunuza Gelir',
+    desc: 'Size en yakın mobil servis ekibimiz profesyonel takviye ekipmanıyla birlikte hemen yola çıkar.'
+  },
+  {
+    step: '3',
+    title: 'Akü Teşhisi Yapılır',
+    desc: 'Dijital voltmetre ile akünüzün voltajı ölçülür, boşalma seviyesi ve genel sağlık durumu tespit edilir.'
+  },
+  {
+    step: '4',
+    title: 'Takviye Uygulanır',
+    desc: 'Profesyonel takviye cihazı kutuplara doğru şekilde bağlanır ve aracınız güvenli bir şekilde çalıştırılır.'
+  },
+  {
+    step: '5',
+    title: 'Şarj Sistemi Kontrol Edilir',
+    desc: 'Motor çalıştıktan sonra alternatör çıkışı ve şarj sistemi test edilir. Akü veya şarj sorunu varsa size bildirilir.'
+  },
+  {
+    step: '6',
+    title: 'Sonuç ve Öneri',
+    desc: 'Akünüz sağlamsa takviye yeterlidir. Ömrünü tamamlamışsa yerinde Bosch akü değişimi seçeneği sunulur.'
+  }
+];
+
+const stats = [
+  { value: '7/24', label: 'Kesintisiz Hizmet' },
+  { value: '15 dk', label: 'Ortalama Varış Süresi' },
+  { value: '5.000+', label: 'Yıllık Akü Takviyesi' },
+  { value: '%99', label: 'Başarı Oranı' }
+];
+
+const faq = [
+  {
+    question: 'Akü takviyesi nedir ve nasıl yapılır?',
+    answer: 'Akü takviyesi, boşalmış bir araç aküsüne harici bir güç kaynağından enerji aktararak motorun çalıştırılmasını sağlayan profesyonel bir işlemdir. Ekibimiz endüstriyel takviye cihazını akünüzün kutuplarına doğru polaritede bağlar ve kontrollü şekilde enerji aktarır. İşlem sırasında aracın elektronik sistemlerini korumak için voltaj sürekli izlenir. Motor çalıştıktan sonra şarj sistemi kontrol edilerek akünüzün kendi kendini besleyip besleyemeyeceği değerlendirilir.'
+  },
+  {
+    question: 'Akü takviyesi aracımın elektronik sistemlerine zarar verir mi?',
+    answer: 'Profesyonel ekipmanla ve doğru prosedürle yapılan akü takviyesi aracınıza kesinlikle zarar vermez. Kullandığımız endüstriyel takviye cihazları dahili voltaj regülasyonuna sahiptir ve aşırı akım geçişini engeller. Kutupların doğru bağlanması kritik önem taşır; ters bağlama yapıldığında aracın ECU, multimedya sistemi ve diğer elektronikler zarar görebilir. Bu nedenle takviye işlemini mutlaka profesyonel ekipmanla ve deneyimli bir teknisyen eliyle yaptırmanız önemlidir.'
+  },
+  {
+    question: 'Akü takviyesi ücreti ne kadar?',
+    answer: 'Akü takviyesi ücreti konumunuza ve mesafeye göre değişiklik gösterir. Mersin şehir merkezinde standart bir takviye işlemi oldukça uygun fiyatlıdır. Bizi aradığınızda konumunuzu ve araç bilgilerinizi öğrendikten sonra telefonda net fiyat bildiriyoruz. Ücrete ekibin geliş maliyeti ve takviye işlemi dahildir. Eğer takviye sonrasında akü değişimi gerekirse, yeni akü ücreti ayrıca bildirilir ve onayınız alınmadan işlem yapılmaz.'
+  },
+  {
+    question: 'Akü takviyeyle çalışmıyorsa ne olur?',
+    answer: 'Bazı durumlarda akü aşırı derecede derin boşalma yaşamış olabilir veya iç hücreleri hasar görmüş olabilir; bu durumda takviye ile çalıştırma mümkün olmayabilir. Ekibimiz bu durumu hemen tespit eder ve yerinde akü değişimi önerir. Servis aracımızda farklı amper ve ebatlarda Bosch akü stoğu bulunur, bu sayede çoğu araç modeline uygun aküyü yerinde monte edebiliriz. Bulunduğunuz konumda değişim yapılamayacak özel bir durum varsa en yakın servise taşıma konusunda yardımcı oluruz.'
+  },
+  {
+    question: 'Akü takviyesi ne kadar sürer?',
+    answer: 'Takviye işleminin kendisi genellikle 5-10 dakika içinde tamamlanır. Ekibimizin konumunuza ulaşma süresi ise Mersin şehir merkezinde ortalama 15 dakikadır. Yani bizi aradıktan yaklaşık 20-25 dakika sonra aracınız çalışır durumda olur. Takviye sonrası yapılan şarj sistemi kontrolü ve akü sağlık testi ek birkaç dakika sürer, ancak bu kontrol aracınızın sağlığı için önemlidir ve ek ücret alınmaz.'
+  },
+  {
+    question: 'Akü takviyesi hizmetiniz hangi bölgeleri kapsıyor?',
+    answer: 'Mersin il genelinde akü takviyesi hizmeti sunuyoruz. Toroslar, Yenişehir, Akdeniz ve Mezitli gibi merkez ilçelere 15 dakika civarında ulaşıyoruz. Tarsus ve Erdemli ilçelerine ise 25-40 dakika arasında varış süremiz var. Otoyol, sahil yolu ve şehirlerarası bağlantı yollarında da hizmet verebilmekteyiz. Gece, hafta sonu veya resmi tatillerde aynı kapsama alanında aynı hızla hizmet devam eder.'
+  }
+];
+
+const relatedSlugs = ['aku-satisi-degisimi', 'yol-yardim-servisi', 'lastik-tamiri'];
+---
+
+<ServiceLayout
+  title="Akü Takviyesi Mersin | 7/24 Yerinde Akü Şarj | Gökalp"
+  description="Mersin'de 7/24 akü takviyesi ve yerinde şarj hizmeti. Aracınız çalışmıyorsa 15 dakikada yanınızdayız. 0534 030 77 59"
+  h1="7/24 Akü Takviyesi ve Yerinde Şarj Hizmeti Mersin"
+  heroSubtitle="Aracınız mı çalışmıyor? Mersin genelinde 7/24 profesyonel akü takviyesi hizmeti sunuyoruz. Endüstriyel takviye cihazlarımızla aracınızı güvenle çalıştırıyoruz, elektronik sisteminize zarar vermeden. Ortalama 15 dakikada konumunuza ulaşıyoruz."
+  slug="aku-takviyesi"
+  heroFeatures={["7/24 Hizmet", "15 Dk Yanınızda", "Profesyonel Ekipman", "Uygun Fiyat"]}
+  benefits={benefits}
+  process={processSteps}
+  stats={stats}
+  faq={faq}
+  relatedSlugs={relatedSlugs}
+>
+
+  <!-- ═══════════════════════════════════════════════════ -->
+  <!-- NEDEN AKÜ BİTER — Yaygın nedenler kartları          -->
+  <!-- ═══════════════════════════════════════════════════ -->
+  <section class="py-20 lg:py-28 bg-gray-50 relative">
+    <div class="container-custom">
+      <div class="text-center mb-14">
+        <div class="flex items-center justify-center gap-3 mb-4 reveal">
+          <span class="w-8 h-px bg-primary/50"></span>
+          <span class="text-primary font-semibold text-sm uppercase tracking-[0.15em]">Bilgi Rehberi</span>
+          <span class="w-8 h-px bg-primary/50"></span>
+        </div>
+        <h2 class="text-h2-mobile lg:text-h2-desktop text-gray-900 reveal reveal-delay-1">
+          Neden Akü Biter?
+        </h2>
+        <p class="text-gray-500 mt-4 max-w-2xl mx-auto reveal reveal-delay-2">
+          Akü boşalmasının en yaygın nedenleri ve bunlardan nasıl korunacağınız.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        <!-- Soğuk Hava -->
+        <div class="glass-card p-6 group reveal reveal-delay-1">
+          <div class="flex items-start gap-4">
+            <div class="w-11 h-11 rounded-xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
+              <svg class="w-5 h-5 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            </div>
+            <div>
+              <h3 class="text-gray-900 font-bold text-sm mb-1.5">Soğuk Hava Koşulları</h3>
+              <p class="text-gray-500 text-sm leading-relaxed">Düşük sıcaklıklarda akü kapasitesi %30-50 oranında azalır. Kış aylarında marş gücü düşer ve çalıştırma zorlaşır.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Yaşlı Akü -->
+        <div class="glass-card p-6 group reveal reveal-delay-2">
+          <div class="flex items-start gap-4">
+            <div class="w-11 h-11 rounded-xl bg-orange-500/10 border border-orange-500/20 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
+              <svg class="w-5 h-5 text-orange-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            </div>
+            <div>
+              <h3 class="text-gray-900 font-bold text-sm mb-1.5">Akü Yaşlanması</h3>
+              <p class="text-gray-500 text-sm leading-relaxed">Ortalama akü ömrü 3-5 yıldır. Zamanla iç hücreler kapasite kaybeder ve şarj tutma süresi kısalır.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Far Açık Kalması -->
+        <div class="glass-card p-6 group reveal reveal-delay-3">
+          <div class="flex items-start gap-4">
+            <div class="w-11 h-11 rounded-xl bg-yellow-500/10 border border-yellow-500/20 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
+              <svg class="w-5 h-5 text-yellow-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
+              </svg>
+            </div>
+            <div>
+              <h3 class="text-gray-900 font-bold text-sm mb-1.5">Far veya Işık Açık Kalması</h3>
+              <p class="text-gray-500 text-sm leading-relaxed">Gece boyunca açık kalan farlar sağlam bir aküyü bile tamamen boşaltabilir. İç aydınlatma da aynı etkiye sahiptir.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Kısa Mesafe -->
+        <div class="glass-card p-6 group reveal reveal-delay-4">
+          <div class="flex items-start gap-4">
+            <div class="w-11 h-11 rounded-xl bg-green-500/10 border border-green-500/20 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
+              <svg class="w-5 h-5 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 17a2 2 0 11-4 0 2 2 0 014 0zM19 17a2 2 0 11-4 0 2 2 0 014 0z" /><path stroke-linecap="round" stroke-linejoin="round" d="M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h1m8-1a1 1 0 01-1 1H9m4-1V8a1 1 0 011-1h2.586a1 1 0 01.707.293l3.414 3.414a1 1 0 01.293.707V16a1 1 0 01-1 1h-1m-6-1a1 1 0 001 1h1M5 17a2 2 0 104 0m-4 0a2 2 0 114 0m6 0a2 2 0 104 0m-4 0a2 2 0 114 0" />
+              </svg>
+            </div>
+            <div>
+              <h3 class="text-gray-900 font-bold text-sm mb-1.5">Kısa Mesafe Sürüşler</h3>
+              <p class="text-gray-500 text-sm leading-relaxed">Sürekli kısa mesafe kullanımda alternatör aküyü yeterince şarj edemez. Zamanla akü giderek zayıflar.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Elektrik Kaçağı -->
+        <div class="glass-card p-6 group reveal reveal-delay-5">
+          <div class="flex items-start gap-4">
+            <div class="w-11 h-11 rounded-xl bg-red-500/10 border border-red-500/20 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
+              <svg class="w-5 h-5 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L4.082 16.5c-.77.833.192 2.5 1.732 2.5z" />
+              </svg>
+            </div>
+            <div>
+              <h3 class="text-gray-900 font-bold text-sm mb-1.5">Elektrik Kaçağı (Parasitik Drain)</h3>
+              <p class="text-gray-500 text-sm leading-relaxed">Arızalı bir modül veya sonradan takılan aksesuar, motor kapalıyken bile akeden akım çekerek aküyü boşaltabilir.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Alternatör Arızası -->
+        <div class="glass-card p-6 group reveal reveal-delay-6">
+          <div class="flex items-start gap-4">
+            <div class="w-11 h-11 rounded-xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
+              <svg class="w-5 h-5 text-purple-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.066 2.573c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.573 1.066c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.066-2.573c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" /><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+              </svg>
+            </div>
+            <div>
+              <h3 class="text-gray-900 font-bold text-sm mb-1.5">Alternatör Arızası</h3>
+              <p class="text-gray-500 text-sm leading-relaxed">Alternatör aküyü şarj eden parçadır. Arızalandığında akü beslenmez ve bir süre sonra tamamen boşalır.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════════════ -->
+  <!-- TAKVİYE Mİ DEĞİŞİM Mİ — Karar rehberi               -->
+  <!-- ═══════════════════════════════════════════════════ -->
+  <section class="py-20 lg:py-28 bg-white relative">
+    <div class="container-custom relative">
+      <div class="text-center mb-14">
+        <div class="flex items-center justify-center gap-3 mb-4 reveal">
+          <span class="w-8 h-px bg-primary/50"></span>
+          <span class="text-primary font-semibold text-sm uppercase tracking-[0.15em]">Karar Rehberi</span>
+          <span class="w-8 h-px bg-primary/50"></span>
+        </div>
+        <h2 class="text-h2-mobile lg:text-h2-desktop text-gray-900 reveal reveal-delay-1">
+          Takviye mi, Değişim mi?
+        </h2>
+        <p class="text-gray-500 mt-4 max-w-2xl mx-auto reveal reveal-delay-2">
+          Akünüzün durumuna göre doğru kararı vermenize yardımcı oluyoruz.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+        <!-- Takviye Yeterli -->
+        <div class="glass-card p-7 border-green-500/20 reveal reveal-delay-1">
+          <div class="flex items-center gap-3 mb-5">
+            <div class="w-12 h-12 rounded-2xl bg-green-500/10 border border-green-500/20 flex items-center justify-center">
+              <svg class="w-6 h-6 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+              </svg>
+            </div>
+            <h3 class="text-green-600 font-bold text-lg">Takviye Yeterli</h3>
+          </div>
+          <ul class="space-y-3">
+            {[
+              'Akü 3 yaşından küçük',
+              'İlk kez boşalma yaşanıyor',
+              'Far veya ışık açık kalmış',
+              'Uzun süre kullanılmamış araç',
+              'Voltaj testi 10.5V üzeri'
+            ].map(item => (
+              <li class="flex items-start gap-3">
+                <svg class="w-4 h-4 text-green-400 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                </svg>
+                <span class="text-gray-600 text-sm">{item}</span>
+              </li>
+            ))}
+          </ul>
+          <div class="mt-5 pt-5 border-t border-gray-200">
+            <p class="text-gray-500 text-xs leading-relaxed">Takviye ile aracınız çalışır, alternatör aküyü tekrar şarj eder. Ek bir işlem gerekmez.</p>
+          </div>
+        </div>
+
+        <!-- Değişim Gerekli -->
+        <div class="glass-card p-7 border-red-500/20 reveal reveal-delay-2">
+          <div class="flex items-center gap-3 mb-5">
+            <div class="w-12 h-12 rounded-2xl bg-red-500/10 border border-red-500/20 flex items-center justify-center">
+              <svg class="w-6 h-6 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+              </svg>
+            </div>
+            <h3 class="text-red-600 font-bold text-lg">Değişim Gerekli</h3>
+          </div>
+          <ul class="space-y-3">
+            {[
+              'Akü 3-5 yaşını geçmiş',
+              'Sık sık boşalma yaşanıyor',
+              'Marş zayıf dönüyor',
+              'Takviye sonrası kısa sürede tekrar bitiyor',
+              'Voltaj testi 10.5V altı'
+            ].map(item => (
+              <li class="flex items-start gap-3">
+                <svg class="w-4 h-4 text-red-400 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01" />
+                </svg>
+                <span class="text-gray-600 text-sm">{item}</span>
+              </li>
+            ))}
+          </ul>
+          <div class="mt-5 pt-5 border-t border-gray-200">
+            <p class="text-gray-500 text-xs leading-relaxed">Yeni akü gerekiyor. <a href="/hizmetler/aku-satisi-degisimi" class="text-primary hover:underline">Bosch akü satışı ve değişimi</a> sayfamızdan detaylı bilgi alabilirsiniz.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════════════ -->
+  <!-- AKÜ BAKIM İPUÇLARI — Numaralı tavsiyeler             -->
+  <!-- ═══════════════════════════════════════════════════ -->
+  <section class="py-20 lg:py-28 bg-gray-50 relative overflow-hidden">
+    <div class="container-custom relative">
+      <div class="text-center mb-14">
+        <div class="flex items-center justify-center gap-3 mb-4 reveal">
+          <span class="w-8 h-px bg-primary/50"></span>
+          <span class="text-primary font-semibold text-sm uppercase tracking-[0.15em]">Uzman Tavsiyeleri</span>
+          <span class="w-8 h-px bg-primary/50"></span>
+        </div>
+        <h2 class="text-h2-mobile lg:text-h2-desktop text-gray-900 reveal reveal-delay-1">
+          Akü Bakım İpuçları
+        </h2>
+        <p class="text-gray-500 mt-4 max-w-2xl mx-auto reveal reveal-delay-2">
+          Akü ömrünü uzatmak ve beklenmedik boşalmaları önlemek için uygulayabileceğiniz basit adımlar.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-5 max-w-4xl mx-auto">
+        {[
+          {
+            num: '01',
+            title: 'Kutup Başlarını Temiz Tutun',
+            desc: 'Akü kutup başlarındaki oksitlenme ve korozyon iletkenliği düşürür. Yılda en az bir kez kutup başlarını temizletin ve vazelin ile koruma altına aldırın.'
+          },
+          {
+            num: '02',
+            title: 'Uzun Süre Kullanılmayacaksa Hazırlık Yapın',
+            desc: 'Aracınızı 2 haftadan fazla kullanmayacaksanız akü kutup kablosunu sökün veya akü koruma cihazı bağlayın. Park halindeki araçlar bile enerji tüketir.'
+          },
+          {
+            num: '03',
+            title: 'Motor Kapatmadan Önce Elektrikli Cihazları Kapatın',
+            desc: 'Far, klima, radyo ve koltuk ısıtma gibi cihazları motoru durdurmadan önce kapatın. Bir sonraki çalıştırmada marş üzerindeki yükü azaltmış olursunuz.'
+          },
+          {
+            num: '04',
+            title: 'Düzenli Olarak Uzun Mesafe Sürün',
+            desc: 'Sadece kısa mesafe kullanıyorsanız haftada en az bir kez 30 dakikalık kesintisiz sürüş yapın. Bu, alternatörün aküyü tam şarj etmesini sağlar.'
+          },
+          {
+            num: '05',
+            title: 'Akü Yaşını Takip Edin',
+            desc: '3 yaşını geçen akülerde periyodik voltaj kontrolü yaptırın. 4-5 yılı geçmiş aküleri sorun yaşamadan önce proaktif olarak değiştirmeyi düşünün.'
+          },
+          {
+            num: '06',
+            title: '6 Ayda Bir Akü Kontrolü Yaptırın',
+            desc: 'Profesyonel akü testi ile şarj kapasitesini, soğuk marş gücünü ve iç direnç değerini ölçtürün. Sorun erken tespit edilirse sizi yolda bırakmaz.'
+          }
+        ].map((tip, i) => (
+          <div class={`glass-card p-6 flex gap-5 items-start reveal reveal-delay-${Math.min(i + 1, 6)}`}>
+            <div class="flex-shrink-0 w-12 h-12 rounded-2xl bg-primary/10 border border-primary/20 flex items-center justify-center">
+              <span class="text-primary font-bold text-sm">{tip.num}</span>
+            </div>
+            <div>
+              <h3 class="text-gray-900 font-bold text-sm mb-1.5">{tip.title}</h3>
+              <p class="text-gray-500 text-sm leading-relaxed">{tip.desc}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <!-- Link to related services -->
+      <div class="mt-12 max-w-4xl mx-auto reveal reveal-delay-4">
+        <div class="glass-card p-6 lg:p-8 border-primary/20 bg-primary/[0.03]">
+          <div class="flex flex-col md:flex-row items-center gap-6">
+            <div class="w-14 h-14 rounded-2xl bg-primary/10 border border-primary/20 flex items-center justify-center flex-shrink-0">
+              <svg class="w-7 h-7 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M4 7h16a1 1 0 011 1v8a1 1 0 01-1 1H4a1 1 0 01-1-1V8a1 1 0 011-1zm5-3h2v3H9V4zm4 0h2v3h-2V4z" />
+              </svg>
+            </div>
+            <div class="text-center md:text-left flex-1">
+              <h3 class="text-gray-900 font-bold text-lg mb-1">Akünüz Değişim mi Gerektiriyor?</h3>
+              <p class="text-gray-500 text-sm leading-relaxed">Bosch yetkili bayi güvencesiyle orijinal akü satışı ve yerinde montaj hizmeti sunuyoruz. Aracınıza uygun aküyü birlikte belirleyelim.</p>
+            </div>
+            <div class="flex gap-3 flex-shrink-0">
+              <a href="/hizmetler/aku-satisi-degisimi" class="inline-flex items-center gap-2 px-5 py-2.5 bg-primary/10 border border-primary/30 rounded-xl text-primary text-sm font-semibold hover:bg-primary/20 transition-colors duration-300">
+                Akü Satışı
+                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+                </svg>
+              </a>
+              <a href="/hizmetler/yol-yardim-servisi" class="inline-flex items-center gap-2 px-5 py-2.5 bg-gray-100 border border-gray-200 rounded-xl text-gray-600 text-sm font-semibold hover:bg-gray-200 transition-colors duration-300">
+                Yol Yardım
+                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <GallerySection />
+
+</ServiceLayout>

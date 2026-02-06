@@ -1,0 +1,150 @@
+---
+import SEOHead from '../components/SEOHead.astro';
+import SchemaMarkup from '../components/SchemaMarkup.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import MobileContactBar from '../components/MobileContactBar.astro';
+import WhatsAppFloat from '../components/WhatsAppFloat.astro';
+import CTASection from '../components/CTASection.astro';
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description: string;
+  canonical?: string;
+  ogImage?: string;
+  ogType?: string;
+  noindex?: boolean;
+  schemaType?: 'home' | 'service' | 'blog' | 'contact' | 'about' | 'page';
+  serviceName?: string;
+  serviceDescription?: string;
+  breadcrumbs?: { name: string; url: string }[];
+  faq?: { question: string; answer: string }[];
+  article?: {
+    headline: string;
+    datePublished: string;
+    dateModified?: string;
+    description: string;
+    image?: string;
+  };
+  headerTransparent?: boolean;
+}
+
+const {
+  title,
+  description,
+  canonical,
+  ogImage,
+  ogType,
+  noindex,
+  schemaType = 'page',
+  serviceName,
+  serviceDescription,
+  breadcrumbs,
+  faq,
+  article,
+  headerTransparent,
+} = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="tr">
+  <SEOHead
+    title={title}
+    description={description}
+    canonical={canonical}
+    ogImage={ogImage}
+    ogType={ogType}
+    noindex={noindex}
+  />
+  <body>
+    <a href="#main-content" class="skip-nav">Ana içeriğe geç</a>
+
+    <Header transparent={headerTransparent} />
+
+    <main id="main-content">
+      <slot />
+    </main>
+
+    <CTASection />
+    <Footer />
+
+    <WhatsAppFloat />
+    <MobileContactBar />
+
+    <SchemaMarkup
+      type={schemaType}
+      serviceName={serviceName}
+      serviceDescription={serviceDescription}
+      breadcrumbs={breadcrumbs}
+      faq={faq}
+      article={article}
+    />
+
+    <!-- Scroll animations -->
+    <script>
+      // ── Reveal observer (all directions) ──
+      const revealObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('visible');
+              revealObserver.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.1, rootMargin: '0px 0px -40px 0px' }
+      );
+
+      document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale').forEach((el) => {
+        revealObserver.observe(el);
+      });
+
+      // ── Counter animation ──
+      const countObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (!entry.isIntersecting) return;
+            const el = entry.target as HTMLElement;
+            const text = el.textContent || '';
+            const match = text.match(/^([\d.]+)(.*)$/);
+            if (!match) { countObserver.unobserve(el); return; }
+
+            const target = parseFloat(match[1].replace('.', ''));
+            const suffix = match[2];
+            const hasDecimal = match[1].includes('.');
+            const duration = 1200;
+            const start = performance.now();
+
+            function tick(now: number) {
+              const elapsed = now - start;
+              const progress = Math.min(elapsed / duration, 1);
+              const eased = 1 - Math.pow(1 - progress, 3);
+              let current = Math.floor(target * eased);
+
+              if (hasDecimal) {
+                const formatted = current.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+                el.textContent = formatted + suffix;
+              } else {
+                el.textContent = current + suffix;
+              }
+
+              if (progress < 1) requestAnimationFrame(tick);
+              else {
+                el.textContent = match[1] + suffix;
+              }
+            }
+
+            el.textContent = '0' + suffix;
+            requestAnimationFrame(tick);
+            countObserver.unobserve(el);
+          });
+        },
+        { threshold: 0.3 }
+      );
+
+      document.querySelectorAll('[data-count]').forEach((el) => countObserver.observe(el));
+
+    </script>
+  </body>
+</html>

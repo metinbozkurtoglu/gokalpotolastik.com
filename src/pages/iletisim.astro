@@ -1,0 +1,322 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ContactForm from '../components/ContactForm.tsx';
+import GoogleMap from '../components/GoogleMap.astro';
+import { siteConfig } from '../data/siteConfig';
+
+const title = "İletişim | Gökalp Lastikçilik Mersin | 0534 030 77 59";
+const description = "Gökalp Lastikçilik Mersin iletişim bilgileri. Telefon: 0534 030 77 59, e-posta ve adres. 7/24 lastik, akü ve yol yardım hizmeti için bize ulaşın.";
+
+const breadcrumbs = [
+  { name: 'Anasayfa', url: '/' },
+  { name: 'İletişim', url: '/iletisim' },
+];
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  schemaType="contact"
+  breadcrumbs={breadcrumbs}
+>
+
+  <!-- ═══════════════════════════════════════════════════ -->
+  <!-- HERO SECTION                                        -->
+  <!-- ═══════════════════════════════════════════════════ -->
+  <section class="relative bg-gray-900 overflow-hidden">
+    <!-- Background Pattern -->
+    <div class="absolute inset-0 opacity-10">
+      <div class="absolute inset-0" style="background-image: url('data:image/svg+xml,%3Csvg width=\"60\" height=\"60\" viewBox=\"0 0 60 60\" xmlns=\"http://www.w3.org/2000/svg\"%3E%3Cg fill=\"none\" fill-rule=\"evenodd\"%3E%3Cg fill=\"%23ffffff\" fill-opacity=\"0.4\"%3E%3Cpath d=\"M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');"></div>
+    </div>
+
+    <!-- Gradient Overlay -->
+    <div class="absolute inset-0 bg-gradient-to-br from-gray-900 via-gray-900/95 to-primary/20"></div>
+
+    <div class="container-custom relative py-16 lg:py-24">
+      <!-- Breadcrumb -->
+      <nav class="mb-6" aria-label="Breadcrumb">
+        <ol class="flex items-center gap-2 text-sm">
+          {breadcrumbs.map((item, index) => (
+            <li class="flex items-center gap-2">
+              {index > 0 && <span class="text-gray-500">/</span>}
+              {index === breadcrumbs.length - 1 ? (
+                <span class="text-gray-400">{item.name}</span>
+              ) : (
+                <a href={item.url} class="text-gray-400 hover:text-white transition-colors">{item.name}</a>
+              )}
+            </li>
+          ))}
+        </ol>
+      </nav>
+
+      <div class="max-w-3xl">
+        <div class="inline-flex items-center gap-2 bg-emerald-500/20 border border-emerald-500/30 rounded-full px-4 py-2 mb-6">
+          <span class="w-2 h-2 bg-emerald-400 rounded-full animate-pulse"></span>
+          <span class="text-emerald-400 text-sm font-medium">7/24 Ulaşılabilir</span>
+        </div>
+
+        <h1 class="text-4xl lg:text-5xl xl:text-6xl font-bold text-white leading-tight mb-6">
+          Mersin'de Bize <span class="text-primary">Ulaşın</span>
+        </h1>
+
+        <p class="text-gray-300 text-lg lg:text-xl leading-relaxed mb-8 max-w-2xl">
+          Lastik, akü veya yol yardım konusunda destek almak için bizi arayabilir ya da formu doldurabilirsiniz.
+        </p>
+
+        <!-- Quick Actions -->
+        <div class="flex flex-wrap gap-4">
+          <a
+            href={`tel:${siteConfig.phone}`}
+            class="inline-flex items-center gap-3 bg-primary hover:bg-primary-dark text-white font-semibold px-6 py-4 rounded-xl transition-all duration-300 shadow-lg shadow-primary/25 hover:shadow-primary/40"
+          >
+            <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+            </svg>
+            <span>{siteConfig.phoneFormatted}</span>
+          </a>
+
+          <a
+            href={siteConfig.whatsappLink}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-3 bg-[#25D366] hover:bg-[#128C7E] text-white font-semibold px-6 py-4 rounded-xl transition-all duration-300"
+          >
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+            </svg>
+            <span>WhatsApp</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════════════ -->
+  <!-- CONTACT INFO CARDS                                  -->
+  <!-- ═══════════════════════════════════════════════════ -->
+  <section class="py-16 lg:py-20 bg-white border-b border-gray-100">
+    <div class="container-custom">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+
+        <!-- Telefon -->
+        <a href={`tel:${siteConfig.phone}`} class="group relative bg-gradient-to-br from-gray-50 to-white border border-gray-200 rounded-2xl p-6 hover:border-primary/30 hover:shadow-lg transition-all duration-300">
+          <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-primary to-orange-500 flex items-center justify-center mb-5 shadow-lg group-hover:scale-110 transition-transform duration-300">
+            <svg class="w-7 h-7 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+            </svg>
+          </div>
+          <p class="text-gray-400 text-xs font-semibold uppercase tracking-wider mb-2">Telefon</p>
+          <p class="text-gray-900 font-bold text-xl group-hover:text-primary transition-colors">{siteConfig.phoneFormatted}</p>
+          <p class="text-gray-500 text-sm mt-2">7/24 ulaşılabilir</p>
+        </a>
+
+        <!-- WhatsApp -->
+        <a href={siteConfig.whatsappLink} target="_blank" rel="noopener noreferrer" class="group relative bg-gradient-to-br from-gray-50 to-white border border-gray-200 rounded-2xl p-6 hover:border-[#25D366]/30 hover:shadow-lg transition-all duration-300">
+          <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-[#25D366] to-[#128C7E] flex items-center justify-center mb-5 shadow-lg group-hover:scale-110 transition-transform duration-300">
+            <svg class="w-7 h-7 text-white" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+            </svg>
+          </div>
+          <p class="text-gray-400 text-xs font-semibold uppercase tracking-wider mb-2">WhatsApp</p>
+          <p class="text-gray-900 font-bold text-xl group-hover:text-[#25D366] transition-colors">Mesaj Gönder</p>
+          <p class="text-gray-500 text-sm mt-2">Konum paylaşın, hızlı destek alın</p>
+        </a>
+
+        <!-- Çalışma Saatleri -->
+        <div class="group relative bg-gradient-to-br from-gray-50 to-white border border-gray-200 rounded-2xl p-6">
+          <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-blue-500 to-indigo-500 flex items-center justify-center mb-5 shadow-lg">
+            <svg class="w-7 h-7 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+          </div>
+          <p class="text-gray-400 text-xs font-semibold uppercase tracking-wider mb-2">Çalışma Saatleri</p>
+          <p class="text-gray-900 font-bold text-xl">{siteConfig.hours}</p>
+          <p class="text-gray-500 text-sm mt-2 flex items-center gap-2">
+            <span class="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></span>
+            Şu an açık
+          </p>
+        </div>
+
+        <!-- E-posta -->
+        <a href={`mailto:${siteConfig.email}`} class="group relative bg-gradient-to-br from-gray-50 to-white border border-gray-200 rounded-2xl p-6 hover:border-primary/30 hover:shadow-lg transition-all duration-300">
+          <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center mb-5 shadow-lg group-hover:scale-110 transition-transform duration-300">
+            <svg class="w-7 h-7 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+            </svg>
+          </div>
+          <p class="text-gray-400 text-xs font-semibold uppercase tracking-wider mb-2">E-posta</p>
+          <p class="text-gray-900 font-bold text-lg group-hover:text-primary transition-colors break-all">{siteConfig.email}</p>
+          <p class="text-gray-500 text-sm mt-2">Detaylı bilgi için</p>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════════════ -->
+  <!-- FORM & MAP SECTION                                  -->
+  <!-- ═══════════════════════════════════════════════════ -->
+  <section class="py-16 lg:py-24 bg-gray-50">
+    <div class="container-custom">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
+
+        <!-- Sol: Form -->
+        <div>
+          <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 lg:p-8">
+            <div class="flex items-center gap-3 mb-6">
+              <div class="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
+                <svg class="w-5 h-5 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+                </svg>
+              </div>
+              <div>
+                <h2 class="text-gray-900 font-bold text-xl">Mesaj Gönderin</h2>
+                <p class="text-gray-500 text-sm">En kısa sürede dönüş yapacağız</p>
+              </div>
+            </div>
+            <ContactForm client:visible />
+          </div>
+
+          <!-- Ek Bilgi -->
+          <div class="mt-6 bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
+            <h3 class="text-gray-900 font-bold text-lg mb-4 flex items-center gap-2">
+              <svg class="w-5 h-5 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              Bilmeniz Gerekenler
+            </h3>
+            <ul class="space-y-3">
+              {[
+                "Acil durumlar için doğrudan telefon veya WhatsApp ile arayın.",
+                "Yol yardım hizmetimiz Mersin genelinde 15-20 dakikada ulaşır.",
+                "Konum paylaşarak bize ulaşmak en hızlı yöntemdir.",
+              ].map((item) => (
+                <li class="flex items-start gap-3 text-gray-600 text-sm">
+                  <svg class="w-5 h-5 text-emerald-500 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                  </svg>
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+
+        <!-- Sağ: Harita & Adres -->
+        <div>
+          <!-- Adres Kartı -->
+          <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 mb-6">
+            <div class="flex items-start gap-4">
+              <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-primary to-orange-500 flex items-center justify-center flex-shrink-0 shadow-lg">
+                <svg class="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                </svg>
+              </div>
+              <div class="flex-1">
+                <p class="text-gray-400 text-xs font-semibold uppercase tracking-wider mb-1">Adres</p>
+                <p class="text-gray-900 font-bold text-lg mb-1">{siteConfig.address.full}</p>
+                <p class="text-gray-500 text-sm">Mersin — Kolay ulaşım, geniş park alanı</p>
+              </div>
+            </div>
+
+            <!-- Yol Tarifi Linki -->
+            <a
+              href={siteConfig.googleMapsUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="mt-4 w-full inline-flex items-center justify-center gap-2 bg-gray-100 hover:bg-gray-200 text-gray-700 font-medium px-4 py-3 rounded-xl transition-colors"
+            >
+              <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
+              </svg>
+              Google Maps'te Yol Tarifi Al
+            </a>
+          </div>
+
+          <!-- Google Harita -->
+          <div class="rounded-2xl overflow-hidden shadow-sm border border-gray-100">
+            <GoogleMap />
+          </div>
+
+          <!-- Nasıl Ulaşırsınız -->
+          <div class="mt-6 bg-gradient-to-br from-gray-900 to-gray-800 rounded-2xl p-6 text-white">
+            <h3 class="font-bold text-lg mb-4 flex items-center gap-2">
+              <svg class="w-5 h-5 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
+              </svg>
+              Nasıl Ulaşırsınız?
+            </h3>
+            <ul class="space-y-3 text-gray-300 text-sm">
+              <li class="flex items-start gap-3">
+                <span class="w-6 h-6 rounded-full bg-primary/20 text-primary flex items-center justify-center flex-shrink-0 text-xs font-bold">1</span>
+                <span>Mersin D-400 karayolundan Toroslar istikametine dönün.</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="w-6 h-6 rounded-full bg-primary/20 text-primary flex items-center justify-center flex-shrink-0 text-xs font-bold">2</span>
+                <span>201. Cadde üzerinde, Hankook bayisi tabelasını göreceksiniz.</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="w-6 h-6 rounded-full bg-primary/20 text-primary flex items-center justify-center flex-shrink-0 text-xs font-bold">3</span>
+                <span>Google Maps'te "Gökalp Lastikçilik" aratarak navigasyon başlatabilirsiniz.</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════════════ -->
+  <!-- ACİL DURUM BANNER                                   -->
+  <!-- ═══════════════════════════════════════════════════ -->
+  <section class="py-16 lg:py-20 bg-gradient-to-br from-primary to-orange-600 relative overflow-hidden">
+    <!-- Background Pattern -->
+    <div class="absolute inset-0 opacity-10">
+      <div class="absolute inset-0" style="background-image: url('data:image/svg+xml,%3Csvg width=\"60\" height=\"60\" viewBox=\"0 0 60 60\" xmlns=\"http://www.w3.org/2000/svg\"%3E%3Cg fill=\"none\" fill-rule=\"evenodd\"%3E%3Cg fill=\"%23ffffff\" fill-opacity=\"0.4\"%3E%3Cpath d=\"M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');"></div>
+    </div>
+
+    <div class="container-custom relative text-center">
+      <div class="inline-flex items-center gap-2 bg-white/20 backdrop-blur rounded-full px-4 py-2 mb-6">
+        <span class="w-2 h-2 bg-white rounded-full animate-pulse"></span>
+        <span class="text-white text-sm font-medium">Acil Yol Yardım</span>
+      </div>
+
+      <h2 class="text-3xl lg:text-4xl xl:text-5xl font-bold text-white mb-4">
+        Yolda mı Kaldınız?
+      </h2>
+      <p class="text-white/90 text-lg lg:text-xl max-w-2xl mx-auto mb-8">
+        Panik yapmayın! Konumunuzu paylaşın, 15-20 dakika içinde yanınızda olalım.
+      </p>
+
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+        <a
+          href={`tel:${siteConfig.phone}`}
+          class="inline-flex items-center gap-3 bg-white text-primary hover:bg-gray-100 font-bold px-8 py-4 rounded-xl transition-all duration-300 shadow-xl"
+        >
+          <svg class="w-6 h-6 animate-pulse" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+          </svg>
+          Hemen Ara: {siteConfig.phoneFormatted}
+        </a>
+
+        <a
+          href={siteConfig.whatsappLink}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-3 bg-white/20 hover:bg-white/30 backdrop-blur text-white font-semibold px-8 py-4 rounded-xl transition-all duration-300 border border-white/30"
+        >
+          <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+          </svg>
+          Konum Paylaş (WhatsApp)
+        </a>
+      </div>
+    </div>
+  </section>
+
+</BaseLayout>

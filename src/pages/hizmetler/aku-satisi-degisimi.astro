@@ -1,0 +1,520 @@
+---
+import ServiceLayout from '../../layouts/ServiceLayout.astro';
+import GallerySection from '../../components/GallerySection.astro';
+import { services } from '../../data/siteConfig';
+
+const service = services.find(s => s.slug === 'aku-satisi-degisimi')!;
+
+const benefits = [
+  {
+    icon: 'award',
+    title: 'Bosch Yetkili Bayi Garantisi',
+    desc: 'Bosch yetkili bayi olarak orijinal ürünleri üretici garantisiyle satıyoruz. 2 yıl resmi Bosch garantisi ile içiniz rahat olsun.'
+  },
+  {
+    icon: 'gauge',
+    title: 'Ücretsiz Akü Testi',
+    desc: 'Profesyonel Bosch test cihazıyla akünüzün voltaj, yük ve sağlık durumunu ücretsiz ölçüyoruz. Gereksiz değişim yaptırmayın.'
+  },
+  {
+    icon: 'truck',
+    title: 'Yerinde Değişim Servisi',
+    desc: 'Mersin genelinde bulunduğunuz konuma gelip akü değişimini yerinde yapıyoruz. Aracınızı servise getirme zahmetine girmenize gerek yok.'
+  },
+  {
+    icon: 'refresh',
+    title: 'Eski Akü Geri Dönüşümü',
+    desc: 'Eski akünüzü ücretsiz olarak teslim alıyor ve çevreye uygun şekilde geri dönüşüme gönderiyoruz. Hem çevreyi koruyun hem tasarruf edin.'
+  }
+];
+
+const processSteps = [
+  {
+    step: '1',
+    title: 'Ücretsiz Akü Testi',
+    desc: 'Profesyonel test cihazıyla akünüzün voltajı, yük kapasitesi ve sağlık durumu ölçülür. Değişim gerçekten gerekli mi, objektif olarak belirlenir.'
+  },
+  {
+    step: '2',
+    title: 'Arıza Teşhisi',
+    desc: 'Akü dışında şarj sistemi (alternatör) ve elektrik devresi de kontrol edilir. Sorunun akü mü yoksa başka bir bileşen mi olduğu netleştirilir.'
+  },
+  {
+    step: '3',
+    title: 'Doğru Akü Seçimi',
+    desc: 'Aracınızın motor hacmi, yakıt tipi ve elektrik tüketim ihtiyacına göre uygun amper kapasitesinde ve boyutta Bosch akü seçilir.'
+  },
+  {
+    step: '4',
+    title: 'Profesyonel Montaj',
+    desc: 'Eski akü dikkatli şekilde sökülerek kutup başları temizlenir. Yeni Bosch akü doğru tork değerinde monte edilir ve bağlantılar sıkıca yapılır.'
+  },
+  {
+    step: '5',
+    title: 'Elektrik Sistemi Kontrolü',
+    desc: 'Montaj sonrası aracın elektrik sistemi test edilir. Şarj voltajı, marş gücü ve elektronik sistemlerin düzgün çalıştığı doğrulanır.'
+  },
+  {
+    step: '6',
+    title: 'Garanti Kaydı',
+    desc: '2 yıl resmi Bosch garantisi kapsamında garanti belgesi düzenlenir. Garanti süresince herhangi bir sorun yaşarsanız destek sağlanır.'
+  }
+];
+
+const stats = [
+  { value: '5.000+', label: 'Satılan Akü Adedi' },
+  { value: '2 Yıl', label: 'Resmi Bosch Garantisi' },
+  { value: '15 dk', label: 'Ortalama Montaj Süresi' },
+  { value: '7/24', label: 'Kesintisiz Hizmet' }
+];
+
+const faq = [
+  {
+    question: 'Bosch akü fiyatları ne kadar?',
+    answer: 'Bosch akü fiyatları modele ve amper kapasitesine göre değişkenlik gösterir. Ekonomik S3 serisinden premium S5A AGM serisine kadar geniş bir fiyat aralığı mevcuttur. Binek araçlar için en çok tercih edilen 60-72 Ah kapasiteli modeller uygun fiyatlarla sunulmaktadır. Güncel ve net fiyat bilgisi için bizi arayabilir veya WhatsApp üzerinden aracınızın bilgilerini paylaşarak özel teklif alabilirsiniz.'
+  },
+  {
+    question: 'Aracıma kaç amper akü lazım?',
+    answer: 'Akü amper kapasitesi aracınızın motor hacmi, yakıt tipi (benzin/dizel), start-stop sistemi olup olmadığı ve ek elektrik tüketim ihtiyacına göre belirlenir. Dizel araçlar genellikle benzinli araçlara göre daha yüksek amper kapasitesi gerektirir. Aracınızın ruhsatındaki motor bilgisini veya mevcut akünüzün etiketini paylaşmanız yeterlidir; size tam uyumlu Bosch aküyü önerelim. Yanlış amper seçimi marş zorluğuna veya elektrik sistemi arızasına neden olabileceğinden doğru seçim kritiktir.'
+  },
+  {
+    question: 'Akü değişimi yerinde yapılabiliyor mu?',
+    answer: 'Evet, Mersin genelinde 7/24 yerinde akü değişimi hizmeti sunuyoruz. Aracınız çalışmıyorsa veya servise gelme imkanınız yoksa konumunuza ekip gönderiyoruz. Ekibimiz tam donanımlı servis aracıyla gelerek eski aküyü söker, yeni Bosch aküyü monte eder ve elektrik sistemi kontrolünü yerinde yapar. Tüm işlem ortalama 15 dakikada tamamlanır ve aracınız hemen kullanıma hazır olur.'
+  },
+  {
+    question: 'Eski aküm geri alınıyor mu?',
+    answer: 'Evet, eski akünüzü ücretsiz olarak geri alıyoruz. Kullanılmış aküler içerdikleri kurşun ve asit nedeniyle çevreye zararlıdır ve yasal olarak da rastgele atılamaz. Geri aldığımız aküler lisanslı geri dönüşüm tesislerine gönderilir. Bu sayede hem çevreye katkı sağlamış olursunuz hem de yeni akü alımında avantajlı fiyatlardan yararlanabilirsiniz. Eski akünüzü yanınızda getirmeniz yeterlidir.'
+  },
+  {
+    question: 'Start-stop akü ile normal akü arasındaki fark nedir?',
+    answer: 'Start-stop sistemli araçlar trafik ışıklarında ve duraklamalarda motoru otomatik olarak kapatıp tekrar çalıştırır. Bu sürekli marş çevirme işlemi normal akülerden çok daha fazla dayanıklılık gerektirir. Bosch S4E EFB ve S5A AGM serileri bu ihtiyaç için özel olarak tasarlanmıştır. Normal akü start-stop sistemli araca takılırsa kısa sürede ömrünü tamamlar ve sistem devre dışı kalabilir. Aracınızda start-stop varsa mutlaka EFB veya AGM teknolojili akü tercih edilmelidir.'
+  },
+  {
+    question: 'Bosch akü garantisi neleri kapsıyor?',
+    answer: 'Bosch yetkili bayi olarak sattığımız tüm akülere 2 yıl resmi üretici garantisi vermekteyiz. Garanti, üretim hatalarını, erken kapasite kaybını ve fabrika kaynaklı arızaları kapsar. Garanti kapsamında sorunlu akünüz ücretsiz olarak değiştirilir. Garanti koşulları gereği akünün yetkili bayiden satın alınmış olması ve aracın elektrik sisteminde bir arıza bulunmaması gerekir. Garanti belgesi montaj sırasında düzenlenir ve akü seri numarası ile kayıt altına alınır.'
+  }
+];
+
+const relatedSlugs = ['aku-takviyesi', 'yol-yardim-servisi', 'lastik-satisi'];
+---
+
+<ServiceLayout
+  title={service.seoTitle}
+  description="Mersin'de Bosch yetkili bayi olarak akü satışı ve değişimi. Ücretsiz akü testi, yerinde değişim, 7/24 hizmet. 0534 030 77 59"
+  h1={service.h1}
+  heroSubtitle="Bosch yetkili bayi olarak orijinal Bosch aküleri üretici garantisiyle sunuyoruz. Ücretsiz akü testi, profesyonel montaj ve Mersin genelinde yerinde değişim hizmetimizle aracınız her an yola hazır."
+  slug={service.slug}
+  heroFeatures={['Bosch Yetkili Bayi', 'Ücretsiz Akü Testi', 'Yerinde Değişim', '2 Yıl Garanti']}
+  benefits={benefits}
+  process={processSteps}
+  stats={stats}
+  faq={faq}
+  relatedSlugs={relatedSlugs}
+>
+
+  <!-- ═══════════════════════════════════════════════════ -->
+  <!-- BOSCH ÜRÜN SERİLERİ                                -->
+  <!-- ═══════════════════════════════════════════════════ -->
+  <section class="py-20 lg:py-28 bg-gray-50 relative">
+    <div class="container-custom">
+      <div class="mb-14 reveal">
+        <span class="inline-block w-12 h-1 bg-primary rounded-full mb-4"></span>
+        <h2 class="text-h2-mobile lg:text-h2-desktop text-gray-900 reveal reveal-delay-1">
+          Bosch Akü Serileri
+        </h2>
+        <p class="text-gray-500 mt-4 max-w-2xl reveal reveal-delay-2">
+          Her bütçeye ve araç tipine uygun Bosch akü modelleri. Tüm seriler stoklarımızda mevcuttur.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        <!-- S3 Economy -->
+        <div class="glass-card p-6 group hover:border-primary/30 transition-all duration-300 reveal reveal-delay-1">
+          <div class="flex items-center justify-between mb-4">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 rounded-lg bg-gray-500/10 border border-gray-500/20 flex items-center justify-center">
+                <span class="text-gray-600 font-bold text-sm">S3</span>
+              </div>
+              <div>
+                <h3 class="text-gray-900 font-bold text-base">S3 Economy</h3>
+                <span class="text-gray-500 text-xs">Ekonomik Seri</span>
+              </div>
+            </div>
+          </div>
+          <div class="space-y-2 mb-4">
+            <div class="flex justify-between text-sm">
+              <span class="text-gray-500">Kapasite</span>
+              <span class="text-gray-600 font-medium">40 - 90 Ah</span>
+            </div>
+            <div class="flex justify-between text-sm">
+              <span class="text-gray-500">Teknoloji</span>
+              <span class="text-gray-600 font-medium">Standart</span>
+            </div>
+            <div class="flex justify-between text-sm">
+              <span class="text-gray-500">Uygun Araç</span>
+              <span class="text-gray-600 font-medium">Binek (Temel)</span>
+            </div>
+          </div>
+          <div class="pt-3 border-t border-gray-200">
+            <div class="inline-flex items-center gap-1.5 text-xs font-semibold text-gray-500 bg-gray-500/10 px-3 py-1.5 rounded-full">
+              Uygun Fiyat Segmenti
+            </div>
+          </div>
+        </div>
+
+        <!-- S4 Standard -->
+        <div class="glass-card p-6 group hover:border-primary/30 transition-all duration-300 reveal reveal-delay-2">
+          <div class="flex items-center justify-between mb-4">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 rounded-lg bg-blue-500/10 border border-blue-500/20 flex items-center justify-center">
+                <span class="text-blue-600 font-bold text-sm">S4</span>
+              </div>
+              <div>
+                <h3 class="text-gray-900 font-bold text-base">S4 Standard</h3>
+                <span class="text-blue-600 text-xs">En Çok Tercih Edilen</span>
+              </div>
+            </div>
+            <span class="bg-blue-500/10 text-blue-600 text-[10px] font-bold px-2.5 py-1 rounded-full uppercase">Popüler</span>
+          </div>
+          <div class="space-y-2 mb-4">
+            <div class="flex justify-between text-sm">
+              <span class="text-gray-500">Kapasite</span>
+              <span class="text-gray-600 font-medium">44 - 95 Ah</span>
+            </div>
+            <div class="flex justify-between text-sm">
+              <span class="text-gray-500">Teknoloji</span>
+              <span class="text-gray-600 font-medium">PowerFrame</span>
+            </div>
+            <div class="flex justify-between text-sm">
+              <span class="text-gray-500">Uygun Araç</span>
+              <span class="text-gray-600 font-medium">Binek / SUV</span>
+            </div>
+          </div>
+          <div class="pt-3 border-t border-gray-200">
+            <div class="inline-flex items-center gap-1.5 text-xs font-semibold text-blue-600 bg-blue-500/10 px-3 py-1.5 rounded-full">
+              Orta Segment
+            </div>
+          </div>
+        </div>
+
+        <!-- S5 Performance -->
+        <div class="glass-card p-6 group hover:border-primary/30 transition-all duration-300 reveal reveal-delay-3">
+          <div class="flex items-center justify-between mb-4">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 rounded-lg bg-primary/10 border border-primary/20 flex items-center justify-center">
+                <span class="text-primary font-bold text-sm">S5</span>
+              </div>
+              <div>
+                <h3 class="text-gray-900 font-bold text-base">S5 Performance</h3>
+                <span class="text-primary text-xs">Yüksek Performans</span>
+              </div>
+            </div>
+          </div>
+          <div class="space-y-2 mb-4">
+            <div class="flex justify-between text-sm">
+              <span class="text-gray-500">Kapasite</span>
+              <span class="text-gray-600 font-medium">52 - 110 Ah</span>
+            </div>
+            <div class="flex justify-between text-sm">
+              <span class="text-gray-500">Teknoloji</span>
+              <span class="text-gray-600 font-medium">PowerFrame+</span>
+            </div>
+            <div class="flex justify-between text-sm">
+              <span class="text-gray-500">Uygun Araç</span>
+              <span class="text-gray-600 font-medium">Premium / Ticari</span>
+            </div>
+          </div>
+          <div class="pt-3 border-t border-gray-200">
+            <div class="inline-flex items-center gap-1.5 text-xs font-semibold text-primary bg-primary/10 px-3 py-1.5 rounded-full">
+              Premium Segment
+            </div>
+          </div>
+        </div>
+
+        <!-- S4E EFB Start-Stop -->
+        <div class="glass-card p-6 group hover:border-green-500/30 transition-all duration-300 reveal reveal-delay-4">
+          <div class="flex items-center justify-between mb-4">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 rounded-lg bg-green-500/10 border border-green-500/20 flex items-center justify-center">
+                <span class="text-green-600 font-bold text-xs">S4E</span>
+              </div>
+              <div>
+                <h3 class="text-gray-900 font-bold text-base">S4E EFB</h3>
+                <span class="text-green-600 text-xs">Start-Stop Teknolojisi</span>
+              </div>
+            </div>
+            <span class="bg-green-500/10 text-green-600 text-[10px] font-bold px-2.5 py-1 rounded-full uppercase">EFB</span>
+          </div>
+          <div class="space-y-2 mb-4">
+            <div class="flex justify-between text-sm">
+              <span class="text-gray-500">Kapasite</span>
+              <span class="text-gray-600 font-medium">60 - 95 Ah</span>
+            </div>
+            <div class="flex justify-between text-sm">
+              <span class="text-gray-500">Teknoloji</span>
+              <span class="text-gray-600 font-medium">Enhanced Flooded</span>
+            </div>
+            <div class="flex justify-between text-sm">
+              <span class="text-gray-500">Uygun Araç</span>
+              <span class="text-gray-600 font-medium">Start-Stop Araçlar</span>
+            </div>
+          </div>
+          <div class="pt-3 border-t border-gray-200">
+            <div class="inline-flex items-center gap-1.5 text-xs font-semibold text-green-600 bg-green-500/10 px-3 py-1.5 rounded-full">
+              Start-Stop Segment
+            </div>
+          </div>
+        </div>
+
+        <!-- S5A AGM Premium -->
+        <div class="glass-card p-6 group hover:border-purple-500/30 transition-all duration-300 relative reveal reveal-delay-5 sm:col-span-2 lg:col-span-2">
+          <div class="absolute -top-3 right-6">
+            <span class="bg-gradient-to-r from-purple-500 to-primary text-white text-[10px] font-bold px-4 py-1.5 rounded-full uppercase tracking-wider">En Gelişmiş</span>
+          </div>
+          <div class="flex flex-col sm:flex-row sm:items-start gap-6">
+            <div class="flex-1">
+              <div class="flex items-center gap-3 mb-4">
+                <div class="w-10 h-10 rounded-lg bg-purple-500/10 border border-purple-500/20 flex items-center justify-center">
+                  <span class="text-purple-600 font-bold text-xs">S5A</span>
+                </div>
+                <div>
+                  <h3 class="text-gray-900 font-bold text-base">S5A AGM Premium</h3>
+                  <span class="text-purple-600 text-xs">Absorbed Glass Mat Teknolojisi</span>
+                </div>
+              </div>
+              <p class="text-gray-500 text-sm leading-relaxed mb-4">
+                En gelişmiş Bosch akü teknolojisi. Start-stop, rejeneratif frenleme ve yüksek enerji tüketimli lüks araçlar için ideal. 3 kata kadar daha uzun döngü ömrü sunar.
+              </p>
+            </div>
+            <div class="flex-1 sm:border-l sm:border-gray-200 sm:pl-6">
+              <div class="space-y-2">
+                <div class="flex justify-between text-sm">
+                  <span class="text-gray-500">Kapasite</span>
+                  <span class="text-gray-600 font-medium">60 - 105 Ah</span>
+                </div>
+                <div class="flex justify-between text-sm">
+                  <span class="text-gray-500">Teknoloji</span>
+                  <span class="text-gray-600 font-medium">AGM (Absorbed Glass Mat)</span>
+                </div>
+                <div class="flex justify-between text-sm">
+                  <span class="text-gray-500">Uygun Araç</span>
+                  <span class="text-gray-600 font-medium">Premium Start-Stop / Lüks</span>
+                </div>
+                <div class="flex justify-between text-sm">
+                  <span class="text-gray-500">Döngü Ömrü</span>
+                  <span class="text-gray-600 font-medium">3x Standart Aküye Göre</span>
+                </div>
+              </div>
+              <div class="pt-3 mt-3 border-t border-gray-200">
+                <div class="inline-flex items-center gap-1.5 text-xs font-semibold text-purple-600 bg-purple-500/10 px-3 py-1.5 rounded-full">
+                  Ultra Premium Segment
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CTA altı -->
+      <div class="text-center mt-10 reveal reveal-delay-6">
+        <p class="text-gray-500 text-sm mb-4">Aracınıza hangi serinin uygun olduğunu bilmiyor musunuz?</p>
+        <a href="https://wa.me/905340307759?text=Merhaba,%20aracıma%20uygun%20Bosch%20akü%20önerisi%20alabilir%20miyim?" target="_blank" rel="noopener noreferrer" class="btn-whatsapp inline-flex">
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+          </svg>
+          WhatsApp ile Danışın
+        </a>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════════════ -->
+  <!-- NEDEN BOSCH?                                        -->
+  <!-- ═══════════════════════════════════════════════════ -->
+  <section class="py-20 lg:py-28 bg-white relative">
+    <div class="container-custom">
+      <div class="mb-14 reveal">
+        <span class="inline-block w-12 h-1 bg-primary rounded-full mb-4"></span>
+        <h2 class="text-h2-mobile lg:text-h2-desktop text-gray-900 reveal reveal-delay-1">
+          Neden Bosch Akü?
+        </h2>
+        <p class="text-gray-500 mt-4 max-w-2xl reveal reveal-delay-2">
+          Dünya otomotiv endüstrisinin lider markası Bosch, akü teknolojisinde de fark yaratıyor.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        <!-- Alman Mühendisliği -->
+        <div class="glass-card p-6 text-center group reveal reveal-delay-1">
+          <div class="w-14 h-14 rounded-2xl bg-primary/10 border border-primary/20 flex items-center justify-center mx-auto mb-5 group-hover:bg-primary/20 group-hover:scale-110 transition-all duration-300">
+            <svg class="w-7 h-7 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
+            </svg>
+          </div>
+          <h3 class="text-gray-900 font-bold text-base mb-3">Alman Mühendisliği</h3>
+          <p class="text-gray-500 text-sm leading-relaxed">130 yılı aşkın deneyim. Almanya'da tasarlanıp dünya standartlarında üretilen güvenilir teknoloji.</p>
+        </div>
+
+        <!-- PowerFrame Teknolojisi -->
+        <div class="glass-card p-6 text-center group reveal reveal-delay-2">
+          <div class="w-14 h-14 rounded-2xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center mx-auto mb-5 group-hover:bg-blue-500/20 group-hover:scale-110 transition-all duration-300">
+            <svg class="w-7 h-7 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
+            </svg>
+          </div>
+          <h3 class="text-gray-900 font-bold text-base mb-3">PowerFrame Teknolojisi</h3>
+          <p class="text-gray-500 text-sm leading-relaxed">Patentli ızgara teknolojisi sayesinde %30 daha fazla marş gücü ve %20 daha uzun ömür.</p>
+        </div>
+
+        <!-- Uzun Ömür -->
+        <div class="glass-card p-6 text-center group reveal reveal-delay-3">
+          <div class="w-14 h-14 rounded-2xl bg-green-500/10 border border-green-500/20 flex items-center justify-center mx-auto mb-5 group-hover:bg-green-500/20 group-hover:scale-110 transition-all duration-300">
+            <svg class="w-7 h-7 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+          </div>
+          <h3 class="text-gray-900 font-bold text-base mb-3">Uzun Kullanım Ömrü</h3>
+          <p class="text-gray-500 text-sm leading-relaxed">Bakımsız (maintenance-free) tasarım. Akü suyu kontrolü gerektirmez, yıllarca sorunsuz performans sunar.</p>
+        </div>
+
+        <!-- Geniş Ürün Yelpazesi -->
+        <div class="glass-card p-6 text-center group reveal reveal-delay-4">
+          <div class="w-14 h-14 rounded-2xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center mx-auto mb-5 group-hover:bg-purple-500/20 group-hover:scale-110 transition-all duration-300">
+            <svg class="w-7 h-7 text-purple-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M4 7h16a1 1 0 011 1v8a1 1 0 01-1 1H4a1 1 0 01-1-1V8a1 1 0 011-1zm5-3h2v3H9V4zm4 0h2v3h-2V4z" />
+            </svg>
+          </div>
+          <h3 class="text-gray-900 font-bold text-base mb-3">Geniş Ürün Yelpazesi</h3>
+          <p class="text-gray-500 text-sm leading-relaxed">Ekonomik S3'ten AGM Premium'a kadar her araç tipine ve bütçeye uygun 5 farklı seri.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════════════ -->
+  <!-- YERİNDE DEĞİŞİM SERVİSİ                           -->
+  <!-- ═══════════════════════════════════════════════════ -->
+  <section class="py-20 lg:py-28 bg-gray-50 relative">
+    <div class="container-custom">
+      <div class="max-w-4xl mx-auto">
+        <div class="glass-card p-8 lg:p-10 relative overflow-hidden reveal">
+          <!-- Arka plan süsleme -->
+          <div class="absolute top-0 right-0 w-40 h-40 bg-primary/5 rounded-full blur-3xl"></div>
+          <div class="absolute bottom-0 left-0 w-32 h-32 bg-primary/5 rounded-full blur-3xl"></div>
+
+          <div class="relative">
+            <div class="flex items-center gap-4 mb-6">
+              <div class="w-16 h-16 rounded-2xl bg-primary/10 border border-primary/20 flex items-center justify-center flex-shrink-0">
+                <svg class="w-8 h-8 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                </svg>
+              </div>
+              <div>
+                <h2 class="text-gray-900 font-bold text-xl lg:text-2xl">Yerinde Akü Değişim Servisi</h2>
+                <p class="text-primary text-sm font-medium">Mersin Geneli - 7/24 Aktif</p>
+              </div>
+            </div>
+
+            <p class="text-gray-500 leading-relaxed mb-8">
+              Aracınız çalışmıyor veya servise gelme imkanınız mı yok? Endişelenmeyin. Tam donanımlı servis aracımızla Mersin'in her noktasına geliyoruz. Eski aküyü yerinde söküyor, yeni Bosch aküyü monte ediyor ve elektrik sistemi kontrolünü yaparak aracınızı yola hazır hale getiriyoruz.
+            </p>
+
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
+              <div class="flex items-center gap-3 bg-gray-100 border border-gray-200 rounded-xl p-4">
+                <svg class="w-6 h-6 text-primary flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <div>
+                  <span class="text-gray-900 font-bold text-sm block">15 Dakika</span>
+                  <span class="text-gray-500 text-xs">Ortalama İşlem Süresi</span>
+                </div>
+              </div>
+              <div class="flex items-center gap-3 bg-gray-100 border border-gray-200 rounded-xl p-4">
+                <svg class="w-6 h-6 text-primary flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                </svg>
+                <div>
+                  <span class="text-gray-900 font-bold text-sm block">2 Yıl Garanti</span>
+                  <span class="text-gray-500 text-xs">Resmi Bosch Garantisi</span>
+                </div>
+              </div>
+              <div class="flex items-center gap-3 bg-gray-100 border border-gray-200 rounded-xl p-4">
+                <svg class="w-6 h-6 text-primary flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                </svg>
+                <div>
+                  <span class="text-gray-900 font-bold text-sm block">Ücretsiz</span>
+                  <span class="text-gray-500 text-xs">Eski Akü Geri Alımı</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="flex flex-col sm:flex-row gap-4">
+              <a href="tel:+905340307759" class="btn-primary flex-1 justify-center">
+                <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                </svg>
+                Hemen Ara: 0534 030 77 59
+              </a>
+              <a href="https://wa.me/905340307759?text=Merhaba,%20yerinde%20akü%20değişimi%20hizmeti%20almak%20istiyorum." target="_blank" rel="noopener noreferrer" class="btn-whatsapp flex-1 justify-center">
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+                </svg>
+                WhatsApp ile Konum Gönderin
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════════════ -->
+  <!-- İLGİLİ HİZMETLER BAĞLANTISI                       -->
+  <!-- ═══════════════════════════════════════════════════ -->
+  <section class="py-16 lg:py-20 bg-white relative">
+    <div class="container-custom">
+      <div class="mb-10 reveal">
+        <span class="inline-block w-12 h-1 bg-primary rounded-full mb-4"></span>
+        <h2 class="text-h2-mobile lg:text-xl text-gray-900">Akü ile İlgili Diğer Hizmetlerimiz</h2>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-5 max-w-2xl mx-auto">
+        <a href="/hizmetler/aku-takviyesi" class="glass-card p-6 flex items-center gap-4 group hover:border-primary/30 transition-all duration-300 reveal reveal-delay-1">
+          <div class="w-12 h-12 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center flex-shrink-0 group-hover:bg-primary/20 transition-colors duration-300">
+            <svg class="w-6 h-6 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
+            </svg>
+          </div>
+          <div>
+            <h3 class="text-gray-900 font-bold text-sm">Akü Takviyesi</h3>
+            <p class="text-gray-500 text-xs mt-1">Akünüz boşaldıysa yerinde takviye hizmeti</p>
+          </div>
+          <svg class="w-5 h-5 text-gray-500 group-hover:text-primary ml-auto transition-colors duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+          </svg>
+        </a>
+        <a href="/hizmetler/yol-yardim-servisi" class="glass-card p-6 flex items-center gap-4 group hover:border-primary/30 transition-all duration-300 reveal reveal-delay-2">
+          <div class="w-12 h-12 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center flex-shrink-0 group-hover:bg-primary/20 transition-colors duration-300">
+            <svg class="w-6 h-6 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+            </svg>
+          </div>
+          <div>
+            <h3 class="text-gray-900 font-bold text-sm">7/24 Yol Yardım</h3>
+            <p class="text-gray-500 text-xs mt-1">Yolda kaldığınızda acil destek hizmeti</p>
+          </div>
+          <svg class="w-5 h-5 text-gray-500 group-hover:text-primary ml-auto transition-colors duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+          </svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <GallerySection />
+
+</ServiceLayout>

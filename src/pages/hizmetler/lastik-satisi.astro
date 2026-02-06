@@ -1,0 +1,405 @@
+---
+import ServiceLayout from '../../layouts/ServiceLayout.astro';
+import GallerySection from '../../components/GallerySection.astro';
+import { services } from '../../data/siteConfig';
+
+const service = services.find(s => s.slug === 'lastik-satisi')!;
+
+const heroFeatures = ["Hankook Yetkili Bayi", "Ücretsiz Montaj", "Tüm Ebatlar Stokta", "Taksit İmkanı"];
+
+const benefits = [
+  {
+    icon: "award",
+    title: "Yetkili Bayi Güvencesi",
+    desc: "Hankook ve Laufenn yetkili bayisi olarak orijinal ürün garantisi, üretici desteği ve rekabetçi bayi fiyatlarıyla hizmet veriyoruz."
+  },
+  {
+    icon: "wrench",
+    title: "Ücretsiz Montaj & Balans",
+    desc: "Satın aldığınız tüm lastiklerin sökme-takma, balans ayarı ve sibop değişimi tamamen ücretsiz. Ekstra masraf yok."
+  },
+  {
+    icon: "users",
+    title: "Uzman Lastik Danışmanlığı",
+    desc: "20 yılı aşkın deneyimli ekibimiz aracınıza, sürüş tarzınıza ve bütçenize en uygun lastiği birlikte seçmenize yardımcı olur."
+  },
+  {
+    icon: "price",
+    title: "Rekabetçi Fiyat & Taksit",
+    desc: "Bayilik avantajıyla uygun fiyatlar sunuyoruz. Kredi kartına 9 aya kadar taksit imkanı ile bütçenizi zorlamadan lastik alabilirsiniz."
+  }
+];
+
+const process = [
+  {
+    step: "1",
+    title: "Bize Ulaşın",
+    desc: "Telefon, WhatsApp veya doğrudan mağazamıza gelerek lastik ihtiyacınızı bildirin. Araç bilgilerinize göre uygun ebat ve modelleri belirleyelim."
+  },
+  {
+    step: "2",
+    title: "Lastik Seçimi",
+    desc: "Aracınıza uygun marka ve modelleri karşılaştırmalı olarak sunuyoruz. Bütçenize, sürüş tarzınıza ve mevsim koşullarına göre en doğru lastiği birlikte seçiyoruz."
+  },
+  {
+    step: "3",
+    title: "Profesyonel Montaj",
+    desc: "Son teknoloji sökme-takma makinemizle jantınıza zarar vermeden lastiklerinizi monte ediyoruz. Sibop değişimi ve hava basıncı ayarı standart olarak yapılır."
+  },
+  {
+    step: "4",
+    title: "Balans Ayarı",
+    desc: "Dijital balans cihazımızla her tekerleğin ağırlık dengesi hassas şekilde ayarlanır. Titreşimsiz, konforlu bir sürüş için kritik bir adım."
+  },
+  {
+    step: "5",
+    title: "Test & Teslimat",
+    desc: "Tüm işlemler tamamlandıktan sonra aracınız kısa bir test sürüşüne çıkarılır. Her şeyin mükemmel olduğundan emin olarak aracınızı teslim ediyoruz."
+  }
+];
+
+const stats = [
+  { value: "15.000+", label: "Satılan Lastik Adedi" },
+  { value: "20+ Yıl", label: "Sektör Deneyimi" },
+  { value: "50+", label: "Marka Çeşitliliği" },
+  { value: "Aynı Gün", label: "Montaj & Teslimat" }
+];
+
+const faq = [
+  {
+    question: "Hankook lastik fiyatları ne kadar?",
+    answer: "Hankook lastik fiyatları ebat, model ve mevsim tipine göre değişkenlik gösterir. Binek araçlar için uygun fiyatlı Laufenn serisinden başlayarak premium Ventus Sport ve Dynapro serilerine kadar geniş bir yelpazeye sahibiz. Örneğin 195/65R15 gibi yaygın ebatlarda oldukça rekabetçi fiyatlarla karşılaşırsınız. Yetkili bayi olmamız sayesinde piyasa ortalamasının altında fiyat sunabiliyoruz. Güncel fiyat listesi ve kampanyalar için bizi arayabilir ya da WhatsApp üzerinden ebat bilginizi göndererek anında teklif alabilirsiniz."
+  },
+  {
+    question: "Hangi lastik markalarını satıyorsunuz?",
+    answer: "Hankook yetkili bayisi olarak Hankook ve Laufenn markalarının tüm ürün gamını depomuzda hazır bulunduruyoruz. Hankook'un Ventus, Kinergy, Dynapro ve Winter i*cept serilerinin yanı sıra bütçe dostu Laufenn G Fit, S Fit ve X Fit modelleri de stokta mevcut. Bunların dışında Michelin, Continental, Bridgestone, Goodyear, Pirelli, Yokohama ve Nexen gibi dünya markalarını da kısa sürede temin edebiliyoruz. SUV, hafif ticari ve ağır ticari araçlar için de özel lastik seçeneklerimiz bulunmaktadır."
+  },
+  {
+    question: "Aracıma hangi ebat lastik uyar, nasıl öğrenebilirim?",
+    answer: "Lastik ebat bilgisi aracınızın ruhsatında, sürücü kapısının iç kısmındaki etikette veya mevcut lastiğinizin yan yüzeyinde yazılıdır. Örneğin '205/55R16 91V' gibi bir ifade görürsünüz; bu sırasıyla genişlik, profil oranı, jant çapı, yük endeksi ve hız sınıfını belirtir. Emin değilseniz bizi aramanız yeterli; plaka numaranız veya araç marka-model bilgisiyle doğru ebadı anında belirleyip uygun seçenekleri sunuyoruz. Yanlış ebat kullanımı güvenlik riski oluşturduğundan profesyonel danışmanlık almanızı kesinlikle tavsiye ederiz."
+  },
+  {
+    question: "Kış lastiği mi, yaz lastiği mi, dört mevsim mi kullanmalıyım?",
+    answer: "Mersin'in Akdeniz ikliminde kışlar ılıman geçtiğinden birçok sürücü dört mevsim lastikle yıl boyunca güvenle yol alabilir. Ancak Toroslar'a doğru yükseldikçe kış koşulları sertleşir; sık yüksek rakıma çıkıyorsanız kış lastiği zorunludur. Genel kural olarak hava sıcaklığı sürekli 7 derecenin altına düştüğünde kış lastiği kullanılmalıdır, çünkü yaz lastiklerinin hamuru sertleşerek tutunma kaybeder. Mersin şehir merkezinde yaşayıp nadiren yaylaya çıkan sürücüler için kaliteli bir dört mevsim lastik ideal çözüm olabilir. Mağazamıza geldiğinizde kullanım alışkanlıklarınıza göre en doğru öneriyi yapıyoruz."
+  },
+  {
+    question: "Lastik satışında montaj ücreti dahil mi?",
+    answer: "Evet, mağazamızdan satın aldığınız tüm lastiklerin sökme-takma, balans ayarı ve sibop değişimi tamamen ücretsiz olarak yapılmaktadır. Herhangi bir gizli ücret veya ekstra masraf yoktur. Aracınızla gelmeniz yeterli; 30-40 dakika içinde lastikleriniz monte edilir, balansı ayarlanır ve doğru hava basıncıyla aracınız yola hazır hale getirilir. Ayrıca lastik değişimi sonrası rot balans kontrolü yaptırmanızı da ücretsiz olarak hatırlatıyor ve bu hizmet için ayrı randevu oluşturabiliyoruz."
+  },
+  {
+    question: "Ödeme seçenekleri nelerdir, taksit yapılıyor mu?",
+    answer: "Nakit, banka kartı ve kredi kartı ile ödeme kabul ediyoruz. Kredi kartlarına 2 ile 9 arası taksit imkanı sunuyoruz; taksit sayısı banka ve kart tipine göre değişiklik gösterebilir. Ayrıca havale ve EFT ile de ödeme yapabilirsiniz. 4 ve üzeri lastik alımlarında özel set indirimleri uyguluyoruz. Kurumsal müşterilerimiz için cari hesap açma ve fatura ile ödeme seçenekleri de mevcuttur. Kampanya ve özel fiyat bilgisi için doğrudan bizi aramanızı öneririz."
+  }
+];
+
+const relatedSlugs = ['lastik-degisimi', 'rot-balans', 'lastik-tamiri'];
+---
+
+<ServiceLayout
+  title={service.seoTitle}
+  description={service.metaDesc}
+  h1={service.h1}
+  heroSubtitle="Mersin'de Hankook yetkili bayi olarak binek, SUV, hafif ticari ve ticari araçlar için 50'den fazla markada lastik sunuyoruz. Satın aldığınız her lastiğin montajı ve balans ayarı ücretsizdir — aracınızla gelmeniz yeterli."
+  slug={service.slug}
+  heroFeatures={heroFeatures}
+  benefits={benefits}
+  process={process}
+  stats={stats}
+  faq={faq}
+  relatedSlugs={relatedSlugs}
+>
+
+  <!-- ═══════════════════════════════════════════════════ -->
+  <!-- SECTION: Hankook Ürün Aileleri                      -->
+  <!-- ═══════════════════════════════════════════════════ -->
+  <section class="py-20 lg:py-28 bg-gray-50 relative overflow-hidden">
+
+    <div class="container-custom relative">
+      <div class="text-center mb-14">
+        <div class="flex items-center justify-center gap-3 mb-4 reveal">
+          <span class="w-8 h-px bg-primary/50"></span>
+          <span class="text-primary font-semibold text-sm uppercase tracking-[0.15em]">Hankook & Laufenn</span>
+          <span class="w-8 h-px bg-primary/50"></span>
+        </div>
+        <h2 class="text-h2-mobile lg:text-h2-desktop text-gray-900 reveal reveal-delay-1">
+          Hankook Ürün Serilerimiz
+        </h2>
+        <p class="text-gray-500 mt-4 max-w-2xl mx-auto reveal reveal-delay-2">
+          Her sürüş ihtiyacına uygun premium lastik çözümleri. Yetkili bayi avantajıyla orijinal garanti ve rekabetçi fiyat.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        <!-- Ventus -->
+        <div class="glass-card p-6 group hover:border-primary/30 transition-all duration-300 reveal reveal-delay-1">
+          <div class="w-12 h-12 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center mb-4 group-hover:bg-primary/20 group-hover:scale-110 transition-all duration-300">
+            <svg class="w-6 h-6 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
+            </svg>
+          </div>
+          <h3 class="text-gray-900 font-bold text-lg mb-2">Ventus Serisi</h3>
+          <span class="inline-block bg-primary/10 text-primary text-xs font-semibold px-2.5 py-1 rounded-full mb-3">Yüksek Performans</span>
+          <p class="text-gray-500 text-sm leading-relaxed">Sportif sürüş, yüksek hız stabilitesi ve mükemmel yol tutuş. Ventus S1 evo ve Prime serileri ile üst düzey performans.</p>
+        </div>
+
+        <!-- Kinergy -->
+        <div class="glass-card p-6 group hover:border-primary/30 transition-all duration-300 reveal reveal-delay-2">
+          <div class="w-12 h-12 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center mb-4 group-hover:bg-primary/20 group-hover:scale-110 transition-all duration-300">
+            <svg class="w-6 h-6 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+          </div>
+          <h3 class="text-gray-900 font-bold text-lg mb-2">Kinergy Serisi</h3>
+          <span class="inline-block bg-green-50 text-green-600 text-xs font-semibold px-2.5 py-1 rounded-full mb-3">Ekonomik & Konfor</span>
+          <p class="text-gray-500 text-sm leading-relaxed">Düşük yakıt tüketimi, sessiz sürüş ve uzun lastik ömrü. Günlük şehir içi kullanım için ideal Kinergy Eco ve 4S serileri.</p>
+        </div>
+
+        <!-- Dynapro -->
+        <div class="glass-card p-6 group hover:border-primary/30 transition-all duration-300 reveal reveal-delay-3">
+          <div class="w-12 h-12 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center mb-4 group-hover:bg-primary/20 group-hover:scale-110 transition-all duration-300">
+            <svg class="w-6 h-6 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 17a2 2 0 11-4 0 2 2 0 014 0zM19 17a2 2 0 11-4 0 2 2 0 014 0z" /><path stroke-linecap="round" stroke-linejoin="round" d="M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h1m8-1a1 1 0 01-1 1H9m4-1V8a1 1 0 011-1h2.586a1 1 0 01.707.293l3.414 3.414a1 1 0 01.293.707V16a1 1 0 01-1 1h-1m-6-1a1 1 0 001 1h1M5 17a2 2 0 104 0m-4 0a2 2 0 114 0m6 0a2 2 0 104 0m-4 0a2 2 0 114 0" />
+            </svg>
+          </div>
+          <h3 class="text-gray-900 font-bold text-lg mb-2">Dynapro Serisi</h3>
+          <span class="inline-block bg-blue-50 text-blue-600 text-xs font-semibold px-2.5 py-1 rounded-full mb-3">SUV & 4x4</span>
+          <p class="text-gray-500 text-sm leading-relaxed">SUV ve 4x4 araçlar için güçlü yapı, off-road dayanıklılık ve konforlu karayolu performansı. Dynapro HP2 ve AT2 serileri.</p>
+        </div>
+
+        <!-- Laufenn -->
+        <div class="glass-card p-6 group hover:border-primary/30 transition-all duration-300 reveal reveal-delay-4">
+          <div class="w-12 h-12 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center mb-4 group-hover:bg-primary/20 group-hover:scale-110 transition-all duration-300">
+            <svg class="w-6 h-6 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" />
+            </svg>
+          </div>
+          <h3 class="text-gray-900 font-bold text-lg mb-2">Laufenn Serisi</h3>
+          <span class="inline-block bg-yellow-50 text-yellow-600 text-xs font-semibold px-2.5 py-1 rounded-full mb-3">Uygun Fiyat</span>
+          <p class="text-gray-500 text-sm leading-relaxed">Hankook teknolojisiyle üretilen bütçe dostu marka. G Fit, S Fit ve X Fit modelleriyle kaliteden ödün vermeden tasarruf edin.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════════════ -->
+  <!-- SECTION: Lastik Kategorileri                        -->
+  <!-- ═══════════════════════════════════════════════════ -->
+  <section class="py-20 lg:py-28 bg-white relative overflow-hidden">
+
+    <div class="container-custom relative">
+      <div class="text-center mb-14">
+        <div class="flex items-center justify-center gap-3 mb-4 reveal">
+          <span class="w-8 h-px bg-primary/50"></span>
+          <span class="text-primary font-semibold text-sm uppercase tracking-[0.15em]">Kategoriler</span>
+          <span class="w-8 h-px bg-primary/50"></span>
+        </div>
+        <h2 class="text-h2-mobile lg:text-h2-desktop text-gray-900 reveal reveal-delay-1">
+          Araç Tipine Göre Lastik Çeşitlerimiz
+        </h2>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        <!-- Binek -->
+        <div class="glass-card p-6 relative overflow-hidden group reveal reveal-delay-1">
+          <div class="absolute top-0 right-0 w-20 h-20 bg-primary/5 rounded-bl-[3rem]"></div>
+          <div class="flex items-start gap-4">
+            <div class="w-11 h-11 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center flex-shrink-0">
+              <svg class="w-5 h-5 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                <circle cx="12" cy="12" r="10" /><circle cx="12" cy="12" r="6" /><circle cx="12" cy="12" r="2" />
+              </svg>
+            </div>
+            <div>
+              <h3 class="text-gray-900 font-bold text-base mb-1">Binek Araç Lastikleri</h3>
+              <p class="text-gray-500 text-sm leading-relaxed">13" - 20" arası tüm ebatlarda yaz, kış ve dört mevsim lastikler. Sedan, hatchback ve coupe modelleri için.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- SUV -->
+        <div class="glass-card p-6 relative overflow-hidden group reveal reveal-delay-2">
+          <div class="absolute top-0 right-0 w-20 h-20 bg-primary/5 rounded-bl-[3rem]"></div>
+          <div class="flex items-start gap-4">
+            <div class="w-11 h-11 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center flex-shrink-0">
+              <svg class="w-5 h-5 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 17a2 2 0 11-4 0 2 2 0 014 0zM19 17a2 2 0 11-4 0 2 2 0 014 0z" /><path stroke-linecap="round" stroke-linejoin="round" d="M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h1m8-1a1 1 0 01-1 1H9m4-1V8a1 1 0 011-1h2.586a1 1 0 01.707.293l3.414 3.414a1 1 0 01.293.707V16a1 1 0 01-1 1h-1m-6-1a1 1 0 001 1h1M5 17a2 2 0 104 0m-4 0a2 2 0 114 0m6 0a2 2 0 104 0m-4 0a2 2 0 114 0" />
+              </svg>
+            </div>
+            <div>
+              <h3 class="text-gray-900 font-bold text-base mb-1">SUV & 4x4 Lastikleri</h3>
+              <p class="text-gray-500 text-sm leading-relaxed">Güçlendirilmiş yapı, yüksek yük kapasitesi. Hem karayolu hem arazi koşullarına uygun AT ve HT modeller.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Hafif Ticari -->
+        <div class="glass-card p-6 relative overflow-hidden group reveal reveal-delay-3">
+          <div class="absolute top-0 right-0 w-20 h-20 bg-primary/5 rounded-bl-[3rem]"></div>
+          <div class="flex items-start gap-4">
+            <div class="w-11 h-11 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center flex-shrink-0">
+              <svg class="w-5 h-5 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M8 7h12l2 5h-2v4a1 1 0 01-1 1h-1a2 2 0 01-4 0H8a2 2 0 01-4 0H3a1 1 0 01-1-1v-4l2-5z" />
+              </svg>
+            </div>
+            <div>
+              <h3 class="text-gray-900 font-bold text-base mb-1">Hafif Ticari Lastikler</h3>
+              <p class="text-gray-500 text-sm leading-relaxed">Doblo, Caddy, Transit tarzı araçlar için yüksek dayanıklılıklı ticari lastikler. C harfli özel seriler stokta.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Kış -->
+        <div class="glass-card p-6 relative overflow-hidden group reveal reveal-delay-4">
+          <div class="absolute top-0 right-0 w-20 h-20 bg-blue-500/5 rounded-bl-[3rem]"></div>
+          <div class="flex items-start gap-4">
+            <div class="w-11 h-11 rounded-xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center flex-shrink-0">
+              <svg class="w-5 h-5 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v18m-6-6l6 6 6-6M6 9l6-6 6 6" />
+              </svg>
+            </div>
+            <div>
+              <h3 class="text-gray-900 font-bold text-base mb-1">Kış Lastikleri</h3>
+              <p class="text-gray-500 text-sm leading-relaxed">Hankook Winter i*cept ve Laufenn i FIT serileri. Kar, buzlanma ve soğuk havalarda maksimum tutunma sağlar.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Dört Mevsim -->
+        <div class="glass-card p-6 relative overflow-hidden group reveal reveal-delay-5">
+          <div class="absolute top-0 right-0 w-20 h-20 bg-green-500/5 rounded-bl-[3rem]"></div>
+          <div class="flex items-start gap-4">
+            <div class="w-11 h-11 rounded-xl bg-green-500/10 border border-green-500/20 flex items-center justify-center flex-shrink-0">
+              <svg class="w-5 h-5 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+              </svg>
+            </div>
+            <div>
+              <h3 class="text-gray-900 font-bold text-base mb-1">Dört Mevsim Lastikler</h3>
+              <p class="text-gray-500 text-sm leading-relaxed">Mersin iklimi için ideal. Kinergy 4S ve Laufenn G Fit 4S ile yıl boyu tek lastikle güvenli sürüş deneyimi.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Run-Flat -->
+        <div class="glass-card p-6 relative overflow-hidden group reveal reveal-delay-6">
+          <div class="absolute top-0 right-0 w-20 h-20 bg-yellow-500/5 rounded-bl-[3rem]"></div>
+          <div class="flex items-start gap-4">
+            <div class="w-11 h-11 rounded-xl bg-yellow-500/10 border border-yellow-500/20 flex items-center justify-center flex-shrink-0">
+              <svg class="w-5 h-5 text-yellow-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+              </svg>
+            </div>
+            <div>
+              <h3 class="text-gray-900 font-bold text-base mb-1">Run-Flat Lastikler</h3>
+              <p class="text-gray-500 text-sm leading-relaxed">Patladığında bile 80 km/h hızla 80 km yol almanızı sağlayan güçlendirilmiş yan duvarlı özel lastikler.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════════════ -->
+  <!-- SECTION: Doğru Lastik Seçimi Rehberi                -->
+  <!-- ═══════════════════════════════════════════════════ -->
+  <section class="py-20 lg:py-28 bg-gray-50 relative overflow-hidden">
+
+    <div class="container-custom relative">
+      <div class="text-center mb-14">
+        <div class="flex items-center justify-center gap-3 mb-4 reveal">
+          <span class="w-8 h-px bg-primary/50"></span>
+          <span class="text-primary font-semibold text-sm uppercase tracking-[0.15em]">Rehber</span>
+          <span class="w-8 h-px bg-primary/50"></span>
+        </div>
+        <h2 class="text-h2-mobile lg:text-h2-desktop text-gray-900 reveal reveal-delay-1">
+          Doğru Lastik Seçimi Nasıl Yapılır?
+        </h2>
+        <p class="text-gray-500 mt-4 max-w-2xl mx-auto reveal reveal-delay-2">
+          Aracınıza en uygun lastiği seçerken dikkat etmeniz gereken 4 temel kriter.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- Ebat -->
+        <div class="glass-card p-7 flex items-start gap-5 reveal reveal-delay-1">
+          <div class="w-14 h-14 rounded-2xl bg-primary/10 border border-primary/20 flex items-center justify-center flex-shrink-0">
+            <span class="text-primary font-bold text-xl">01</span>
+          </div>
+          <div>
+            <h3 class="text-gray-900 font-bold text-lg mb-2">Doğru Ebat Belirleme</h3>
+            <p class="text-gray-500 text-sm leading-relaxed">
+              Aracınızın ruhsatına veya lastik yan yüzeyine bakın. "205/55R16" gibi bir ifade görürsünüz. Bu ebat dışında lastik kullanmak güvenlik riski oluşturur. Emin değilseniz ekibimiz plaka ile doğru ebadı belirler.
+            </p>
+          </div>
+        </div>
+
+        <!-- Mevsim -->
+        <div class="glass-card p-7 flex items-start gap-5 reveal reveal-delay-2">
+          <div class="w-14 h-14 rounded-2xl bg-primary/10 border border-primary/20 flex items-center justify-center flex-shrink-0">
+            <span class="text-primary font-bold text-xl">02</span>
+          </div>
+          <div>
+            <h3 class="text-gray-900 font-bold text-lg mb-2">Mevsim Koşulları</h3>
+            <p class="text-gray-500 text-sm leading-relaxed">
+              Mersin'de genellikle dört mevsim lastik yeterlidir. Ancak kışın yüksek rakıma çıkıyorsanız mutlaka kış lastiği tercih edin. 7 derecenin altında yaz lastiğinin hamuru sertleşerek tutunma kaybeder.
+            </p>
+          </div>
+        </div>
+
+        <!-- Sürüş Tarzı -->
+        <div class="glass-card p-7 flex items-start gap-5 reveal reveal-delay-3">
+          <div class="w-14 h-14 rounded-2xl bg-primary/10 border border-primary/20 flex items-center justify-center flex-shrink-0">
+            <span class="text-primary font-bold text-xl">03</span>
+          </div>
+          <div>
+            <h3 class="text-gray-900 font-bold text-lg mb-2">Sürüş Tarzınız</h3>
+            <p class="text-gray-500 text-sm leading-relaxed">
+              Sportif sürüşü seviyorsanız Ventus serisi, konfor ve sessizlik istiyorsanız Kinergy serisi, uzun yol yapıyorsanız düşük yuvarlanma dirençli ekonomik modeller idealdir.
+            </p>
+          </div>
+        </div>
+
+        <!-- Bütçe -->
+        <div class="glass-card p-7 flex items-start gap-5 reveal reveal-delay-4">
+          <div class="w-14 h-14 rounded-2xl bg-primary/10 border border-primary/20 flex items-center justify-center flex-shrink-0">
+            <span class="text-primary font-bold text-xl">04</span>
+          </div>
+          <div>
+            <h3 class="text-gray-900 font-bold text-lg mb-2">Bütçe Planlaması</h3>
+            <p class="text-gray-500 text-sm leading-relaxed">
+              Premium lastikler uzun ömür ve üstün performans sunarken, Laufenn serisi gibi bütçe dostu modeller kaliteden ödün vermeden tasarruf sağlar. Taksit imkanıyla bütçenizi daha rahat yönetebilirsiniz.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- İlgili Hizmet Linkleri -->
+      <div class="mt-12 glass-card p-6 lg:p-8 reveal reveal-delay-5">
+        <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+          <div>
+            <h3 class="text-gray-900 font-bold text-lg mb-2">Lastiğinizi Seçtiniz mi?</h3>
+            <p class="text-gray-500 text-sm">Lastik aldıktan sonra profesyonel montaj ve rot balans ayarı ile lastik ömrünüzü uzatın.</p>
+          </div>
+          <div class="flex flex-col sm:flex-row gap-3 flex-shrink-0">
+            <a href="/hizmetler/lastik-degisimi" class="inline-flex items-center gap-2 bg-primary/10 border border-primary/20 text-primary px-5 py-3 rounded-xl font-semibold text-sm hover:bg-primary/20 transition-all duration-300">
+              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+              </svg>
+              Lastik Değişimi
+            </a>
+            <a href="/hizmetler/rot-balans" class="inline-flex items-center gap-2 bg-gray-100 border border-gray-200 text-gray-600 px-5 py-3 rounded-xl font-semibold text-sm hover:bg-gray-200 transition-all duration-300">
+              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 16c-3.31 0-6-2.69-6-6s2.69-6 6-6 6 2.69 6 6-2.69 6-6 6zm0-8c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z" />
+              </svg>
+              Rot Balans
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <GallerySection />
+
+</ServiceLayout>

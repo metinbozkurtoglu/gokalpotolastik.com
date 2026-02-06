@@ -1,0 +1,60 @@
+---
+import { siteConfig } from '../data/siteConfig';
+
+interface Props {
+  fullWidth?: boolean;
+}
+
+const { fullWidth = false } = Astro.props;
+---
+
+<div class={`relative ${fullWidth ? 'w-full' : 'rounded-xl overflow-hidden border border-white/[0.08]'}`}>
+  <!-- Mobile: Static placeholder, click to load -->
+  <div class="map-placeholder lg:hidden relative cursor-pointer group" data-map-src={siteConfig.mapEmbed}>
+    <div class="aspect-video bg-dark-700 flex items-center justify-center">
+      <div class="text-center">
+        <div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-3 group-hover:bg-primary/20 transition-colors">
+          <svg class="w-8 h-8 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+            <path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+          </svg>
+        </div>
+        <p class="text-white font-semibold text-sm">Haritayı Görüntüle</p>
+        <p class="text-gray-400 text-xs mt-1">{siteConfig.address.district}, {siteConfig.address.city}</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Desktop: Direct embed with lazy loading -->
+  <div class="hidden lg:block">
+    <iframe
+      src={siteConfig.mapEmbed}
+      width="100%"
+      height="400"
+      style="border:0;"
+      allowfullscreen
+      loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade"
+      title="Gökalp Lastikçilik Konum"
+    ></iframe>
+  </div>
+</div>
+
+<script>
+  document.querySelectorAll('.map-placeholder').forEach((placeholder) => {
+    placeholder.addEventListener('click', () => {
+      const src = placeholder.getAttribute('data-map-src');
+      if (src) {
+        const iframe = document.createElement('iframe');
+        iframe.src = src;
+        iframe.width = '100%';
+        iframe.height = '300';
+        iframe.style.border = '0';
+        iframe.allowFullscreen = true;
+        iframe.loading = 'lazy';
+        iframe.title = 'Gökalp Lastikçilik Konum';
+        placeholder.replaceWith(iframe);
+      }
+    });
+  });
+</script>
