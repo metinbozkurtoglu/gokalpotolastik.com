@@ -1,0 +1,409 @@
+---
+import ServiceLayout from '../../layouts/ServiceLayout.astro';
+import GallerySection from '../../components/GallerySection.astro';
+import { services } from '../../data/siteConfig';
+
+const service = services.find(s => s.slug === 'lastik-basinc-sensoru')!;
+
+const benefits = [
+  {
+    icon: 'sensor',
+    title: 'Profesyonel TPMS Programlama',
+    desc: 'OEM ve aftermarket tüm TPMS sensörlerini aracınıza uyumlu şekilde programlıyoruz. Sensör ID eşleştirme ve araç ECU ile senkronizasyon işlemlerini uzman ekipmanlarla gerçekleştiriyoruz.'
+  },
+  {
+    icon: 'shield',
+    title: 'Güvenli Sürüş Garantisi',
+    desc: 'Doğru lastik basıncı yakıt tasarrufu sağlar, lastik ömrünü uzatır ve frenleme mesafesini kısaltır. TPMS sisteminizin düzgün çalışması sürüş güvenliğiniz için kritik öneme sahiptir.'
+  },
+  {
+    icon: 'tools',
+    title: 'Tüm Araç Markalarına Uyumlu',
+    desc: 'Avrupa, Asya ve Amerikan araçları dahil tüm markalara hizmet veriyoruz. Orijinal ve evrensel sensör seçenekleriyle bütçenize uygun çözüm sunuyoruz.'
+  },
+  {
+    icon: 'price',
+    title: 'Uygun Fiyat, Hızlı Servis',
+    desc: 'Sensör arıza tespiti, programlama ve değişim işlemleri kısa sürede tamamlanır. Gereksiz parça değişimi yapmaz, önce arızayı doğru teşhis ederiz.'
+  }
+];
+
+const process = [
+  {
+    step: '1',
+    title: 'TPMS Arıza Tespiti',
+    desc: 'Araç gösterge panelindeki TPMS uyarı lambası sebebini profesyonel TPMS teşhis cihazımızla belirliyoruz. Sensör pili, sinyal gücü ve hasar durumu kontrol edilir.'
+  },
+  {
+    step: '2',
+    title: 'Sensör Kontrolü ve Okuma',
+    desc: 'Mevcut sensörlerin ID numaraları, pil seviyeleri ve frekansları okunur. Hangi sensörün arızalı olduğu tespit edilir.'
+  },
+  {
+    step: '3',
+    title: 'Programlama veya Değişim',
+    desc: 'Sensör yazılımsal sorunluysa yeniden programlanır. Fiziksel hasar veya pil ömrü bitmişse yeni sensör takılıp araç ECU ile eşleştirilir.'
+  },
+  {
+    step: '4',
+    title: 'Kalibrasyon ve Test',
+    desc: 'Yeni sensörler takıldıktan sonra lastik basınçları ayarlanır ve sistem kalibre edilir. Test sürüşü ile tüm sensörlerin doğru değer gönderdiği doğrulanır.'
+  }
+];
+
+const stats = [
+  { value: '4', label: 'Sensör Aynı Anda' },
+  { value: '20+', label: 'Yıl Deneyim' },
+  { value: '30 dk', label: 'Ortalama İşlem' },
+  { value: '100+', label: 'Araç Markası Desteği' }
+];
+
+const faq = [
+  {
+    question: 'TPMS nedir ve ne işe yarar?',
+    answer: 'TPMS (Tire Pressure Monitoring System), lastik basınç izleme sistemidir. Lastik basıncı düştüğünde veya anormal bir değişiklik olduğunda gösterge panelindeki uyarı lambası yanar. Bu sistem lastik patlaması riskini azaltır, yakıt tasarrufu sağlar ve lastik ömrünü uzatır. 2014 sonrası üretilen araçların büyük çoğunluğunda standart olarak bulunur.'
+  },
+  {
+    question: 'TPMS uyarı lambası neden yanar?',
+    answer: 'TPMS uyarı lambası birkaç farklı nedenle yanabilir: lastik basıncının düşmesi veya yükselmesi, sensör pilinin bitmesi, sensörün fiziksel hasar görmesi, lastik değişimi sonrası sensör eşleşmesinin bozulması veya aşırı sıcaklık değişimleri. Lamba yandığında önce lastik basınçlarınızı kontrol edin. Basınçlar normal olmasına rağmen lamba sönmüyorsa sensör arızası olabilir.'
+  },
+  {
+    question: 'Lastik basınç sensörü değişimi ne kadar sürer?',
+    answer: 'Tek bir sensör değişimi ortalama 15-20 dakika sürer. Dört sensörün birden değişimi ise yaklaşık 30-45 dakikada tamamlanır. Bu süreye lastiğin janttan sökülmesi, eski sensörün çıkarılması, yeni sensörün takılması, lastiğin tekrar monte edilmesi ve programlama dahildir.'
+  },
+  {
+    question: 'Orijinal sensör mü yoksa evrensel sensör mü tercih etmeliyim?',
+    answer: 'Her iki seçeneğin de avantajları vardır. Orijinal (OEM) sensörler aracınızla birebir uyumludur ancak fiyatı daha yüksektir. Evrensel (aftermarket) sensörler daha uygun fiyatlıdır ve programlama ile tüm araçlara uyum sağlar. Servisimizde her iki seçeneği de sunuyor, aracınıza ve bütçenize en uygun çözümü öneriyoruz.'
+  },
+  {
+    question: 'Lastik değişimi sonrası TPMS sensörlerini yeniden programlatmam gerekir mi?',
+    answer: 'Mevcut jant ve sensörleriniz değişmiyorsa genellikle yeniden programlama gerekmez. Ancak yeni jant alırsanız veya sensörsüz janta geçiş yaparsanız yeni sensör takılıp programlanması gerekir. Mevsimlik lastik değişimlerinde iki set jantınız varsa her birinde ayrı sensör bulunması en pratik çözümdür.'
+  },
+  {
+    question: 'TPMS sensörü olmadan araç kullanılabilir mi?',
+    answer: 'Teknik olarak araç çalışır ancak gösterge panelinde sürekli uyarı lambası yanar. Daha önemlisi, lastik basıncındaki tehlikeli düşüşlerden haberdar olamazsınız. Bu durum güvenlik riski oluşturur, yakıt tüketimini artırır ve lastiklerin düzensiz aşınmasına neden olur. Araç muayenesinde de TPMS arızası sorun çıkarabilir.'
+  }
+];
+
+const relatedSlugs = ['lastik-degisimi', 'lastik-satisi', 'rot-balans'];
+---
+
+<ServiceLayout
+  title="Lastik Basınç Sensörü Mersin | TPMS Programlama | Gökalp"
+  description="Mersin'de lastik basınç sensörü (TPMS) programlama, değişim ve kalibrasyon. Tüm araç markaları için orijinal ve evrensel sensör. 0534 030 77 59"
+  h1="Lastik Basınç Sensörü (TPMS) Hizmeti — Mersin"
+  heroSubtitle="Profesyonel TPMS teşhis cihazımızla sensör arızalarını hızlıca tespit edip çözüyoruz. Orijinal ve evrensel sensör seçenekleriyle tüm araç markalarına hizmet veriyoruz. Sensör programlama, değişim ve kalibrasyon işlemlerinde uzman kadromuzla yanınızdayız."
+  slug="lastik-basinc-sensoru"
+  heroFeatures={["TPMS Programlama", "Sensör Değişimi", "Tüm Markalar", "Hızlı Servis"]}
+  benefits={benefits}
+  process={process}
+  stats={stats}
+  faq={faq}
+  relatedSlugs={relatedSlugs}
+>
+
+  <!-- ═══════════════════════════════════════════════════ -->
+  <!-- TPMS NEDİR — Bilgi Bölümü                          -->
+  <!-- ═══════════════════════════════════════════════════ -->
+  <section class="py-20 lg:py-28 bg-gray-50 relative">
+    <div class="container-custom">
+      <div class="text-center mb-14">
+        <div class="flex items-center justify-center gap-3 mb-4 reveal">
+          <span class="w-8 h-px bg-primary/50"></span>
+          <span class="text-primary font-semibold text-sm uppercase tracking-[0.15em]">Bilgi</span>
+          <span class="w-8 h-px bg-primary/50"></span>
+        </div>
+        <h2 class="text-h2-mobile lg:text-h2-desktop text-gray-900 reveal reveal-delay-1">
+          TPMS Sistemi Nasıl Çalışır?
+        </h2>
+        <p class="text-gray-500 mt-4 max-w-2xl mx-auto reveal reveal-delay-2">
+          Her lastiğin içinde bulunan sensör, basınç ve sıcaklık bilgilerini kablosuz olarak araç bilgisayarına iletir.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 max-w-5xl mx-auto">
+        <!-- Direkt TPMS -->
+        <div class="glass-card p-6 lg:p-8 reveal reveal-delay-1">
+          <div class="flex items-center gap-3 mb-6">
+            <div class="w-12 h-12 rounded-2xl bg-primary/10 border border-primary/20 flex items-center justify-center">
+              <svg class="w-6 h-6 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9.348 14.651a3.75 3.75 0 010-5.303m5.304 0a3.75 3.75 0 010 5.303m-7.425 2.122a6.75 6.75 0 010-9.546m9.546 0a6.75 6.75 0 010 9.546" />
+              </svg>
+            </div>
+            <div>
+              <h3 class="text-gray-900 font-bold text-lg">Direkt TPMS</h3>
+              <span class="text-primary text-xs font-semibold uppercase tracking-wider">Sensörlü Sistem</span>
+            </div>
+          </div>
+          <ul class="space-y-4">
+            <li class="flex items-start gap-3">
+              <div class="w-6 h-6 rounded-md bg-primary/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                <span class="text-primary text-xs font-bold">1</span>
+              </div>
+              <div>
+                <p class="text-gray-900 text-sm font-semibold">Her lastik içinde sensör var</p>
+                <p class="text-gray-500 text-sm">Jant iç kısmına monte edilmiş fiziksel sensörler basınç ölçer</p>
+              </div>
+            </li>
+            <li class="flex items-start gap-3">
+              <div class="w-6 h-6 rounded-md bg-primary/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                <span class="text-primary text-xs font-bold">2</span>
+              </div>
+              <div>
+                <p class="text-gray-900 text-sm font-semibold">Gerçek zamanlı veri</p>
+                <p class="text-gray-500 text-sm">Anlık basınç ve sıcaklık değerleri gösterge panelinde görüntülenir</p>
+              </div>
+            </li>
+            <li class="flex items-start gap-3">
+              <div class="w-6 h-6 rounded-md bg-primary/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                <span class="text-primary text-xs font-bold">3</span>
+              </div>
+              <div>
+                <p class="text-gray-900 text-sm font-semibold">Hassas ölçüm</p>
+                <p class="text-gray-500 text-sm">Her lastik ayrı ayrı izlenir, hangi lastik sorunlu hemen görünür</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <!-- İndirekt TPMS -->
+        <div class="glass-card p-6 lg:p-8 reveal reveal-delay-2">
+          <div class="flex items-center gap-3 mb-6">
+            <div class="w-12 h-12 rounded-2xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center">
+              <svg class="w-6 h-6 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            </div>
+            <div>
+              <h3 class="text-gray-900 font-bold text-lg">İndirekt TPMS</h3>
+              <span class="text-blue-600 text-xs font-semibold uppercase tracking-wider">ABS Tabanlı Sistem</span>
+            </div>
+          </div>
+          <ul class="space-y-4">
+            <li class="flex items-start gap-3">
+              <div class="w-6 h-6 rounded-md bg-blue-500/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                <span class="text-blue-600 text-xs font-bold">1</span>
+              </div>
+              <div>
+                <p class="text-gray-900 text-sm font-semibold">Fiziksel sensör yok</p>
+                <p class="text-gray-500 text-sm">ABS tekerlek hız sensörlerini kullanarak basınç farkını hesaplar</p>
+              </div>
+            </li>
+            <li class="flex items-start gap-3">
+              <div class="w-6 h-6 rounded-md bg-blue-500/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                <span class="text-blue-600 text-xs font-bold">2</span>
+              </div>
+              <div>
+                <p class="text-gray-900 text-sm font-semibold">Karşılaştırmalı ölçüm</p>
+                <p class="text-gray-500 text-sm">Tekerlek dönüş hızlarını karşılaştırarak basınç düşüşü algılar</p>
+              </div>
+            </li>
+            <li class="flex items-start gap-3">
+              <div class="w-6 h-6 rounded-md bg-blue-500/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                <span class="text-blue-600 text-xs font-bold">3</span>
+              </div>
+              <div>
+                <p class="text-gray-900 text-sm font-semibold">Reset gerektirir</p>
+                <p class="text-gray-500 text-sm">Lastik değişimi veya basınç ayarı sonrası sistem sıfırlanmalıdır</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Bilgi Notu -->
+      <div class="max-w-5xl mx-auto mt-8 reveal reveal-delay-3">
+        <div class="glass-card p-5 lg:p-6 border-primary/20 flex flex-col sm:flex-row items-start sm:items-center gap-4">
+          <div class="w-10 h-10 rounded-xl bg-primary/10 border border-primary/30 flex items-center justify-center flex-shrink-0">
+            <svg class="w-5 h-5 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
+            </svg>
+          </div>
+          <div>
+            <p class="text-gray-600 text-sm leading-relaxed">
+              <strong class="text-gray-900">Not:</strong> Servisimizde her iki TPMS tipi için de hizmet veriyoruz.
+              Direkt sistem sensör değişimi ve programlama, indirekt sistem kalibrasyon ve reset işlemleri yapılmaktadır.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════════════ -->
+  <!-- BELİRTİLER — TPMS Arıza İşaretleri                 -->
+  <!-- ═══════════════════════════════════════════════════ -->
+  <section class="py-20 lg:py-28 bg-white relative">
+    <div class="container-custom">
+      <div class="text-center mb-14">
+        <div class="flex items-center justify-center gap-3 mb-4 reveal">
+          <span class="w-8 h-px bg-primary/50"></span>
+          <span class="text-primary font-semibold text-sm uppercase tracking-[0.15em]">Belirtiler</span>
+          <span class="w-8 h-px bg-primary/50"></span>
+        </div>
+        <h2 class="text-h2-mobile lg:text-h2-desktop text-gray-900 reveal reveal-delay-1">
+          TPMS Sensör Arızası Nasıl Anlaşılır?
+        </h2>
+        <p class="text-gray-500 mt-4 max-w-2xl mx-auto reveal reveal-delay-2">
+          Aşağıdaki belirtilerden birini fark ediyorsanız sensör kontrolü yaptırmanız gerekiyor.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 max-w-5xl mx-auto">
+        <!-- Uyarı Lambası -->
+        <div class="glass-card p-6 text-center group reveal reveal-delay-1">
+          <div class="w-14 h-14 rounded-2xl bg-red-500/10 border border-red-500/20 flex items-center justify-center mx-auto mb-5 group-hover:bg-red-500/20 group-hover:scale-110 transition-all duration-300">
+            <svg class="w-7 h-7 text-red-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" />
+            </svg>
+          </div>
+          <h3 class="text-gray-900 font-bold text-sm mb-2">TPMS Uyarı Lambası</h3>
+          <p class="text-gray-500 text-xs leading-relaxed">
+            Gösterge panelinde ünlem işaretli lastik ikonu sürekli yanıyor veya yanıp sönüyor.
+          </p>
+          <div class="mt-3 inline-block bg-red-500/10 border border-red-500/20 text-red-600 text-[10px] font-bold px-2.5 py-1 rounded-full uppercase tracking-wider">
+            Acil Kontrol
+          </div>
+        </div>
+
+        <!-- Yanlış Basınç Değeri -->
+        <div class="glass-card p-6 text-center group reveal reveal-delay-2">
+          <div class="w-14 h-14 rounded-2xl bg-yellow-500/10 border border-yellow-500/20 flex items-center justify-center mx-auto mb-5 group-hover:bg-yellow-500/20 group-hover:scale-110 transition-all duration-300">
+            <svg class="w-7 h-7 text-yellow-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3" />
+            </svg>
+          </div>
+          <h3 class="text-gray-900 font-bold text-sm mb-2">Yanlış Basınç Gösterimi</h3>
+          <p class="text-gray-500 text-xs leading-relaxed">
+            Ekranda gösterilen basınç değeri gerçek basınçla uyuşmuyor.
+          </p>
+          <div class="mt-3 inline-block bg-yellow-500/10 border border-yellow-500/20 text-yellow-600 text-[10px] font-bold px-2.5 py-1 rounded-full uppercase tracking-wider">
+            Sensör Arızası
+          </div>
+        </div>
+
+        <!-- Sensör Göstermeme -->
+        <div class="glass-card p-6 text-center group reveal reveal-delay-3">
+          <div class="w-14 h-14 rounded-2xl bg-orange-500/10 border border-orange-500/20 flex items-center justify-center mx-auto mb-5 group-hover:bg-orange-500/20 group-hover:scale-110 transition-all duration-300">
+            <svg class="w-7 h-7 text-orange-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M3.98 8.223A10.477 10.477 0 001.934 12C3.226 16.338 7.244 19.5 12 19.5c.993 0 1.953-.138 2.863-.395M6.228 6.228A10.45 10.45 0 0112 4.5c4.756 0 8.773 3.162 10.065 7.498a10.523 10.523 0 01-4.293 5.774M6.228 6.228L3 3m3.228 3.228l3.65 3.65m7.894 7.894L21 21m-3.228-3.228l-3.65-3.65m0 0a3 3 0 10-4.243-4.243m4.242 4.242L9.88 9.88" />
+            </svg>
+          </div>
+          <h3 class="text-gray-900 font-bold text-sm mb-2">Sensör Veri Göstermeme</h3>
+          <p class="text-gray-500 text-xs leading-relaxed">
+            Bir veya birden fazla lastiğin basınç verisi ekranda görüntülenmiyor.
+          </p>
+          <div class="mt-3 inline-block bg-orange-500/10 border border-orange-500/20 text-orange-400 text-[10px] font-bold px-2.5 py-1 rounded-full uppercase tracking-wider">
+            Pil / Hasar
+          </div>
+        </div>
+
+        <!-- Lastik Değişimi Sonrası -->
+        <div class="glass-card p-6 text-center group reveal reveal-delay-4">
+          <div class="w-14 h-14 rounded-2xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center mx-auto mb-5 group-hover:bg-purple-500/20 group-hover:scale-110 transition-all duration-300">
+            <svg class="w-7 h-7 text-purple-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+            </svg>
+          </div>
+          <h3 class="text-gray-900 font-bold text-sm mb-2">Lastik Değişimi Sonrası</h3>
+          <p class="text-gray-500 text-xs leading-relaxed">
+            Yeni lastik veya jant takıldıktan sonra TPMS sistemi uyarı veriyor.
+          </p>
+          <div class="mt-3 inline-block bg-purple-500/10 border border-purple-500/20 text-purple-600 text-[10px] font-bold px-2.5 py-1 rounded-full uppercase tracking-wider">
+            Programlama Gerekli
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════════════ -->
+  <!-- DOĞRU BASINÇ — Bilgi Şeridi                        -->
+  <!-- ═══════════════════════════════════════════════════ -->
+  <section class="py-20 lg:py-28 bg-gray-50 relative overflow-hidden">
+    <div class="container-custom relative">
+      <div class="text-center mb-14">
+        <div class="flex items-center justify-center gap-3 mb-4 reveal">
+          <span class="w-8 h-px bg-primary/50"></span>
+          <span class="text-primary font-semibold text-sm uppercase tracking-[0.15em]">Neden Önemli?</span>
+          <span class="w-8 h-px bg-primary/50"></span>
+        </div>
+        <h2 class="text-h2-mobile lg:text-h2-desktop text-gray-900 reveal reveal-delay-1">
+          Doğru Lastik Basıncının Faydaları
+        </h2>
+      </div>
+
+      <div class="max-w-4xl mx-auto">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+          <div class="glass-card p-6 flex items-start gap-4 reveal reveal-delay-1">
+            <div class="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center flex-shrink-0">
+              <svg class="w-5 h-5 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            </div>
+            <div>
+              <h3 class="text-gray-900 font-bold text-sm mb-1">%3-5 Yakıt Tasarrufu</h3>
+              <p class="text-gray-500 text-xs leading-relaxed">Doğru basınç yuvarlanma direncini azaltır, motorun daha az çalışmasını sağlar.</p>
+            </div>
+          </div>
+
+          <div class="glass-card p-6 flex items-start gap-4 reveal reveal-delay-2">
+            <div class="w-10 h-10 rounded-xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center flex-shrink-0">
+              <svg class="w-5 h-5 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+              </svg>
+            </div>
+            <div>
+              <h3 class="text-gray-900 font-bold text-sm mb-1">Daha Kısa Fren Mesafesi</h3>
+              <p class="text-gray-500 text-xs leading-relaxed">Optimum basınçta lastikler yol yüzeyiyle ideal temas sağlar.</p>
+            </div>
+          </div>
+
+          <div class="glass-card p-6 flex items-start gap-4 reveal reveal-delay-3">
+            <div class="w-10 h-10 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center flex-shrink-0">
+              <svg class="w-5 h-5 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            </div>
+            <div>
+              <h3 class="text-gray-900 font-bold text-sm mb-1">%25 Daha Uzun Lastik Ömrü</h3>
+              <p class="text-gray-500 text-xs leading-relaxed">Eşit basınç dağılımı lastiklerin düzgün aşınmasını sağlar.</p>
+            </div>
+          </div>
+
+          <div class="glass-card p-6 flex items-start gap-4 reveal reveal-delay-4">
+            <div class="w-10 h-10 rounded-xl bg-red-500/10 border border-red-500/20 flex items-center justify-center flex-shrink-0">
+              <svg class="w-5 h-5 text-red-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" />
+              </svg>
+            </div>
+            <div>
+              <h3 class="text-gray-900 font-bold text-sm mb-1">Patlak Riski Azalır</h3>
+              <p class="text-gray-500 text-xs leading-relaxed">Düşük basınçla sürüş lastik aşırı ısınmasına ve patlamaya yol açabilir.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Alt Bağlantı -->
+        <div class="mt-10 text-center reveal reveal-delay-3">
+          <div class="glass-card p-5 lg:p-6 border-primary/20 inline-flex flex-col sm:flex-row items-center gap-4">
+            <p class="text-gray-600 text-sm">
+              <strong class="text-gray-900">Lastikleriniz eski mi?</strong> TPMS sensör değişimiyle birlikte lastik yenileme fırsatı.
+            </p>
+            <a href="/hizmetler/lastik-satisi" class="inline-flex items-center gap-2 text-primary font-semibold text-sm hover:text-primary/80 transition-colors whitespace-nowrap">
+              Lastik Seçenekleri
+              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <GallerySection />
+
+</ServiceLayout>

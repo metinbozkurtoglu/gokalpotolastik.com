@@ -102,5 +102,14 @@ export const services = [
     seoTitle: "Akü Takviyesi Mersin | Yerinde Akü Şarj | Gökalp",
     h1: "Yerinde Akü Takviyesi Hizmeti — Mersin",
     metaDesc: "Mersin'de yerinde akü takviyesi hizmeti. Aracınız çalışmıyorsa bizi arayın, 15 dakikada yanınızdayız. 0534 030 77 59"
+  },
+  {
+    slug: "lastik-basinc-sensoru",
+    title: "Lastik Basınç Sensörü",
+    shortDesc: "TPMS sensör programlama, değişim ve kalibrasyon.",
+    icon: "sensor",
+    seoTitle: "Lastik Basınç Sensörü Mersin | TPMS Programlama | Gökalp",
+    h1: "Lastik Basınç Sensörü (TPMS) Hizmeti — Mersin",
+    metaDesc: "Mersin'de lastik basınç sensörü (TPMS) programlama, değişim ve kalibrasyon. Tüm araç markaları için sensör hizmeti. 0534 030 77 59"
   }
 ] as const;

@@ -45,6 +45,10 @@ const serviceDetails: Record<string, { desc: string; features: string[] }> = {
   'aku-takviyesi': {
     desc: "Araç çalışmıyorsa bulunduğunuz yere gelip profesyonel takviye cihazlarıyla akünüzü şarj ediyoruz veya yerinde değişim yapıyoruz.",
     features: ["15 dk'da geliyoruz", "Yerinde şarj", "Her gün açık"]
+  },
+  'lastik-basinc-sensoru': {
+    desc: "Lastik basınç sensörü (TPMS) arıza tespiti, programlama, değişim ve kalibrasyon hizmeti. Tüm araç markaları için evrensel ve orijinal sensör desteği.",
+    features: ["TPMS programlama", "Sensör değişimi", "Tüm markalar"]
   }
 };
 
@@ -81,6 +85,10 @@ const serviceStyles: Record<string, { gradient: string; iconPath: string }> = {
   'aku-takviyesi': {
     gradient: 'from-cyan-500 to-blue-500',
     iconPath: '<path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" />'
+  },
+  'lastik-basinc-sensoru': {
+    gradient: 'from-teal-500 to-cyan-500',
+    iconPath: '<path stroke-linecap="round" stroke-linejoin="round" d="M9.348 14.651a3.75 3.75 0 010-5.303m5.304 0a3.75 3.75 0 010 5.303m-7.425 2.122a6.75 6.75 0 010-9.546m9.546 0a6.75 6.75 0 010 9.546M5.106 18.894c-3.808-3.808-3.808-9.98 0-13.789m13.788 0c3.808 3.808 3.808 9.981 0 13.79M12 12h.008v.007H12V12zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />'
   }
 };
 
@@ -98,8 +106,8 @@ const whatsappUrl = `https://wa.me/${siteConfig.whatsapp.replace(/\D/g, '')}`;
   <!-- Hero -->
   <PageHeader
     title="Mersin'de Profesyonel Lastik & Akü Hizmetleri"
-    subtitle="20 yıllık tecrübeyle 8 farklı hizmeti tek çatı altında sunuyoruz. Hankook lastik ve Bosch akü yetkili bayii."
-    badge="8 Farklı Hizmet | Her Gün Açık"
+    subtitle="20 yıllık tecrübeyle 9 farklı hizmeti tek çatı altında sunuyoruz. Hankook lastik ve Bosch akü yetkili bayii."
+    badge="9 Farklı Hizmet | Her Gün Açık"
     breadcrumbs={breadcrumbs}
     showCTA={true}
     ctaText="Hemen Arayın"
@@ -242,7 +250,7 @@ const whatsappUrl = `https://wa.me/${siteConfig.whatsapp.replace(/\D/g, '')}`;
       <div class="grid grid-cols-2 lg:grid-cols-4 gap-6 mb-16 reveal">
         {[
           { value: '20+', label: 'Yıl Deneyim' },
-          { value: '8', label: 'Farklı Hizmet' },
+          { value: '9', label: 'Farklı Hizmet' },
           { value: '4.9', label: 'Google Puanı' },
           { value: '7/7', label: 'Her Gün Açık' },
         ].map((stat) => (
