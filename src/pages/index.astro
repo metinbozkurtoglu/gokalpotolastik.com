@@ -10,7 +10,7 @@ import { siteConfig, services } from '../data/siteConfig';
 
 // FAQ - En önemli 6 soru
 const faqItems = [
-  { question: "7/24 yol yardım hizmetiniz nasıl çalışıyor?", answer: "0534 030 77 59 numarasını aradığınızda veya WhatsApp'tan yazdığınızda konumunuzu alıp en yakın ekibimizi yönlendiriyoruz. Mersin merkez ve ilçelerinde ortalama 15-30 dakikada yanınızdayız. Lastik patlaması, akü bitmesi, lastik değişimi gibi tüm acil durumlar için gece gündüz hizmet veriyoruz." },
+  { question: "Yol yardım hizmetiniz nasıl çalışıyor?", answer: "0534 030 77 59 numarasını aradığınızda veya WhatsApp'tan yazdığınızda konumunuzu alıp en yakın ekibimizi yönlendiriyoruz. Mersin merkez ve ilçelerinde ortalama 15-30 dakikada yanınızdayız. Lastik patlaması, akü bitmesi, lastik değişimi gibi tüm acil durumlar için her gün hizmet veriyoruz." },
   { question: "Lastikler ne zaman değiştirilmeli?", answer: "Lastik diş derinliği 1.6mm'nin altına düştüğünde yasal olarak değiştirilmesi zorunludur. Ancak güvenli sürüş için 3mm'nin altına düşmeden değiştirmenizi öneririz. Lastiklerinizin yaşı 5 yılı geçtiyse, diş derinliği yeterli olsa bile kontrol ettirmeniz önemlidir." },
   { question: "Hangi marka lastik tercih etmeliyim?", answer: "Hankook yetkili bayi olarak öncelikle Hankook ve alt markası Laufenn'i öneriyoruz. Bununla birlikte Michelin, Continental, Bridgestone, Pirelli, Goodyear gibi tüm premium markaları da stokta bulunduruyoruz. Aracınızın modeli ve bütçenize göre en uygun lastik önerisini ücretsiz sunuyoruz." },
   { question: "Akü ömrü ne kadardır?", answer: "Ortalama bir akü 3-5 yıl arasında ömre sahiptir. Aracınız zor çalışıyorsa, farlar normalden daha sönük yanıyorsa akünüzü kontrol ettirmeniz gerekir. Bosch yetkili bayi olarak ücretsiz akü testi yapıyor, gerekirse yerinde değişim sağlıyoruz." },
@@ -20,8 +20,8 @@ const faqItems = [
 ---
 
 <BaseLayout
-  title="Mersin Lastikçi 7/24 | Gökalp Lastikçilik | Hankook & Bosch Yetkili Bayi"
-  description="Mersin'de 7/24 lastik, akü ve jant hizmetleri. Hankook yetkili bayi ve Bosch akü bayii güvencesiyle 20 yıldır profesyonel hizmet. 0534 030 77 59"
+  title="Mersin Lastikçi | Gökalp Lastikçilik | Hankook & Bosch Yetkili Bayi"
+  description="Mersin'de her gün lastik, akü ve jant hizmetleri. Hankook yetkili bayi ve Bosch akü bayii güvencesiyle 20 yıldır profesyonel hizmet. 0534 030 77 59"
   schemaType="home"
   faq={faqItems}
   headerTransparent={true}
@@ -56,7 +56,7 @@ const faqItems = [
           <div class="hero-fade hero-fade-1 mb-6">
             <span class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/20 border border-primary/40 text-primary text-sm font-semibold">
               <span class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
-              7/24 Hizmet Veriyoruz
+              Her Gün Hizmet Veriyoruz
             </span>
           </div>
 
@@ -105,8 +105,8 @@ const faqItems = [
               <span class="text-white/80 text-sm">Yıllık Deneyim</span>
             </div>
             <div class="stat-item">
-              <span class="text-3xl lg:text-4xl font-bold text-primary">7/24</span>
-              <span class="text-white/80 text-sm">Kesintisiz Hizmet</span>
+              <span class="text-3xl lg:text-4xl font-bold text-primary">7/7</span>
+              <span class="text-white/80 text-sm">Her Gün Hizmet</span>
             </div>
             <div class="stat-item">
               <span class="text-3xl lg:text-4xl font-bold text-white">15dk</span>
@@ -148,12 +148,12 @@ const faqItems = [
             </div>
           </div>
 
-          <!-- Floating Card 3: 7/24 Açık -->
+          <!-- Floating Card 3: Her Gün Açık -->
           <div class="floating-card floating-card-3 absolute top-64 right-4">
             <div class="bg-primary/90 backdrop-blur-xl rounded-2xl p-5 shadow-2xl">
               <div class="text-white">
-                <span class="text-4xl font-bold">7/24</span>
-                <p class="text-white/80 text-sm mt-1">Kesintisiz Hizmet</p>
+                <span class="text-4xl font-bold">7/7</span>
+                <p class="text-white/80 text-sm mt-1">Her Gün Açık</p>
                 <p class="text-white/60 text-xs mt-2">Hafta sonu ve tatil dahil</p>
               </div>
             </div>
@@ -203,7 +203,7 @@ const faqItems = [
       <!-- Bento Grid -->
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
         
-        <!-- Ana Kart: 7/24 Yol Yardım — 2x2 -->
+        <!-- Ana Kart: Yol Yardım — 2x2 -->
         <div class="sm:col-span-2 sm:row-span-2 reveal reveal-delay-1">
           <div class="relative h-full min-h-[400px] lg:min-h-[480px] rounded-3xl overflow-hidden bg-gradient-to-br from-primary to-red-600 p-7 lg:p-10 flex flex-col justify-between">
             <!-- Decorative -->
@@ -213,7 +213,7 @@ const faqItems = [
             <div class="relative">
               <div class="inline-flex items-center gap-2 px-3 py-1.5 bg-white/20 backdrop-blur-sm rounded-full text-white text-xs font-bold mb-6">
                 <span class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
-                7/24 AKTİF
+                HER GÜN AKTİF
               </div>
               <h3 class="text-white text-2xl lg:text-4xl font-bold leading-tight mb-3">
                 Yol Yardım<br/>Servisi
@@ -382,7 +382,7 @@ const faqItems = [
         {[
           { value: "20+", unit: "Yıl", label: "Sektör Deneyimi", gradient: "from-primary to-orange-500" },
           { value: "4.9", unit: "★", label: "Google Puanı", gradient: "from-emerald-500 to-teal-500" },
-          { value: "7/24", unit: "", label: "Kesintisiz Hizmet", gradient: "from-blue-500 to-indigo-500" },
+          { value: "7/7", unit: "", label: "Her Gün Hizmet", gradient: "from-blue-500 to-indigo-500" },
           { value: "15", unit: "dk", label: "Ortalama Varış", gradient: "from-amber-500 to-orange-500" },
         ].map((stat, i) => (
           <div class={`group relative text-center p-6 lg:p-8 rounded-3xl bg-gradient-to-br ${stat.gradient} overflow-hidden reveal reveal-delay-${Math.min(i + 1, 4)}`}>
@@ -448,7 +448,7 @@ const faqItems = [
             {
               num: "01",
               title: "Ulaşılabilirlik",
-              desc: "7/24 telefon ve WhatsApp üzerinden ulaşabilirsiniz. Sorularınızı anında yanıtlıyor, acil durumlarınıza hızlıca müdahale ediyoruz.",
+              desc: "Telefon ve WhatsApp üzerinden ulaşabilirsiniz. Sorularınızı anında yanıtlıyor, acil durumlarınıza hızlıca müdahale ediyoruz.",
               icon: "phone",
               color: "primary"
             },
@@ -577,7 +577,7 @@ const faqItems = [
                   <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
               </div>
-              <span class="text-gray-700 font-medium text-sm">7/24 Hizmet</span>
+              <span class="text-gray-700 font-medium text-sm">Her Gün Açık</span>
             </div>
             <div class="flex items-center gap-3">
               <div class="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center">
@@ -755,7 +755,7 @@ const faqItems = [
               <div>
                 <p class="text-gray-400 text-xs mb-1 font-medium uppercase tracking-wider">Adres</p>
                 <p class="text-gray-900 font-bold text-sm">{siteConfig.address.full}</p>
-                <p class="text-primary/60 text-xs mt-1 font-medium">7/24 Açık</p>
+                <p class="text-primary/60 text-xs mt-1 font-medium">Her Gün Açık</p>
               </div>
             </div>
           </div>

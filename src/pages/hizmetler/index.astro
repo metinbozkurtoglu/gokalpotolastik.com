@@ -5,7 +5,7 @@ import BrandsStrip from '../../components/BrandsStrip.astro';
 import { siteConfig, services } from '../../data/siteConfig';
 
 const title = "Hizmetlerimiz | Gökalp Lastikçilik Mersin";
-const description = "Mersin'de lastik satışı, lastik değişimi, rot balans, jant düzeltme, akü satışı, akü takviyesi ve 7/24 yol yardım hizmeti. Hankook & Bosch yetkili bayi.";
+const description = "Mersin'de lastik satışı, lastik değişimi, rot balans, jant düzeltme, akü satışı, akü takviyesi ve yol yardım hizmeti. Hankook & Bosch yetkili bayi.";
 
 const breadcrumbs = [
   { name: 'Anasayfa', url: '/' },
@@ -15,7 +15,7 @@ const breadcrumbs = [
 // Her hizmet için detaylı açıklama ve özellikler
 const serviceDetails: Record<string, { desc: string; features: string[] }> = {
   'yol-yardim-servisi': {
-    desc: "Mersin'in her noktasına ortalama 15 dakikada ulaşıyoruz. Lastik patlaması, akü arızası, lastik değişimi gibi acil durumlarda 7/24 hizmetinizdeyiz.",
+    desc: "Mersin'in her noktasına ortalama 15 dakikada ulaşıyoruz. Lastik patlaması, akü arızası, lastik değişimi gibi acil durumlarda her gün hizmetinizdeyiz.",
     features: ["15 dk içerisinde", "Tüm ilçelere servis", "Gece-gündüz"]
   },
   'lastik-satisi': {
@@ -44,7 +44,7 @@ const serviceDetails: Record<string, { desc: string; features: string[] }> = {
   },
   'aku-takviyesi': {
     desc: "Araç çalışmıyorsa bulunduğunuz yere gelip profesyonel takviye cihazlarıyla akünüzü şarj ediyoruz veya yerinde değişim yapıyoruz.",
-    features: ["15 dk'da geliyoruz", "Yerinde şarj", "7/24 açık"]
+    features: ["15 dk'da geliyoruz", "Yerinde şarj", "Her gün açık"]
   }
 };
 
@@ -99,7 +99,7 @@ const whatsappUrl = `https://wa.me/${siteConfig.whatsapp.replace(/\D/g, '')}`;
   <PageHeader
     title="Mersin'de Profesyonel Lastik & Akü Hizmetleri"
     subtitle="20 yıllık tecrübeyle 8 farklı hizmeti tek çatı altında sunuyoruz. Hankook lastik ve Bosch akü yetkili bayii."
-    badge="8 Farklı Hizmet | 7/24 Açık"
+    badge="8 Farklı Hizmet | Her Gün Açık"
     breadcrumbs={breadcrumbs}
     showCTA={true}
     ctaText="Hemen Arayın"
@@ -150,7 +150,7 @@ const whatsappUrl = `https://wa.me/${siteConfig.whatsapp.replace(/\D/g, '')}`;
                   {service.slug === 'yol-yardim-servisi' && (
                     <span class="mt-3 inline-flex items-center gap-1.5 px-3 py-1 bg-white/20 backdrop-blur-sm text-white text-xs font-semibold rounded-full">
                       <span class="w-1.5 h-1.5 bg-white rounded-full animate-pulse"></span>
-                      7/24 Acil
+                      Acil
                     </span>
                   )}
                 </div>
@@ -165,7 +165,7 @@ const whatsappUrl = `https://wa.me/${siteConfig.whatsapp.replace(/\D/g, '')}`;
                     {service.slug === 'yol-yardim-servisi' && (
                       <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 bg-red-50 text-red-600 text-xs font-semibold rounded-full border border-red-100">
                         <span class="w-1.5 h-1.5 bg-red-500 rounded-full animate-pulse"></span>
-                        7/24 Acil
+                        Acil
                       </span>
                     )}
                   </div>
@@ -244,7 +244,7 @@ const whatsappUrl = `https://wa.me/${siteConfig.whatsapp.replace(/\D/g, '')}`;
           { value: '20+', label: 'Yıl Deneyim' },
           { value: '8', label: 'Farklı Hizmet' },
           { value: '4.9', label: 'Google Puanı' },
-          { value: '7/24', label: 'Kesintisiz' },
+          { value: '7/7', label: 'Her Gün Açık' },
         ].map((stat) => (
           <div class="text-center py-6 px-4 rounded-2xl bg-white/5 border border-white/10">
             <span class="block text-3xl lg:text-4xl font-bold text-white mb-1" data-count>{stat.value}</span>
@@ -269,8 +269,8 @@ const whatsappUrl = `https://wa.me/${siteConfig.whatsapp.replace(/\D/g, '')}`;
           },
           {
             icon: '<path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />',
-            title: "7/24 Kesintisiz Hizmet",
-            desc: "Gece yarısı lastik patlaması, sabah akü bitmesi... Ne zaman olursa olsun Mersin genelinde yanınızdayız.",
+            title: "Her Gün Kesintisiz Hizmet",
+            desc: "Hafta sonu, resmi tatil fark etmez... Mersin genelinde her gün yanınızdayız.",
             color: "text-emerald-400"
           },
           {

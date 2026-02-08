@@ -2,7 +2,7 @@ export const siteConfig = {
   name: "Gökalp Lastikçilik ve Akü Satışı",
   shortName: "Gökalp Lastikçilik",
   tagline: "Hankook Yetkili Bayi | Bosch Akü Bayii",
-  description: "Mersin'de 7/24 lastik, akü ve jant hizmetleri. Hankook yetkili bayi ve Bosch akü bayii güvencesiyle 20 yıldır profesyonel hizmet.",
+  description: "Mersin'de her gün lastik, akü ve jant hizmetleri. Hankook yetkili bayi ve Bosch akü bayii güvencesiyle 20 yıldır profesyonel hizmet.",
   url: "https://gokalplastikcilik.com",
   phone: "+905340307759",
   phoneFormatted: "0534 030 77 59",
@@ -20,7 +20,7 @@ export const siteConfig = {
   geo: { lat: 36.807972, lng: 34.596781 },
   colors: { primary: "#DB5200", black: "#000000", white: "#FFFFFF" },
   font: "Montserrat",
-  hours: "7/24",
+  hours: "Her Gün 08:30 - 22:00",
   brands: {
     lastik: { primary: "Hankook", secondary: "Laufenn", others: true },
     aku: { primary: "Bosch" },
@@ -32,13 +32,13 @@ export const siteConfig = {
 export const services = [
   {
     slug: "yol-yardim-servisi",
-    title: "7/24 Yol Yardım",
-    shortDesc: "Gece gündüz, Mersin'in her noktasına 15 dakikada yol yardım.",
+    title: "Yol Yardım",
+    shortDesc: "Her gün Mersin'in her noktasına 15 dakikada yol yardım.",
     icon: "emergency",
     featured: true,
-    seoTitle: "7/24 Yol Yardım Mersin | Acil Lastik & Akü Servisi | Gökalp",
-    h1: "7/24 Yol Yardım Servisi — Mersin'in Her Yerine",
-    metaDesc: "Mersin'de 7/24 yol yardım servisi. Acil lastik değişimi, akü takviyesi, yerinde servis. 15 dakikada yanınızdayız. 0534 030 77 59"
+    seoTitle: "Yol Yardım Mersin | Acil Lastik & Akü Servisi | Gökalp",
+    h1: "Yol Yardım Servisi — Mersin'in Her Yerine",
+    metaDesc: "Mersin'de yol yardım servisi. Acil lastik değişimi, akü takviyesi, yerinde servis. 15 dakikada yanınızdayız. 0534 030 77 59"
   },
   {
     slug: "lastik-satisi",
@@ -56,7 +56,7 @@ export const services = [
     icon: "battery",
     seoTitle: "Bosch Akü Satışı Mersin | Akü Değişimi | Gökalp Lastikçilik",
     h1: "Bosch Yetkili Bayi — Akü Satışı ve Değişimi Mersin",
-    metaDesc: "Mersin'de Bosch yetkili bayi olarak akü satışı ve değişimi. Yerinde akü montajı, 7/24 hizmet. 0534 030 77 59"
+    metaDesc: "Mersin'de Bosch yetkili bayi olarak akü satışı ve değişimi. Yerinde akü montajı, her gün hizmet. 0534 030 77 59"
   },
   {
     slug: "lastik-degisimi",
@@ -65,7 +65,7 @@ export const services = [
     icon: "change",
     seoTitle: "Lastik Değişimi Mersin | Profesyonel Lastik Sökme Takma | Gökalp",
     h1: "Profesyonel Lastik Değişimi Hizmeti — Mersin",
-    metaDesc: "Mersin'de profesyonel lastik değişimi hizmeti. Uzman ekip, modern ekipman, hızlı servis. Yaz ve kış lastiği değişimi. 7/24 hizmet. 0534 030 77 59"
+    metaDesc: "Mersin'de profesyonel lastik değişimi hizmeti. Uzman ekip, modern ekipman, hızlı servis. Yaz ve kış lastiği değişimi. Her gün hizmet. 0534 030 77 59"
   },
   {
     slug: "rot-balans",
@@ -83,7 +83,7 @@ export const services = [
     icon: "repair",
     seoTitle: "Lastik Tamiri Mersin | Lastik Yama & Onarım | Gökalp Lastikçilik",
     h1: "Mersin'de Uzman Lastik Tamiri ve Onarım Hizmeti",
-    metaDesc: "Mersin'de lastik tamiri ve yama hizmeti. Profesyonel lastik onarımı, uygun fiyat, 7/24 servis. Hemen arayın: 0534 030 77 59"
+    metaDesc: "Mersin'de lastik tamiri ve yama hizmeti. Profesyonel lastik onarımı, uygun fiyat, her gün servis. Hemen arayın: 0534 030 77 59"
   },
   {
     slug: "jant-duzeltme",
@@ -99,8 +99,8 @@ export const services = [
     title: "Akü Takviyesi",
     shortDesc: "Aracınız mı çalışmıyor? Yerinde akü takviyesi yapıyoruz.",
     icon: "charge",
-    seoTitle: "Akü Takviyesi Mersin | 7/24 Yerinde Akü Şarj | Gökalp",
-    h1: "7/24 Yerinde Akü Takviyesi Hizmeti — Mersin",
-    metaDesc: "Mersin'de 7/24 yerinde akü takviyesi hizmeti. Aracınız çalışmıyorsa bizi arayın, 15 dakikada yanınızdayız. 0534 030 77 59"
+    seoTitle: "Akü Takviyesi Mersin | Yerinde Akü Şarj | Gökalp",
+    h1: "Yerinde Akü Takviyesi Hizmeti — Mersin",
+    metaDesc: "Mersin'de yerinde akü takviyesi hizmeti. Aracınız çalışmıyorsa bizi arayın, 15 dakikada yanınızdayız. 0534 030 77 59"
   }
 ] as const;

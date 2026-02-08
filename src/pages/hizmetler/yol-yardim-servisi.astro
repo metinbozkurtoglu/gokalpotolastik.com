@@ -8,8 +8,8 @@ const service = services.find(s => s.slug === 'yol-yardim-servisi')!;
 const benefits = [
   {
     icon: 'clock',
-    title: '7/24 Kesintisiz Hizmet',
-    desc: 'Gece yarısı, hafta sonu, resmi tatil fark etmez — yol yardım ekibimiz yılın 365 günü, günün her saati aktiftir. Sabah 03:00\'te lastik patlasa da, bayram sabahı akü bitse de tek bir arama ile mobil servis ekibimizi yönlendiriyoruz. Mersin\'de 7/24 gerçek anlamda ulaşılabilir yol yardım hizmeti sunuyoruz.'
+    title: 'Her Gün Kesintisiz Hizmet',
+    desc: 'Hafta sonu, resmi tatil fark etmez — yol yardım ekibimiz yılın 365 günü aktiftir. Tek bir arama ile mobil servis ekibimizi yönlendiriyoruz. Mersin\'de gerçek anlamda ulaşılabilir yol yardım hizmeti sunuyoruz.'
   },
   {
     icon: 'zap',
@@ -57,7 +57,7 @@ const processSteps = [
 ];
 
 const stats = [
-  { value: '7/24', label: 'Kesintisiz Hizmet' },
+  { value: '7/7', label: 'Her Gün Açık' },
   { value: '15-30 dk', label: 'Ortalama Varış Süresi' },
   { value: '4.9', label: 'Google Puanı' },
   { value: 'Mersin Geneli', label: 'Kapsama Alanı' }
@@ -94,12 +94,12 @@ const relatedSlugs = ['lastik-tamiri', 'aku-takviyesi', 'lastik-degisimi'];
 ---
 
 <ServiceLayout
-  title="7/24 Yol Yardım Mersin | Lastik & Akü Yol Yardımı | Gökalp"
-  description="Mersin'de 7/24 yol yardım servisi. Lastik patlaması, akü bitmesi, patlak tamir. 15-30 dakikada yanınızda. 0534 030 77 59"
-  h1="Mersin 7/24 Yol Yardım Servisi — Lastik & Akü"
-  heroSubtitle="Mersin'de yolda mı kaldınız? Lastik patlaması, akü bitmesi veya patlak lastik sorununuz mu var? Profesyonel mobil servis ekibimiz tam donanımlı araçlarla 15-30 dakika içinde bulunduğunuz noktaya ulaşır. Gece gündüz, 7/24 yanınızdayız."
+  title="Yol Yardım Mersin | Lastik & Akü Yol Yardımı | Gökalp"
+  description="Mersin'de her gün yol yardım servisi. Lastik patlaması, akü bitmesi, patlak tamir. 15-30 dakikada yanınızda. 0534 030 77 59"
+  h1="Mersin Yol Yardım Servisi — Lastik & Akü"
+  heroSubtitle="Mersin'de yolda mı kaldınız? Lastik patlaması, akü bitmesi veya patlak lastik sorununuz mu var? Profesyonel mobil servis ekibimiz tam donanımlı araçlarla 15-30 dakika içinde bulunduğunuz noktaya ulaşır. Her gün yanınızdayız."
   slug="yol-yardim-servisi"
-  heroFeatures={["7/24 Hizmet", "15-30 Dk Yanınızda", "Mersin Geneli", "Mobil Ekip"]}
+  heroFeatures={["Her Gün Hizmet", "15-30 Dk Yanınızda", "Mersin Geneli", "Mobil Ekip"]}
   benefits={benefits}
   process={processSteps}
   stats={stats}
