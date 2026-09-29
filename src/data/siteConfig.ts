@@ -4,10 +4,10 @@ export const siteConfig = {
   tagline: "Hankook Yetkili Bayi | Bosch Akü Bayii",
   description: "Mersin'de her gün lastik, akü ve jant hizmetleri. Hankook yetkili bayi ve Bosch akü bayii güvencesiyle 20 yıldır profesyonel hizmet.",
   url: "https://gokalplastikcilik.com",
-  phone: "+905340307759",
-  phoneFormatted: "0534 030 77 59",
-  whatsapp: "905340307759",
-  whatsappLink: "https://wa.me/905340307759?text=Merhaba,%20bilgi%20almak%20istiyorum",
+  phone: "+905378377720",
+  phoneFormatted: "0537 837 77 20",
+  whatsapp: "905378377720",
+  whatsappLink: "https://wa.me/905378377720?text=Merhaba,%20bilgi%20almak%20istiyorum",
   email: "info@gokalplastikcilik.com",
   address: {
     street: "Mustafa Kemal, 201. Cd. No:34/A",
@@ -38,7 +38,7 @@ export const services = [
     featured: true,
     seoTitle: "Yol Yardım Mersin | Acil Lastik & Akü Servisi | Gökalp",
     h1: "Yol Yardım Servisi — Mersin'in Her Yerine",
-    metaDesc: "Mersin'de yol yardım servisi. Acil lastik değişimi, akü takviyesi, yerinde servis. 15 dakikada yanınızdayız. 0534 030 77 59"
+    metaDesc: "Mersin'de yol yardım servisi. Acil lastik değişimi, akü takviyesi, yerinde servis. 15 dakikada yanınızdayız. 0537 837 77 20"
   },
   {
     slug: "lastik-satisi",
@@ -47,7 +47,7 @@ export const services = [
     icon: "tire",
     seoTitle: "Lastik Satışı Mersin | Hankook, Laufenn & Tüm Markalar | Gökalp",
     h1: "Mersin'de Her Marka Lastik Satışı — Hankook Yetkili Bayi",
-    metaDesc: "Mersin'de Hankook yetkili bayi güvencesiyle lastik satışı. Laufenn, Michelin, Continental, Bridgestone ve tüm markalarda uygun fiyat. 0534 030 77 59"
+    metaDesc: "Mersin'de Hankook yetkili bayi güvencesiyle lastik satışı. Laufenn, Michelin, Continental, Bridgestone ve tüm markalarda uygun fiyat. 0537 837 77 20"
   },
   {
     slug: "aku-satisi-degisimi",
@@ -56,7 +56,7 @@ export const services = [
     icon: "battery",
     seoTitle: "Bosch Akü Satışı Mersin | Akü Değişimi | Gökalp Lastikçilik",
     h1: "Bosch Yetkili Bayi — Akü Satışı ve Değişimi Mersin",
-    metaDesc: "Mersin'de Bosch yetkili bayi olarak akü satışı ve değişimi. Yerinde akü montajı, her gün hizmet. 0534 030 77 59"
+    metaDesc: "Mersin'de Bosch yetkili bayi olarak akü satışı ve değişimi. Yerinde akü montajı, her gün hizmet. 0537 837 77 20"
   },
   {
     slug: "lastik-degisimi",
@@ -65,7 +65,7 @@ export const services = [
     icon: "change",
     seoTitle: "Lastik Değişimi Mersin | Profesyonel Lastik Sökme Takma | Gökalp",
     h1: "Profesyonel Lastik Değişimi Hizmeti — Mersin",
-    metaDesc: "Mersin'de profesyonel lastik değişimi hizmeti. Uzman ekip, modern ekipman, hızlı servis. Yaz ve kış lastiği değişimi. Her gün hizmet. 0534 030 77 59"
+    metaDesc: "Mersin'de profesyonel lastik değişimi hizmeti. Uzman ekip, modern ekipman, hızlı servis. Yaz ve kış lastiği değişimi. Her gün hizmet. 0537 837 77 20"
   },
   {
     slug: "rot-balans",
@@ -74,7 +74,7 @@ export const services = [
     icon: "balance",
     seoTitle: "Rot Balans Ayarı Mersin | Hassas Balans Hizmeti | Gökalp",
     h1: "Hassas Rot Balans Ayarı — Güvenli Sürüş İçin",
-    metaDesc: "Mersin'de hassas rot balans ayarı hizmeti. Modern cihazlarla doğru ayar, güvenli sürüş. Gökalp Lastikçilik — 0534 030 77 59"
+    metaDesc: "Mersin'de hassas rot balans ayarı hizmeti. Modern cihazlarla doğru ayar, güvenli sürüş. Gökalp Lastikçilik — 0537 837 77 20"
   },
   {
     slug: "lastik-tamiri",
@@ -83,7 +83,7 @@ export const services = [
     icon: "repair",
     seoTitle: "Lastik Tamiri Mersin | Lastik Yama & Onarım | Gökalp Lastikçilik",
     h1: "Mersin'de Uzman Lastik Tamiri ve Onarım Hizmeti",
-    metaDesc: "Mersin'de lastik tamiri ve yama hizmeti. Profesyonel lastik onarımı, uygun fiyat, her gün servis. Hemen arayın: 0534 030 77 59"
+    metaDesc: "Mersin'de lastik tamiri ve yama hizmeti. Profesyonel lastik onarımı, uygun fiyat, her gün servis. Hemen arayın: 0537 837 77 20"
   },
   {
     slug: "jant-duzeltme",
@@ -92,7 +92,7 @@ export const services = [
     icon: "rim",
     seoTitle: "Jant Düzeltme Mersin | Çant Düzeltme Hizmeti | Gökalp",
     h1: "Profesyonel Jant Düzeltme (Çant Düzeltme) Hizmeti",
-    metaDesc: "Mersin'de jant düzeltme ve çant düzeltme hizmeti. Hasarlı jantlarınız profesyonel ekipmanlarla onarılır. 0534 030 77 59"
+    metaDesc: "Mersin'de jant düzeltme ve çant düzeltme hizmeti. Hasarlı jantlarınız profesyonel ekipmanlarla onarılır. 0537 837 77 20"
   },
   {
     slug: "aku-takviyesi",
@@ -101,7 +101,7 @@ export const services = [
     icon: "charge",
     seoTitle: "Akü Takviyesi Mersin | Yerinde Akü Şarj | Gökalp",
     h1: "Yerinde Akü Takviyesi Hizmeti — Mersin",
-    metaDesc: "Mersin'de yerinde akü takviyesi hizmeti. Aracınız çalışmıyorsa bizi arayın, 15 dakikada yanınızdayız. 0534 030 77 59"
+    metaDesc: "Mersin'de yerinde akü takviyesi hizmeti. Aracınız çalışmıyorsa bizi arayın, 15 dakikada yanınızdayız. 0537 837 77 20"
   },
   {
     slug: "lastik-basinc-sensoru",
@@ -110,6 +110,6 @@ export const services = [
     icon: "sensor",
     seoTitle: "Lastik Basınç Sensörü Mersin | TPMS Programlama | Gökalp",
     h1: "Lastik Basınç Sensörü (TPMS) Hizmeti — Mersin",
-    metaDesc: "Mersin'de lastik basınç sensörü (TPMS) programlama, değişim ve kalibrasyon. Tüm araç markaları için sensör hizmeti. 0534 030 77 59"
+    metaDesc: "Mersin'de lastik basınç sensörü (TPMS) programlama, değişim ve kalibrasyon. Tüm araç markaları için sensör hizmeti. 0537 837 77 20"
   }
 ] as const;

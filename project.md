@@ -14,8 +14,8 @@
 | **Uzun Başlık** | Gökalp Lastikçilik ve Akü Satışı — Hankook Lastik Bayi |
 | **Konum** | Mustafa Kemal, 201. Cd. No:34/A, 33250 Toroslar/Mersin |
 | **Bölge** | Mersin / Toroslar |
-| **Telefon** | +90 534 030 77 59 |
-| **WhatsApp** | +90 534 030 77 59 |
+| **Telefon** | +90 537 837 77 20 |
+| **WhatsApp** | +90 537 837 77 20 |
 | **E-posta** | info@gokalplastikcilik.com |
 | **Çalışma Saatleri** | 7/24 (Yol yardım & akü takviyesi dahil) |
 
@@ -235,7 +235,7 @@ Premium araç servis markaları, lüks oto yıkama siteleri, Hankook/Continental
   "alternateName": "Gökalp Lastikçilik",
   "description": "Mersin Toroslar'da 7/24 lastik, akü, jant hizmetleri. Hankook yetkili bayi, Bosch akü satışı.",
   "url": "https://gokalplastikcilik.com",
-  "telephone": "+905340307759",
+  "telephone": "+905378377720",
   "email": "info@gokalplastikcilik.com",
   "address": {
     "@type": "PostalAddress",
@@ -307,7 +307,7 @@ Premium araç servis markaları, lüks oto yıkama siteleri, Hankook/Continental
 | 7/24 Yol Yardım | 7/24 Yol Yardım Mersin \| Acil Lastik & Akü Servisi \| Gökalp | 7/24 Yol Yardım Servisi — Mersin'in Her Yerine |
 | Akü Takviyesi | Akü Takviyesi Mersin \| 7/24 Yerinde Akü Şarj \| Gökalp | 7/24 Yerinde Akü Takviyesi Hizmeti — Mersin |
 | Blog | Blog \| Lastik & Akü Rehberi \| Gökalp Lastikçilik Mersin | Lastik ve Akü Hakkında Bilmeniz Gereken Her Şey |
-| İletişim | İletişim \| Gökalp Lastikçilik Mersin \| 0534 030 77 59 | Bize Ulaşın — Gökalp Lastikçilik Mersin |
+| İletişim | İletişim \| Gökalp Lastikçilik Mersin \| 0537 837 77 20 | Bize Ulaşın — Gökalp Lastikçilik Mersin |
 
 ---
 
@@ -355,8 +355,8 @@ Premium araç servis markaları, lüks oto yıkama siteleri, Hankook/Continental
 
 **KURALLAR:**
 - ASLA kaybolmaz, ASLA gizlenmez, scroll'dan bağımsız
-- `tel:+905340307759` — direkt arama
-- `https://wa.me/905340307759?text=Merhaba,%20bilgi%20almak%20istiyorum`
+- `tel:+905378377720` — direkt arama
+- `https://wa.me/905378377720?text=Merhaba,%20bilgi%20almak%20istiyorum`
 - Z-index en yüksek
 - Minimum 48px yükseklik, parmak dostu
 - Body'de padding-bottom ile içerik barın altında kalmaz
@@ -396,7 +396,7 @@ Premium araç servis markaları, lüks oto yıkama siteleri, Hankook/Continental
 **Desktop:**
 ```
 ┌────────────────────────────────────────────────────────────────┐
-│ [LOGO]  Anasayfa  Hizmetler▾  Hakkımızda  Blog  İletişim  │  📞 0534 030 77 59  [WhatsApp] │
+│ [LOGO]  Anasayfa  Hizmetler▾  Hakkımızda  Blog  İletişim  │  📞 0537 837 77 20  [WhatsApp] │
 └────────────────────────────────────────────────────────────────┘
 ```
 - Sticky — scroll'da küçülür, glassmorphism/blur backdrop
@@ -473,7 +473,7 @@ Premium araç servis markaları, lüks oto yıkama siteleri, Hankook/Continental
 - ✅ "Lastik mi patladı? 15 dakikada yanınızdayız."
 - ✅ "Hankook yetkili bayi güvencesiyle"
 - ✅ "Mersin Toroslar'da 7/24 açığız"
-- ✅ "0534 030 77 59'u arayın, yola çıkalım"
+- ✅ "0537 837 77 20'u arayın, yola çıkalım"
 - ✅ "Bosch akü güvencesiyle kışa hazır olun"
 
 ### 10.4 Hizmet Sayfası İçerik Şablonu
@@ -589,10 +589,10 @@ export const siteConfig = {
   tagline: "Hankook Lastik Bayi",
   description: "Mersin Toroslar'da 7/24 lastik, akü, jant hizmetleri. Hankook yetkili bayi.",
   url: "https://gokalplastikcilik.com",
-  phone: "+905340307759",
-  phoneFormatted: "0534 030 77 59",
-  whatsapp: "905340307759",
-  whatsappLink: "https://wa.me/905340307759?text=Merhaba,%20bilgi%20almak%20istiyorum",
+  phone: "+905378377720",
+  phoneFormatted: "0537 837 77 20",
+  whatsapp: "905378377720",
+  whatsappLink: "https://wa.me/905378377720?text=Merhaba,%20bilgi%20almak%20istiyorum",
   email: "info@gokalplastikcilik.com",
   address: {
     street: "Mustafa Kemal, 201. Cd. No:34/A",
