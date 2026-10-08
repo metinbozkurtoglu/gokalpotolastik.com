@@ -9,7 +9,7 @@ export default function ContactForm() {
     const whatsappMsg = encodeURIComponent(
       `Merhaba, ben ${formData.name}.\nTelefon: ${formData.phone}\n${formData.message ? `Mesaj: ${formData.message}` : ''}`
     );
-    window.open(`https://wa.me/905378377720?text=${whatsappMsg}`, '_blank');
+    window.open(`https://wa.me/905340307759?text=${whatsappMsg}`, '_blank');
   };
 
   const handleSubmit = async (e: Event) => {

@@ -51,7 +51,7 @@ eklenmesi gerekiyor:
   ilk 1-2 hafta yakından izleyin, gerekirse "Sıralı eşleme"ye çevirin.
 - **Arama terimleri raporu**: Kampanya başladıktan 3-5 gün sonra "Arama
   terimleri" raporunu kontrol edip alakasız aramaları negatif listeye ekleyin.
-- **Çağrı uzantısı (Call Asset)**: Telefon numarasını (0537 837 77 20) çağrı
+- **Çağrı uzantısı (Call Asset)**: Telefon numarasını (0534 030 77 59) çağrı
   uzantısı olarak ekleyin — CSV ile desteklenmiyor, Editor'de
   Varlıklar > Çağrı Uzantısı Ekle'den elle eklenmeli.
 - **Dönüşüm izleme**: Şu an conversion tracking kurulu değilse önce bunu
